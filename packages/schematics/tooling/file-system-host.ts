@@ -1,4 +1,4 @@
-import {FileSystemTreeHost} from '@angular/schematics';
+import {FileSystemTreeHost} from '../src';
 import {readFileSync, readdirSync, statSync} from 'fs';
 import {join} from 'path';
 

@@ -15,7 +15,8 @@ import {
   ContentHasMutatedException,
   FileAlreadyExistException,
   FileDoesNotExistException,
-  InvalidUpdateRecordException, MergeConflictException
+  InvalidUpdateRecordException,
+  MergeConflictException
 } from '../exception/exception';
 
 

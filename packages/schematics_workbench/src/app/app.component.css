@@ -1,0 +1,16 @@
+.left-pane {
+    width: 50%;
+    top: 64px;
+    bottom: 0;
+    position: absolute;
+    border-right: 1px solid #cccccc;
+}
+
+
+.fill-remaining-space {
+    flex: 1 1 auto;
+}
+
+md-sidenav {
+    min-width: 50%;
+}
