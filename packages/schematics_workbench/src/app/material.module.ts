@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {
-  MdButtonModule,
+  MdButtonModule, MdCardModule,
   MdCheckboxModule,
   MdIconModule,
   MdSidenavModule,
@@ -10,6 +10,7 @@ import {
 
 const modules = [
   MdButtonModule,
+  MdCardModule,
   MdCheckboxModule,
   MdIconModule,
   MdSidenavModule,

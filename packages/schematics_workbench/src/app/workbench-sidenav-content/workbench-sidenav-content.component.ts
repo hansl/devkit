@@ -16,9 +16,6 @@ export class WorkbenchSidenavContentComponent implements OnInit {
   }
 
   onOpenCollection() {
-    this._dialog.showOpenDialog((fileName: string) => {
-      console.log(fileName);
-    });
   }
 
   ngOnInit() {

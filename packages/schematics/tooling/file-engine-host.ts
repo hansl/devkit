@@ -58,7 +58,7 @@ export class FileSystemEngineHost implements EngineHost<FileSystemCollectionDesc
   /**
    * Register a collection JSON with its name.
    */
-  registerCollection(path: string) {
+  registerCollection(path: string): string {
     const collectionDesc = JSON.parse(readFileSync(path, 'utf-8')) as FileSystemCollectionDesc;
     const maybeCollection = this._collectionMap.get(collectionDesc.name);
     if (maybeCollection && maybeCollection.path !== path) {
@@ -69,6 +69,7 @@ export class FileSystemEngineHost implements EngineHost<FileSystemCollectionDesc
       ...collectionDesc,
       path
     });
+    return collectionDesc.name;
   }
 
   listSchematics(collection: FileSystemCollection) {

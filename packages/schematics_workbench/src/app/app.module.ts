@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { WorkbenchPaneComponent } from './workbench-pane/workbench-pane.component';
 import { SchematicService } from './schematic.service';
 import { WorkbenchSidenavContentComponent } from './workbench-sidenav-content/workbench-sidenav-content.component';
+import { ElectronService } from './electron.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { WorkbenchSidenavContentComponent } from './workbench-sidenav-content/wo
     BrowserModule,
     MaterialModule,
   ],
-  providers: [SchematicService],
+  providers: [SchematicService, ElectronService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

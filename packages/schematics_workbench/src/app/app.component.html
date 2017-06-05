@@ -1,12 +1,12 @@
 <md-sidenav-container>
   <md-toolbar color="primary">
-    <a md-button (click)="left.open()">{{leftSchematic?.name}} <md-icon>menu</md-icon></a>
+    <a md-icon-button (click)="left.open()">{{leftSchematic?.name}} <md-icon>menu</md-icon></a>
     Schematics Workbench
   </md-toolbar>
 
   <md-sidenav #left>
-    <app-workbench-sidenav-content [schematic]="leftSchematic"></app-workbench-sidenav-content>
+    <app-workbench-sidenav-content></app-workbench-sidenav-content>
   </md-sidenav>
 
-  <app-workbench-pane [schematic]="leftSchematic"></app-workbench-pane>
+  <app-workbench-pane></app-workbench-pane>
 </md-sidenav-container>

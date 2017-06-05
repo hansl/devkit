@@ -1,3 +1,7 @@
-<p>
-  workbench-pane works!
-</p>
+<md-card>
+  <ng-container [ngSwitch]="kind">
+    <ng-container *ngSwitchCase="0">
+      <button md-raised-button (click)="openCollection()">Open Collection</button>
+    </ng-container>
+  </ng-container>
+</md-card>
