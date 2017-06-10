@@ -28,8 +28,7 @@
       "./node_modules/@types"
     ],
     "types": [
-      "jasmine",
-      "node"
+      "jasmine"
     ],
     "paths": {
       "@angular/schematics": [ "./packages/schematics/src/index" ],

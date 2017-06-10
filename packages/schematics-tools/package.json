@@ -1,7 +1,7 @@
 {
-  "name": "@angular/schematics",
+  "name": "@angular/schematics-tools",
   "version": "0.0.0",
-  "description": "Angular Schematics - Library",
+  "description": "Schematics tooling-specific package",
   "main": "src/index.js",
   "typings": "src/index.d.ts",
   "keywords": [
@@ -27,5 +27,6 @@
   },
   "homepage": "https://github.com/angular/devkit",
   "dependencies": {
+    "@angular/schematics": "0.0.0"
   }
 }

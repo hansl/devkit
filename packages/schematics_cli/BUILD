@@ -2,7 +2,7 @@
 #
 # Use of this source code is governed by an MIT-style license that can be
 # found in the LICENSE file at https://angular.io/license
-package(default_visibility=["//visibility:public"])
+package(default_visibility = ["//visibility:public"])
 load("@io_bazel_rules_typescript//:defs.bzl", "ts_library")
 load("@io_bazel_rules_typescript//internal:node.bzl", "node_binary")
 licenses(["notice"])  # MIT License
@@ -22,6 +22,8 @@ ts_library(
     ),
     deps = [
         "//packages/schematics",
+        # @deps: rxjs
+        # @deps: typescript
     ],
     tsconfig = "//:tsconfig.json",
 )
@@ -46,7 +48,7 @@ filegroup(
 )
 
 
-
+# @external_begin
 node_binary(
     name = "schematics_cli",
     main = "__main__/packages/schematics_cli/bin/schematics.js",
@@ -57,3 +59,4 @@ node_binary(
         ":schematics_data",
     ],
 )
+# @external_end
