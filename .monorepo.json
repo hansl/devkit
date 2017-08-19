@@ -98,6 +98,30 @@
       "hash": "",
       "snapshotRepo": ""
     },
+    "@angular-devkit/arborist": {
+      "name": "Arborist",
+      "links": [
+        {
+          "label": "README",
+          "url": "https://github.com/angular/devkit/blob/master/packages/angular_devkit/arborist/README.md"
+        }
+      ],
+      "version": "0.3.1",
+      "hash": "",
+      "snapshotRepo": ""
+    },
+    "@angular-devkit/arborist-cli": {
+      "name": "Arborist CLI",
+      "links": [
+        {
+          "label": "README",
+          "url": "https://github.com/angular/devkit/blob/master/packages/angular_devkit/arborist_cli/README.md"
+        }
+      ],
+      "version": "0.3.1",
+      "hash": "",
+      "snapshotRepo": ""
+    },
     "@angular-devkit/build-optimizer": {
       "name": "Build Optimizer",
       "links": [
