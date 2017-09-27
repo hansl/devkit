@@ -7,12 +7,71 @@
     "non-null-operator": true,
     "no-global-tslint-disable": true,
     "single-eof-line": true,
-
-
-    "import-blacklist": [
+    "import-glob-whitelist": [
       true,
-      "rxjs"
+      "rxjs/**/*",
+      "./**/*",
+      "../**/*",
+      "@angular-devkit/core",
+      "@angular-devkit/schematics",
+      "typescript",
+      { "source": "lib/**/*", "glob": [ "**/*", "*" ] },
+      { "source": "rules/**/*", "glob": [ "**/*", "*" ] },
+      { "source": "scripts/**/*", "glob": [ "**/*", "*" ] },
+      {
+        "source": "packages/angular_devkit/core/**/*",
+        "glob": [
+          "source-map"
+        ]
+      },
+      {
+        "source": "packages/angular_devkit/core/node/*",
+        "glob": [
+          "@angular-devkit/core/*",
+          "fs",
+          "path"
+        ]
+      },
+      {
+        "source": "packages/angular_devkit/schematics/bin/schematics.ts",
+        "glob": [
+          "@angular-devkit/core/*",
+          "@angular-devkit/schematics/*",
+          "minimist"
+        ]
+      },
+      {
+        "source": "packages/angular_devkit/schematics/tools/*",
+        "glob": [
+          "@angular-devkit/core/*",
+          "@angular-devkit/schematics/*",
+          "fs",
+          "path",
+          "url"
+        ]
+      },
+      {
+        "source": "packages/angular_devkit/build_optimizer/**/*",
+        "glob": [
+          "fs",
+          "path",
+          "source-map",
+          "webpack",
+          "webpack-sources"
+        ]
+      },
+      {
+        "source": "**/*_spec.ts",
+        "glob": [ "**/*", "*" ]
+      },
+      {
+        "source": "**/*_benchmark.ts",
+        "glob": [ "**/*", "*" ]
+      }
     ],
+
+
+
     "align": [
       true,
       "elements",
