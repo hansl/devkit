@@ -1,0 +1,3543 @@
+[
+  {
+    "ServiceName": "tcpmux",
+    "PortNumber": "1",
+    "Description": "TCP Port Service Multiplexer"
+  },
+  {
+    "ServiceName": "compressnet",
+    "PortNumber": "2",
+    "Description": "Management Utility"
+  },
+  {
+    "ServiceName": "compressnet",
+    "PortNumber": "3",
+    "Description": "Compression Process"
+  },
+  {
+    "ServiceName": "rje",
+    "PortNumber": "5",
+    "Description": "Remote Job Entry"
+  },
+  {
+    "ServiceName": "echo",
+    "PortNumber": "7",
+    "Description": "Echo"
+  },
+  {
+    "ServiceName": "discard",
+    "PortNumber": "9",
+    "Description": "Discard"
+  },
+  {
+    "ServiceName": "systat",
+    "PortNumber": "11",
+    "Description": "Active Users"
+  },
+  {
+    "ServiceName": "daytime",
+    "PortNumber": "13",
+    "Description": "Daytime"
+  },
+  {
+    "PortNumber": "15",
+    "Description": "Unassigned [was netstat]"
+  },
+  {
+    "ServiceName": "qotd",
+    "PortNumber": "17",
+    "Description": "Quote of the Day"
+  },
+  {
+    "ServiceName": "msp",
+    "PortNumber": "18",
+    "Description": "Message Send Protocol (historic)"
+  },
+  {
+    "ServiceName": "chargen",
+    "PortNumber": "19",
+    "Description": "Character Generator"
+  },
+  {
+    "ServiceName": "ftp-data",
+    "PortNumber": "20",
+    "Description": "File Transfer [Default Data]"
+  },
+  {
+    "ServiceName": "ftp",
+    "PortNumber": "21",
+    "Description": "File Transfer Protocol [Control]"
+  },
+  {
+    "ServiceName": "ssh",
+    "PortNumber": "22",
+    "Description": "The Secure Shell (SSH) Protocol"
+  },
+  {
+    "ServiceName": "telnet",
+    "PortNumber": "23",
+    "Description": "Telnet"
+  },
+  {
+    "PortNumber": "24",
+    "Description": "any private mail system"
+  },
+  {
+    "ServiceName": "smtp",
+    "PortNumber": "25",
+    "Description": "Simple Mail Transfer"
+  },
+  {
+    "ServiceName": "nsw-fe",
+    "PortNumber": "27",
+    "Description": "NSW User System FE"
+  },
+  {
+    "ServiceName": "msg-icp",
+    "PortNumber": "29",
+    "Description": "MSG ICP"
+  },
+  {
+    "ServiceName": "msg-auth",
+    "PortNumber": "31",
+    "Description": "MSG Authentication"
+  },
+  {
+    "ServiceName": "dsp",
+    "PortNumber": "33",
+    "Description": "Display Support Protocol"
+  },
+  {
+    "PortNumber": "35",
+    "Description": "any private printer server"
+  },
+  {
+    "ServiceName": "time",
+    "PortNumber": "37",
+    "Description": "Time"
+  },
+  {
+    "ServiceName": "rap",
+    "PortNumber": "38",
+    "Description": "Route Access Protocol"
+  },
+  {
+    "ServiceName": "rlp",
+    "PortNumber": "39",
+    "Description": "Resource Location Protocol"
+  },
+  {
+    "ServiceName": "graphics",
+    "PortNumber": "41",
+    "Description": "Graphics"
+  },
+  {
+    "ServiceName": "name",
+    "PortNumber": "42",
+    "Description": "Host Name Server"
+  },
+  {
+    "ServiceName": "nameserver",
+    "PortNumber": "42",
+    "Description": "Host Name Server"
+  },
+  {
+    "ServiceName": "nicname",
+    "PortNumber": "43",
+    "Description": "Who Is"
+  },
+  {
+    "ServiceName": "mpm-flags",
+    "PortNumber": "44",
+    "Description": "MPM FLAGS Protocol"
+  },
+  {
+    "ServiceName": "mpm",
+    "PortNumber": "45",
+    "Description": "Message Processing Module [recv]"
+  },
+  {
+    "ServiceName": "mpm-snd",
+    "PortNumber": "46",
+    "Description": "MPM [default send]"
+  },
+  {
+    "ServiceName": "ni-ftp",
+    "PortNumber": "47",
+    "Description": "NI FTP"
+  },
+  {
+    "ServiceName": "auditd",
+    "PortNumber": "48",
+    "Description": "Digital Audit Daemon"
+  },
+  {
+    "ServiceName": "tacacs",
+    "PortNumber": "49",
+    "Description": "Login Host Protocol (TACACS)"
+  },
+  {
+    "ServiceName": "re-mail-ck",
+    "PortNumber": "50",
+    "Description": "Remote Mail Checking Protocol"
+  },
+  {
+    "ServiceName": "xns-time",
+    "PortNumber": "52",
+    "Description": "XNS Time Protocol"
+  },
+  {
+    "ServiceName": "domain",
+    "PortNumber": "53",
+    "Description": "Domain Name Server"
+  },
+  {
+    "ServiceName": "xns-ch",
+    "PortNumber": "54",
+    "Description": "XNS Clearinghouse"
+  },
+  {
+    "ServiceName": "isi-gl",
+    "PortNumber": "55",
+    "Description": "ISI Graphics Language"
+  },
+  {
+    "ServiceName": "xns-auth",
+    "PortNumber": "56",
+    "Description": "XNS Authentication"
+  },
+  {
+    "PortNumber": "57",
+    "Description": "any private terminal access"
+  },
+  {
+    "ServiceName": "xns-mail",
+    "PortNumber": "58",
+    "Description": "XNS Mail"
+  },
+  {
+    "PortNumber": "59",
+    "Description": "any private file service"
+  },
+  {
+    "ServiceName": "ni-mail",
+    "PortNumber": "61",
+    "Description": "NI MAIL"
+  },
+  {
+    "ServiceName": "acas",
+    "PortNumber": "62",
+    "Description": "ACA Services"
+  },
+  {
+    "ServiceName": "whoispp",
+    "PortNumber": "63",
+    "Description": "whois++\nIANA assigned this well-formed service name as a replacement for \"whois++\"."
+  },
+  {
+    "ServiceName": "whois++",
+    "PortNumber": "63",
+    "Description": "whois++"
+  },
+  {
+    "ServiceName": "covia",
+    "PortNumber": "64",
+    "Description": "Communications Integrator (CI)"
+  },
+  {
+    "ServiceName": "tacacs-ds",
+    "PortNumber": "65",
+    "Description": "TACACS-Database Service"
+  },
+  {
+    "ServiceName": "sql-net",
+    "PortNumber": "66",
+    "Description": "Oracle SQL*NET\nIANA assigned this well-formed service name as a replacement for \"sql*net\"."
+  },
+  {
+    "ServiceName": "sql*net",
+    "PortNumber": "66",
+    "Description": "Oracle SQL*NET"
+  },
+  {
+    "ServiceName": "bootps",
+    "PortNumber": "67",
+    "Description": "Bootstrap Protocol Server"
+  },
+  {
+    "ServiceName": "bootpc",
+    "PortNumber": "68",
+    "Description": "Bootstrap Protocol Client"
+  },
+  {
+    "ServiceName": "tftp",
+    "PortNumber": "69",
+    "Description": "Trivial File Transfer"
+  },
+  {
+    "ServiceName": "gopher",
+    "PortNumber": "70",
+    "Description": "Gopher"
+  },
+  {
+    "ServiceName": "netrjs-1",
+    "PortNumber": "71",
+    "Description": "Remote Job Service"
+  },
+  {
+    "ServiceName": "netrjs-2",
+    "PortNumber": "72",
+    "Description": "Remote Job Service"
+  },
+  {
+    "ServiceName": "netrjs-3",
+    "PortNumber": "73",
+    "Description": "Remote Job Service"
+  },
+  {
+    "ServiceName": "netrjs-4",
+    "PortNumber": "74",
+    "Description": "Remote Job Service"
+  },
+  {
+    "PortNumber": "75",
+    "Description": "any private dial out service"
+  },
+  {
+    "ServiceName": "deos",
+    "PortNumber": "76",
+    "Description": "Distributed External Object Store"
+  },
+  {
+    "PortNumber": "77",
+    "Description": "any private RJE service"
+  },
+  {
+    "ServiceName": "vettcp",
+    "PortNumber": "78",
+    "Description": "vettcp"
+  },
+  {
+    "ServiceName": "finger",
+    "PortNumber": "79",
+    "Description": "Finger",
+    "KnownUnauthorizedUses": "Unauthorized use by some mail users (see [RFC4146] for details)"
+  },
+  {
+    "ServiceName": "http",
+    "PortNumber": "80",
+    "Description": "World Wide Web HTTP"
+  },
+  {
+    "ServiceName": "www",
+    "PortNumber": "80",
+    "Description": "World Wide Web HTTP"
+  },
+  {
+    "ServiceName": "www-http",
+    "PortNumber": "80",
+    "Description": "World Wide Web HTTP"
+  },
+  {
+    "ServiceName": "xfer",
+    "PortNumber": "82",
+    "Description": "XFER Utility"
+  },
+  {
+    "ServiceName": "mit-ml-dev",
+    "PortNumber": "83",
+    "Description": "MIT ML Device"
+  },
+  {
+    "ServiceName": "ctf",
+    "PortNumber": "84",
+    "Description": "Common Trace Facility"
+  },
+  {
+    "ServiceName": "mit-ml-dev",
+    "PortNumber": "85",
+    "Description": "MIT ML Device"
+  },
+  {
+    "ServiceName": "mfcobol",
+    "PortNumber": "86",
+    "Description": "Micro Focus Cobol"
+  },
+  {
+    "PortNumber": "87",
+    "Description": "any private terminal link"
+  },
+  {
+    "ServiceName": "kerberos",
+    "PortNumber": "88",
+    "Description": "Kerberos"
+  },
+  {
+    "ServiceName": "su-mit-tg",
+    "PortNumber": "89",
+    "Description": "SU/MIT Telnet Gateway"
+  },
+  {
+    "ServiceName": "dnsix",
+    "PortNumber": "90",
+    "Description": "DNSIX Securit Attribute Token Map",
+    "KnownUnauthorizedUses": "PORT 90 also being used unofficially by Pointcast"
+  },
+  {
+    "ServiceName": "mit-dov",
+    "PortNumber": "91",
+    "Description": "MIT Dover Spooler"
+  },
+  {
+    "ServiceName": "npp",
+    "PortNumber": "92",
+    "Description": "Network Printing Protocol"
+  },
+  {
+    "ServiceName": "dcp",
+    "PortNumber": "93",
+    "Description": "Device Control Protocol"
+  },
+  {
+    "ServiceName": "objcall",
+    "PortNumber": "94",
+    "Description": "Tivoli Object Dispatcher"
+  },
+  {
+    "ServiceName": "supdup",
+    "PortNumber": "95",
+    "Description": "SUPDUP"
+  },
+  {
+    "ServiceName": "dixie",
+    "PortNumber": "96",
+    "Description": "DIXIE Protocol Specification"
+  },
+  {
+    "ServiceName": "swift-rvf",
+    "PortNumber": "97",
+    "Description": "Swift Remote Virtural File Protocol"
+  },
+  {
+    "ServiceName": "tacnews",
+    "PortNumber": "98",
+    "Description": "TAC News"
+  },
+  {
+    "ServiceName": "metagram",
+    "PortNumber": "99",
+    "Description": "Metagram Relay"
+  },
+  {
+    "ServiceName": "hostname",
+    "PortNumber": "101",
+    "Description": "NIC Host Name Server"
+  },
+  {
+    "ServiceName": "iso-tsap",
+    "PortNumber": "102",
+    "Description": "ISO-TSAP Class 0"
+  },
+  {
+    "ServiceName": "gppitnp",
+    "PortNumber": "103",
+    "Description": "Genesis Point-to-Point Trans Net"
+  },
+  {
+    "ServiceName": "acr-nema",
+    "PortNumber": "104",
+    "Description": "ACR-NEMA Digital Imag. & Comm. 300"
+  },
+  {
+    "ServiceName": "cso",
+    "PortNumber": "105",
+    "Description": "CCSO name server protocol"
+  },
+  {
+    "ServiceName": "csnet-ns",
+    "PortNumber": "105",
+    "Description": "Mailbox Name Nameserver"
+  },
+  {
+    "ServiceName": "3com-tsmux",
+    "PortNumber": "106",
+    "Description": "3COM-TSMUX",
+    "KnownUnauthorizedUses": "Known Unauthorized Use on 106"
+  },
+  {
+    "ServiceName": "rtelnet",
+    "PortNumber": "107",
+    "Description": "Remote Telnet Service"
+  },
+  {
+    "ServiceName": "snagas",
+    "PortNumber": "108",
+    "Description": "SNA Gateway Access Server"
+  },
+  {
+    "ServiceName": "pop2",
+    "PortNumber": "109",
+    "Description": "Post Office Protocol - Version 2"
+  },
+  {
+    "ServiceName": "pop3",
+    "PortNumber": "110",
+    "Description": "Post Office Protocol - Version 3"
+  },
+  {
+    "ServiceName": "sunrpc",
+    "PortNumber": "111",
+    "Description": "SUN Remote Procedure Call"
+  },
+  {
+    "ServiceName": "mcidas",
+    "PortNumber": "112",
+    "Description": "McIDAS Data Transmission Protocol"
+  },
+  {
+    "ServiceName": "ident",
+    "PortNumber": "113"
+  },
+  {
+    "ServiceName": "auth",
+    "PortNumber": "113",
+    "Description": "Authentication Service"
+  },
+  {
+    "ServiceName": "sftp",
+    "PortNumber": "115",
+    "Description": "Simple File Transfer Protocol"
+  },
+  {
+    "ServiceName": "ansanotify",
+    "PortNumber": "116",
+    "Description": "ANSA REX Notify"
+  },
+  {
+    "ServiceName": "uucp-path",
+    "PortNumber": "117",
+    "Description": "UUCP Path Service"
+  },
+  {
+    "ServiceName": "sqlserv",
+    "PortNumber": "118",
+    "Description": "SQL Services"
+  },
+  {
+    "ServiceName": "nntp",
+    "PortNumber": "119",
+    "Description": "Network News Transfer Protocol"
+  },
+  {
+    "ServiceName": "cfdptkt",
+    "PortNumber": "120",
+    "Description": "CFDPTKT"
+  },
+  {
+    "ServiceName": "erpc",
+    "PortNumber": "121",
+    "Description": "Encore Expedited Remote Pro.Call"
+  },
+  {
+    "ServiceName": "smakynet",
+    "PortNumber": "122",
+    "Description": "SMAKYNET"
+  },
+  {
+    "ServiceName": "ntp",
+    "PortNumber": "123",
+    "Description": "Network Time Protocol"
+  },
+  {
+    "ServiceName": "ansatrader",
+    "PortNumber": "124",
+    "Description": "ANSA REX Trader"
+  },
+  {
+    "ServiceName": "locus-map",
+    "PortNumber": "125",
+    "Description": "Locus PC-Interface Net Map Ser"
+  },
+  {
+    "ServiceName": "nxedit",
+    "PortNumber": "126",
+    "Description": "NXEdit"
+  },
+  {
+    "ServiceName": "locus-con",
+    "PortNumber": "127",
+    "Description": "Locus PC-Interface Conn Server"
+  },
+  {
+    "ServiceName": "gss-xlicen",
+    "PortNumber": "128",
+    "Description": "GSS X License Verification"
+  },
+  {
+    "ServiceName": "pwdgen",
+    "PortNumber": "129",
+    "Description": "Password Generator Protocol"
+  },
+  {
+    "ServiceName": "cisco-fna",
+    "PortNumber": "130",
+    "Description": "cisco FNATIVE"
+  },
+  {
+    "ServiceName": "cisco-tna",
+    "PortNumber": "131",
+    "Description": "cisco TNATIVE"
+  },
+  {
+    "ServiceName": "cisco-sys",
+    "PortNumber": "132",
+    "Description": "cisco SYSMAINT"
+  },
+  {
+    "ServiceName": "statsrv",
+    "PortNumber": "133",
+    "Description": "Statistics Service"
+  },
+  {
+    "ServiceName": "ingres-net",
+    "PortNumber": "134",
+    "Description": "INGRES-NET Service"
+  },
+  {
+    "ServiceName": "epmap",
+    "PortNumber": "135",
+    "Description": "DCE endpoint resolution"
+  },
+  {
+    "ServiceName": "profile",
+    "PortNumber": "136",
+    "Description": "PROFILE Naming System"
+  },
+  {
+    "ServiceName": "netbios-ns",
+    "PortNumber": "137",
+    "Description": "NETBIOS Name Service"
+  },
+  {
+    "ServiceName": "netbios-dgm",
+    "PortNumber": "138",
+    "Description": "NETBIOS Datagram Service"
+  },
+  {
+    "ServiceName": "netbios-ssn",
+    "PortNumber": "139",
+    "Description": "NETBIOS Session Service"
+  },
+  {
+    "ServiceName": "emfis-data",
+    "PortNumber": "140",
+    "Description": "EMFIS Data Service"
+  },
+  {
+    "ServiceName": "emfis-cntl",
+    "PortNumber": "141",
+    "Description": "EMFIS Control Service"
+  },
+  {
+    "ServiceName": "bl-idm",
+    "PortNumber": "142",
+    "Description": "Britton-Lee IDM"
+  },
+  {
+    "ServiceName": "imap",
+    "PortNumber": "143",
+    "Description": "Internet Message Access Protocol"
+  },
+  {
+    "ServiceName": "uma",
+    "PortNumber": "144",
+    "Description": "Universal Management Architecture"
+  },
+  {
+    "ServiceName": "uaac",
+    "PortNumber": "145",
+    "Description": "UAAC Protocol"
+  },
+  {
+    "ServiceName": "iso-tp0",
+    "PortNumber": "146",
+    "Description": "ISO-IP0"
+  },
+  {
+    "ServiceName": "iso-ip",
+    "PortNumber": "147",
+    "Description": "ISO-IP"
+  },
+  {
+    "ServiceName": "jargon",
+    "PortNumber": "148",
+    "Description": "Jargon"
+  },
+  {
+    "ServiceName": "aed-512",
+    "PortNumber": "149",
+    "Description": "AED 512 Emulation Service"
+  },
+  {
+    "ServiceName": "sql-net",
+    "PortNumber": "150",
+    "Description": "SQL-NET"
+  },
+  {
+    "ServiceName": "hems",
+    "PortNumber": "151",
+    "Description": "HEMS"
+  },
+  {
+    "ServiceName": "bftp",
+    "PortNumber": "152",
+    "Description": "Background File Transfer Program"
+  },
+  {
+    "ServiceName": "sgmp",
+    "PortNumber": "153",
+    "Description": "SGMP"
+  },
+  {
+    "ServiceName": "netsc-prod",
+    "PortNumber": "154",
+    "Description": "NETSC"
+  },
+  {
+    "ServiceName": "netsc-dev",
+    "PortNumber": "155",
+    "Description": "NETSC"
+  },
+  {
+    "ServiceName": "sqlsrv",
+    "PortNumber": "156",
+    "Description": "SQL Service"
+  },
+  {
+    "ServiceName": "knet-cmp",
+    "PortNumber": "157",
+    "Description": "KNET/VM Command/Message Protocol"
+  },
+  {
+    "ServiceName": "pcmail-srv",
+    "PortNumber": "158",
+    "Description": "PCMail Server"
+  },
+  {
+    "ServiceName": "nss-routing",
+    "PortNumber": "159",
+    "Description": "NSS-Routing"
+  },
+  {
+    "ServiceName": "sgmp-traps",
+    "PortNumber": "160",
+    "Description": "SGMP-TRAPS"
+  },
+  {
+    "ServiceName": "snmp",
+    "PortNumber": "161",
+    "Description": "SNMP"
+  },
+  {
+    "ServiceName": "snmptrap",
+    "PortNumber": "162",
+    "Description": "SNMPTRAP"
+  },
+  {
+    "ServiceName": "cmip-man",
+    "PortNumber": "163",
+    "Description": "CMIP/TCP Manager"
+  },
+  {
+    "ServiceName": "cmip-agent",
+    "PortNumber": "164",
+    "Description": "CMIP/TCP Agent"
+  },
+  {
+    "ServiceName": "xns-courier",
+    "PortNumber": "165",
+    "Description": "Xerox"
+  },
+  {
+    "ServiceName": "s-net",
+    "PortNumber": "166",
+    "Description": "Sirius Systems"
+  },
+  {
+    "ServiceName": "namp",
+    "PortNumber": "167",
+    "Description": "NAMP"
+  },
+  {
+    "ServiceName": "rsvd",
+    "PortNumber": "168",
+    "Description": "RSVD"
+  },
+  {
+    "ServiceName": "send",
+    "PortNumber": "169",
+    "Description": "SEND"
+  },
+  {
+    "ServiceName": "print-srv",
+    "PortNumber": "170",
+    "Description": "Network PostScript"
+  },
+  {
+    "ServiceName": "multiplex",
+    "PortNumber": "171",
+    "Description": "Network Innovations Multiplex"
+  },
+  {
+    "ServiceName": "cl-1",
+    "PortNumber": "172",
+    "Description": "Network Innovations CL/1\nIANA assigned this well-formed service name as a replacement for \"cl/1\"."
+  },
+  {
+    "ServiceName": "cl/1",
+    "PortNumber": "172",
+    "Description": "Network Innovations CL/1"
+  },
+  {
+    "ServiceName": "xyplex-mux",
+    "PortNumber": "173",
+    "Description": "Xyplex"
+  },
+  {
+    "ServiceName": "mailq",
+    "PortNumber": "174",
+    "Description": "MAILQ"
+  },
+  {
+    "ServiceName": "vmnet",
+    "PortNumber": "175",
+    "Description": "VMNET"
+  },
+  {
+    "ServiceName": "genrad-mux",
+    "PortNumber": "176",
+    "Description": "GENRAD-MUX"
+  },
+  {
+    "ServiceName": "xdmcp",
+    "PortNumber": "177",
+    "Description": "X Display Manager Control Protocol"
+  },
+  {
+    "ServiceName": "nextstep",
+    "PortNumber": "178",
+    "Description": "NextStep Window Server"
+  },
+  {
+    "ServiceName": "bgp",
+    "PortNumber": "179",
+    "Description": "Border Gateway Protocol"
+  },
+  {
+    "ServiceName": "ris",
+    "PortNumber": "180",
+    "Description": "Intergraph"
+  },
+  {
+    "ServiceName": "unify",
+    "PortNumber": "181",
+    "Description": "Unify"
+  },
+  {
+    "ServiceName": "audit",
+    "PortNumber": "182",
+    "Description": "Unisys Audit SITP"
+  },
+  {
+    "ServiceName": "ocbinder",
+    "PortNumber": "183",
+    "Description": "OCBinder"
+  },
+  {
+    "ServiceName": "ocserver",
+    "PortNumber": "184",
+    "Description": "OCServer"
+  },
+  {
+    "ServiceName": "remote-kis",
+    "PortNumber": "185",
+    "Description": "Remote-KIS"
+  },
+  {
+    "ServiceName": "kis",
+    "PortNumber": "186",
+    "Description": "KIS Protocol"
+  },
+  {
+    "ServiceName": "aci",
+    "PortNumber": "187",
+    "Description": "Application Communication Interface"
+  },
+  {
+    "ServiceName": "mumps",
+    "PortNumber": "188",
+    "Description": "Plus Five's MUMPS"
+  },
+  {
+    "ServiceName": "qft",
+    "PortNumber": "189",
+    "Description": "Queued File Transport"
+  },
+  {
+    "ServiceName": "gacp",
+    "PortNumber": "190",
+    "Description": "Gateway Access Control Protocol"
+  },
+  {
+    "ServiceName": "prospero",
+    "PortNumber": "191",
+    "Description": "Prospero Directory Service"
+  },
+  {
+    "ServiceName": "osu-nms",
+    "PortNumber": "192",
+    "Description": "OSU Network Monitoring System"
+  },
+  {
+    "ServiceName": "srmp",
+    "PortNumber": "193",
+    "Description": "Spider Remote Monitoring Protocol"
+  },
+  {
+    "ServiceName": "irc",
+    "PortNumber": "194",
+    "Description": "Internet Relay Chat Protocol"
+  },
+  {
+    "ServiceName": "dn6-nlm-aud",
+    "PortNumber": "195",
+    "Description": "DNSIX Network Level Module Audit"
+  },
+  {
+    "ServiceName": "dn6-smm-red",
+    "PortNumber": "196",
+    "Description": "DNSIX Session Mgt Module Audit Redir"
+  },
+  {
+    "ServiceName": "dls",
+    "PortNumber": "197",
+    "Description": "Directory Location Service"
+  },
+  {
+    "ServiceName": "dls-mon",
+    "PortNumber": "198",
+    "Description": "Directory Location Service Monitor"
+  },
+  {
+    "ServiceName": "smux",
+    "PortNumber": "199",
+    "Description": "SMUX"
+  },
+  {
+    "ServiceName": "src",
+    "PortNumber": "200",
+    "Description": "IBM System Resource Controller"
+  },
+  {
+    "ServiceName": "at-rtmp",
+    "PortNumber": "201",
+    "Description": "AppleTalk Routing Maintenance"
+  },
+  {
+    "ServiceName": "at-nbp",
+    "PortNumber": "202",
+    "Description": "AppleTalk Name Binding"
+  },
+  {
+    "ServiceName": "at-3",
+    "PortNumber": "203",
+    "Description": "AppleTalk Unused"
+  },
+  {
+    "ServiceName": "at-echo",
+    "PortNumber": "204",
+    "Description": "AppleTalk Echo"
+  },
+  {
+    "ServiceName": "at-5",
+    "PortNumber": "205",
+    "Description": "AppleTalk Unused"
+  },
+  {
+    "ServiceName": "at-zis",
+    "PortNumber": "206",
+    "Description": "AppleTalk Zone Information"
+  },
+  {
+    "ServiceName": "at-7",
+    "PortNumber": "207",
+    "Description": "AppleTalk Unused"
+  },
+  {
+    "ServiceName": "at-8",
+    "PortNumber": "208",
+    "Description": "AppleTalk Unused"
+  },
+  {
+    "ServiceName": "qmtp",
+    "PortNumber": "209",
+    "Description": "The Quick Mail Transfer Protocol"
+  },
+  {
+    "ServiceName": "z39-50",
+    "PortNumber": "210",
+    "Description": "ANSI Z39.50\nIANA assigned this well-formed service name as a replacement for \"z39.50\"."
+  },
+  {
+    "ServiceName": "z39.50",
+    "PortNumber": "210",
+    "Description": "ANSI Z39.50"
+  },
+  {
+    "ServiceName": "914c-g",
+    "PortNumber": "211",
+    "Description": "Texas Instruments 914C/G Terminal\nIANA assigned this well-formed service name as a replacement for \"914c/g\"."
+  },
+  {
+    "ServiceName": "914c/g",
+    "PortNumber": "211",
+    "Description": "Texas Instruments 914C/G Terminal"
+  },
+  {
+    "ServiceName": "anet",
+    "PortNumber": "212",
+    "Description": "ATEXSSTR"
+  },
+  {
+    "ServiceName": "ipx",
+    "PortNumber": "213",
+    "Description": "IPX"
+  },
+  {
+    "ServiceName": "vmpwscs",
+    "PortNumber": "214",
+    "Description": "VM PWSCS"
+  },
+  {
+    "ServiceName": "softpc",
+    "PortNumber": "215",
+    "Description": "Insignia Solutions"
+  },
+  {
+    "ServiceName": "CAIlic",
+    "PortNumber": "216",
+    "Description": "Computer Associates Int'l License Server"
+  },
+  {
+    "ServiceName": "dbase",
+    "PortNumber": "217",
+    "Description": "dBASE Unix"
+  },
+  {
+    "ServiceName": "mpp",
+    "PortNumber": "218",
+    "Description": "Netix Message Posting Protocol"
+  },
+  {
+    "ServiceName": "uarps",
+    "PortNumber": "219",
+    "Description": "Unisys ARPs"
+  },
+  {
+    "ServiceName": "imap3",
+    "PortNumber": "220",
+    "Description": "Interactive Mail Access Protocol v3"
+  },
+  {
+    "ServiceName": "fln-spx",
+    "PortNumber": "221",
+    "Description": "Berkeley rlogind with SPX auth"
+  },
+  {
+    "ServiceName": "rsh-spx",
+    "PortNumber": "222",
+    "Description": "Berkeley rshd with SPX auth"
+  },
+  {
+    "ServiceName": "cdc",
+    "PortNumber": "223",
+    "Description": "Certificate Distribution Center"
+  },
+  {
+    "ServiceName": "masqdialer",
+    "PortNumber": "224",
+    "Description": "masqdialer"
+  },
+  {
+    "ServiceName": "direct",
+    "PortNumber": "242",
+    "Description": "Direct"
+  },
+  {
+    "ServiceName": "sur-meas",
+    "PortNumber": "243",
+    "Description": "Survey Measurement"
+  },
+  {
+    "ServiceName": "inbusiness",
+    "PortNumber": "244",
+    "Description": "inbusiness"
+  },
+  {
+    "ServiceName": "link",
+    "PortNumber": "245",
+    "Description": "LINK"
+  },
+  {
+    "ServiceName": "dsp3270",
+    "PortNumber": "246",
+    "Description": "Display Systems Protocol"
+  },
+  {
+    "ServiceName": "subntbcst-tftp",
+    "PortNumber": "247",
+    "Description": "SUBNTBCST_TFTP\nIANA assigned this well-formed service name as a replacement for \"subntbcst_tftp\"."
+  },
+  {
+    "ServiceName": "subntbcst_tftp",
+    "PortNumber": "247",
+    "Description": "SUBNTBCST_TFTP"
+  },
+  {
+    "ServiceName": "bhfhs",
+    "PortNumber": "248",
+    "Description": "bhfhs"
+  },
+  {
+    "ServiceName": "rap",
+    "PortNumber": "256",
+    "Description": "RAP"
+  },
+  {
+    "ServiceName": "set",
+    "PortNumber": "257",
+    "Description": "Secure Electronic Transaction"
+  },
+  {
+    "ServiceName": "esro-gen",
+    "PortNumber": "259",
+    "Description": "Efficient Short Remote Operations"
+  },
+  {
+    "ServiceName": "openport",
+    "PortNumber": "260",
+    "Description": "Openport"
+  },
+  {
+    "ServiceName": "nsiiops",
+    "PortNumber": "261",
+    "Description": "IIOP Name Service over TLS/SSL"
+  },
+  {
+    "ServiceName": "arcisdms",
+    "PortNumber": "262",
+    "Description": "Arcisdms"
+  },
+  {
+    "ServiceName": "hdap",
+    "PortNumber": "263",
+    "Description": "HDAP"
+  },
+  {
+    "ServiceName": "bgmp",
+    "PortNumber": "264",
+    "Description": "BGMP"
+  },
+  {
+    "ServiceName": "x-bone-ctl",
+    "PortNumber": "265",
+    "Description": "X-Bone CTL"
+  },
+  {
+    "ServiceName": "sst",
+    "PortNumber": "266",
+    "Description": "SCSI on ST"
+  },
+  {
+    "ServiceName": "td-service",
+    "PortNumber": "267",
+    "Description": "Tobit David Service Layer"
+  },
+  {
+    "ServiceName": "td-replica",
+    "PortNumber": "268",
+    "Description": "Tobit David Replica"
+  },
+  {
+    "ServiceName": "manet",
+    "PortNumber": "269",
+    "Description": "MANET Protocols"
+  },
+  {
+    "ServiceName": "pt-tls",
+    "PortNumber": "271",
+    "Description": "IETF Network Endpoint Assessment (NEA) Posture Transport Protocol over TLS (PT-TLS)"
+  },
+  {
+    "ServiceName": "http-mgmt",
+    "PortNumber": "280",
+    "Description": "http-mgmt"
+  },
+  {
+    "ServiceName": "personal-link",
+    "PortNumber": "281",
+    "Description": "Personal Link"
+  },
+  {
+    "ServiceName": "cableport-ax",
+    "PortNumber": "282",
+    "Description": "Cable Port A/X"
+  },
+  {
+    "ServiceName": "rescap",
+    "PortNumber": "283",
+    "Description": "rescap"
+  },
+  {
+    "ServiceName": "corerjd",
+    "PortNumber": "284",
+    "Description": "corerjd"
+  },
+  {
+    "ServiceName": "fxp",
+    "PortNumber": "286",
+    "Description": "FXP Communication"
+  },
+  {
+    "ServiceName": "k-block",
+    "PortNumber": "287",
+    "Description": "K-BLOCK"
+  },
+  {
+    "ServiceName": "novastorbakcup",
+    "PortNumber": "308",
+    "Description": "Novastor Backup"
+  },
+  {
+    "ServiceName": "entrusttime",
+    "PortNumber": "309",
+    "Description": "EntrustTime"
+  },
+  {
+    "ServiceName": "bhmds",
+    "PortNumber": "310",
+    "Description": "bhmds"
+  },
+  {
+    "ServiceName": "asip-webadmin",
+    "PortNumber": "311",
+    "Description": "AppleShare IP WebAdmin"
+  },
+  {
+    "ServiceName": "vslmp",
+    "PortNumber": "312",
+    "Description": "VSLMP"
+  },
+  {
+    "ServiceName": "magenta-logic",
+    "PortNumber": "313",
+    "Description": "Magenta Logic"
+  },
+  {
+    "ServiceName": "opalis-robot",
+    "PortNumber": "314",
+    "Description": "Opalis Robot"
+  },
+  {
+    "ServiceName": "dpsi",
+    "PortNumber": "315",
+    "Description": "DPSI"
+  },
+  {
+    "ServiceName": "decauth",
+    "PortNumber": "316",
+    "Description": "decAuth"
+  },
+  {
+    "ServiceName": "zannet",
+    "PortNumber": "317",
+    "Description": "Zannet"
+  },
+  {
+    "ServiceName": "pkix-timestamp",
+    "PortNumber": "318",
+    "Description": "PKIX TimeStamp"
+  },
+  {
+    "ServiceName": "ptp-event",
+    "PortNumber": "319",
+    "Description": "PTP Event"
+  },
+  {
+    "ServiceName": "ptp-general",
+    "PortNumber": "320",
+    "Description": "PTP General"
+  },
+  {
+    "ServiceName": "pip",
+    "PortNumber": "321",
+    "Description": "PIP"
+  },
+  {
+    "ServiceName": "rtsps",
+    "PortNumber": "322",
+    "Description": "RTSPS"
+  },
+  {
+    "ServiceName": "rpki-rtr",
+    "PortNumber": "323",
+    "Description": "Resource PKI to Router Protocol"
+  },
+  {
+    "ServiceName": "rpki-rtr-tls",
+    "PortNumber": "324",
+    "Description": "Resource PKI to Router Protocol over TLS"
+  },
+  {
+    "ServiceName": "texar",
+    "PortNumber": "333",
+    "Description": "Texar Security Port"
+  },
+  {
+    "ServiceName": "pdap",
+    "PortNumber": "344",
+    "Description": "Prospero Data Access Protocol"
+  },
+  {
+    "ServiceName": "pawserv",
+    "PortNumber": "345",
+    "Description": "Perf Analysis Workbench"
+  },
+  {
+    "ServiceName": "zserv",
+    "PortNumber": "346",
+    "Description": "Zebra server"
+  },
+  {
+    "ServiceName": "fatserv",
+    "PortNumber": "347",
+    "Description": "Fatmen Server"
+  },
+  {
+    "ServiceName": "csi-sgwp",
+    "PortNumber": "348",
+    "Description": "Cabletron Management Protocol"
+  },
+  {
+    "ServiceName": "mftp",
+    "PortNumber": "349",
+    "Description": "mftp"
+  },
+  {
+    "ServiceName": "matip-type-a",
+    "PortNumber": "350",
+    "Description": "MATIP Type A"
+  },
+  {
+    "ServiceName": "matip-type-b",
+    "PortNumber": "351",
+    "Description": "MATIP Type B"
+  },
+  {
+    "ServiceName": "bhoetty",
+    "PortNumber": "351",
+    "Description": "bhoetty"
+  },
+  {
+    "ServiceName": "dtag-ste-sb",
+    "PortNumber": "352",
+    "Description": "DTAG"
+  },
+  {
+    "ServiceName": "bhoedap4",
+    "PortNumber": "352",
+    "Description": "bhoedap4"
+  },
+  {
+    "ServiceName": "ndsauth",
+    "PortNumber": "353",
+    "Description": "NDSAUTH"
+  },
+  {
+    "ServiceName": "bh611",
+    "PortNumber": "354",
+    "Description": "bh611"
+  },
+  {
+    "ServiceName": "datex-asn",
+    "PortNumber": "355",
+    "Description": "DATEX-ASN"
+  },
+  {
+    "ServiceName": "cloanto-net-1",
+    "PortNumber": "356",
+    "Description": "Cloanto Net 1"
+  },
+  {
+    "ServiceName": "bhevent",
+    "PortNumber": "357",
+    "Description": "bhevent"
+  },
+  {
+    "ServiceName": "shrinkwrap",
+    "PortNumber": "358",
+    "Description": "Shrinkwrap"
+  },
+  {
+    "ServiceName": "nsrmp",
+    "PortNumber": "359",
+    "Description": "Network Security Risk Management Protocol"
+  },
+  {
+    "ServiceName": "scoi2odialog",
+    "PortNumber": "360",
+    "Description": "scoi2odialog"
+  },
+  {
+    "ServiceName": "semantix",
+    "PortNumber": "361",
+    "Description": "Semantix"
+  },
+  {
+    "ServiceName": "srssend",
+    "PortNumber": "362",
+    "Description": "SRS Send"
+  },
+  {
+    "ServiceName": "rsvp-tunnel",
+    "PortNumber": "363",
+    "Description": "RSVP Tunnel\nIANA assigned this well-formed service name as a replacement for \"rsvp_tunnel\"."
+  },
+  {
+    "ServiceName": "rsvp_tunnel",
+    "PortNumber": "363",
+    "Description": "RSVP Tunnel"
+  },
+  {
+    "ServiceName": "aurora-cmgr",
+    "PortNumber": "364",
+    "Description": "Aurora CMGR"
+  },
+  {
+    "ServiceName": "dtk",
+    "PortNumber": "365",
+    "Description": "DTK"
+  },
+  {
+    "ServiceName": "odmr",
+    "PortNumber": "366",
+    "Description": "ODMR"
+  },
+  {
+    "ServiceName": "mortgageware",
+    "PortNumber": "367",
+    "Description": "MortgageWare"
+  },
+  {
+    "ServiceName": "qbikgdp",
+    "PortNumber": "368",
+    "Description": "QbikGDP"
+  },
+  {
+    "ServiceName": "rpc2portmap",
+    "PortNumber": "369",
+    "Description": "rpc2portmap"
+  },
+  {
+    "ServiceName": "codaauth2",
+    "PortNumber": "370",
+    "Description": "codaauth2"
+  },
+  {
+    "ServiceName": "clearcase",
+    "PortNumber": "371",
+    "Description": "Clearcase"
+  },
+  {
+    "ServiceName": "ulistproc",
+    "PortNumber": "372",
+    "Description": "ListProcessor"
+  },
+  {
+    "ServiceName": "legent-1",
+    "PortNumber": "373",
+    "Description": "Legent Corporation"
+  },
+  {
+    "ServiceName": "legent-2",
+    "PortNumber": "374",
+    "Description": "Legent Corporation"
+  },
+  {
+    "ServiceName": "hassle",
+    "PortNumber": "375",
+    "Description": "Hassle"
+  },
+  {
+    "ServiceName": "nip",
+    "PortNumber": "376",
+    "Description": "Amiga Envoy Network Inquiry Proto"
+  },
+  {
+    "ServiceName": "tnETOS",
+    "PortNumber": "377",
+    "Description": "NEC Corporation"
+  },
+  {
+    "ServiceName": "dsETOS",
+    "PortNumber": "378",
+    "Description": "NEC Corporation"
+  },
+  {
+    "ServiceName": "is99c",
+    "PortNumber": "379",
+    "Description": "TIA/EIA/IS-99 modem client"
+  },
+  {
+    "ServiceName": "is99s",
+    "PortNumber": "380",
+    "Description": "TIA/EIA/IS-99 modem server"
+  },
+  {
+    "ServiceName": "hp-collector",
+    "PortNumber": "381",
+    "Description": "hp performance data collector"
+  },
+  {
+    "ServiceName": "hp-managed-node",
+    "PortNumber": "382",
+    "Description": "hp performance data managed node"
+  },
+  {
+    "ServiceName": "hp-alarm-mgr",
+    "PortNumber": "383",
+    "Description": "hp performance data alarm manager"
+  },
+  {
+    "ServiceName": "arns",
+    "PortNumber": "384",
+    "Description": "A Remote Network Server System"
+  },
+  {
+    "ServiceName": "ibm-app",
+    "PortNumber": "385",
+    "Description": "IBM Application"
+  },
+  {
+    "ServiceName": "asa",
+    "PortNumber": "386",
+    "Description": "ASA Message Router Object Def."
+  },
+  {
+    "ServiceName": "aurp",
+    "PortNumber": "387",
+    "Description": "Appletalk Update-Based Routing Pro."
+  },
+  {
+    "ServiceName": "unidata-ldm",
+    "PortNumber": "388",
+    "Description": "Unidata LDM"
+  },
+  {
+    "ServiceName": "ldap",
+    "PortNumber": "389",
+    "Description": "Lightweight Directory Access Protocol"
+  },
+  {
+    "ServiceName": "uis",
+    "PortNumber": "390",
+    "Description": "UIS"
+  },
+  {
+    "ServiceName": "synotics-relay",
+    "PortNumber": "391",
+    "Description": "SynOptics SNMP Relay Port"
+  },
+  {
+    "ServiceName": "synotics-broker",
+    "PortNumber": "392",
+    "Description": "SynOptics Port Broker Port"
+  },
+  {
+    "ServiceName": "meta5",
+    "PortNumber": "393",
+    "Description": "Meta5"
+  },
+  {
+    "ServiceName": "embl-ndt",
+    "PortNumber": "394",
+    "Description": "EMBL Nucleic Data Transfer"
+  },
+  {
+    "ServiceName": "netcp",
+    "PortNumber": "395",
+    "Description": "NetScout Control Protocol"
+  },
+  {
+    "ServiceName": "netware-ip",
+    "PortNumber": "396",
+    "Description": "Novell Netware over IP"
+  },
+  {
+    "ServiceName": "mptn",
+    "PortNumber": "397",
+    "Description": "Multi Protocol Trans. Net."
+  },
+  {
+    "ServiceName": "kryptolan",
+    "PortNumber": "398",
+    "Description": "Kryptolan"
+  },
+  {
+    "ServiceName": "iso-tsap-c2",
+    "PortNumber": "399",
+    "Description": "ISO Transport Class 2 Non-Control over TCP"
+  },
+  {
+    "ServiceName": "osb-sd",
+    "PortNumber": "400",
+    "Description": "Oracle Secure Backup"
+  },
+  {
+    "ServiceName": "ups",
+    "PortNumber": "401",
+    "Description": "Uninterruptible Power Supply"
+  },
+  {
+    "ServiceName": "genie",
+    "PortNumber": "402",
+    "Description": "Genie Protocol"
+  },
+  {
+    "ServiceName": "decap",
+    "PortNumber": "403",
+    "Description": "decap"
+  },
+  {
+    "ServiceName": "nced",
+    "PortNumber": "404",
+    "Description": "nced"
+  },
+  {
+    "ServiceName": "ncld",
+    "PortNumber": "405",
+    "Description": "ncld"
+  },
+  {
+    "ServiceName": "imsp",
+    "PortNumber": "406",
+    "Description": "Interactive Mail Support Protocol"
+  },
+  {
+    "ServiceName": "timbuktu",
+    "PortNumber": "407",
+    "Description": "Timbuktu"
+  },
+  {
+    "ServiceName": "prm-sm",
+    "PortNumber": "408",
+    "Description": "Prospero Resource Manager Sys. Man."
+  },
+  {
+    "ServiceName": "prm-nm",
+    "PortNumber": "409",
+    "Description": "Prospero Resource Manager Node Man."
+  },
+  {
+    "ServiceName": "decladebug",
+    "PortNumber": "410",
+    "Description": "DECLadebug Remote Debug Protocol"
+  },
+  {
+    "ServiceName": "rmt",
+    "PortNumber": "411",
+    "Description": "Remote MT Protocol"
+  },
+  {
+    "ServiceName": "synoptics-trap",
+    "PortNumber": "412",
+    "Description": "Trap Convention Port"
+  },
+  {
+    "ServiceName": "smsp",
+    "PortNumber": "413",
+    "Description": "Storage Management Services Protocol"
+  },
+  {
+    "ServiceName": "infoseek",
+    "PortNumber": "414",
+    "Description": "InfoSeek"
+  },
+  {
+    "ServiceName": "bnet",
+    "PortNumber": "415",
+    "Description": "BNet"
+  },
+  {
+    "ServiceName": "silverplatter",
+    "PortNumber": "416",
+    "Description": "Silverplatter"
+  },
+  {
+    "ServiceName": "onmux",
+    "PortNumber": "417",
+    "Description": "Onmux"
+  },
+  {
+    "ServiceName": "hyper-g",
+    "PortNumber": "418",
+    "Description": "Hyper-G"
+  },
+  {
+    "ServiceName": "ariel1",
+    "PortNumber": "419",
+    "Description": "Ariel 1"
+  },
+  {
+    "ServiceName": "smpte",
+    "PortNumber": "420",
+    "Description": "SMPTE"
+  },
+  {
+    "ServiceName": "ariel2",
+    "PortNumber": "421",
+    "Description": "Ariel 2"
+  },
+  {
+    "ServiceName": "ariel3",
+    "PortNumber": "422",
+    "Description": "Ariel 3"
+  },
+  {
+    "ServiceName": "opc-job-start",
+    "PortNumber": "423",
+    "Description": "IBM Operations Planning and Control Start"
+  },
+  {
+    "ServiceName": "opc-job-track",
+    "PortNumber": "424",
+    "Description": "IBM Operations Planning and Control Track"
+  },
+  {
+    "ServiceName": "icad-el",
+    "PortNumber": "425",
+    "Description": "ICAD"
+  },
+  {
+    "ServiceName": "smartsdp",
+    "PortNumber": "426",
+    "Description": "smartsdp"
+  },
+  {
+    "ServiceName": "svrloc",
+    "PortNumber": "427",
+    "Description": "Server Location"
+  },
+  {
+    "ServiceName": "ocs-cmu",
+    "PortNumber": "428",
+    "Description": "OCS_CMU\nIANA assigned this well-formed service name as a replacement for \"ocs_cmu\"."
+  },
+  {
+    "ServiceName": "ocs_cmu",
+    "PortNumber": "428",
+    "Description": "OCS_CMU"
+  },
+  {
+    "ServiceName": "ocs-amu",
+    "PortNumber": "429",
+    "Description": "OCS_AMU\nIANA assigned this well-formed service name as a replacement for \"ocs_amu\"."
+  },
+  {
+    "ServiceName": "ocs_amu",
+    "PortNumber": "429",
+    "Description": "OCS_AMU"
+  },
+  {
+    "ServiceName": "utmpsd",
+    "PortNumber": "430",
+    "Description": "UTMPSD"
+  },
+  {
+    "ServiceName": "utmpcd",
+    "PortNumber": "431",
+    "Description": "UTMPCD"
+  },
+  {
+    "ServiceName": "iasd",
+    "PortNumber": "432",
+    "Description": "IASD"
+  },
+  {
+    "ServiceName": "nnsp",
+    "PortNumber": "433",
+    "Description": "NNSP"
+  },
+  {
+    "ServiceName": "mobileip-agent",
+    "PortNumber": "434",
+    "Description": "MobileIP-Agent"
+  },
+  {
+    "ServiceName": "mobilip-mn",
+    "PortNumber": "435",
+    "Description": "MobilIP-MN"
+  },
+  {
+    "ServiceName": "dna-cml",
+    "PortNumber": "436",
+    "Description": "DNA-CML"
+  },
+  {
+    "ServiceName": "comscm",
+    "PortNumber": "437",
+    "Description": "comscm"
+  },
+  {
+    "ServiceName": "dsfgw",
+    "PortNumber": "438",
+    "Description": "dsfgw"
+  },
+  {
+    "ServiceName": "dasp",
+    "PortNumber": "439",
+    "Description": "dasp"
+  },
+  {
+    "ServiceName": "sgcp",
+    "PortNumber": "440",
+    "Description": "sgcp"
+  },
+  {
+    "ServiceName": "decvms-sysmgt",
+    "PortNumber": "441",
+    "Description": "decvms-sysmgt"
+  },
+  {
+    "ServiceName": "cvc-hostd",
+    "PortNumber": "442",
+    "Description": "cvc_hostd\nIANA assigned this well-formed service name as a replacement for \"cvc_hostd\"."
+  },
+  {
+    "ServiceName": "cvc_hostd",
+    "PortNumber": "442",
+    "Description": "cvc_hostd"
+  },
+  {
+    "ServiceName": "https",
+    "PortNumber": "443",
+    "Description": "http protocol over TLS/SSL"
+  },
+  {
+    "ServiceName": "snpp",
+    "PortNumber": "444",
+    "Description": "Simple Network Paging Protocol"
+  },
+  {
+    "ServiceName": "microsoft-ds",
+    "PortNumber": "445",
+    "Description": "Microsoft-DS"
+  },
+  {
+    "ServiceName": "ddm-rdb",
+    "PortNumber": "446",
+    "Description": "DDM-Remote Relational Database Access"
+  },
+  {
+    "ServiceName": "ddm-dfm",
+    "PortNumber": "447",
+    "Description": "DDM-Distributed File Management"
+  },
+  {
+    "ServiceName": "ddm-ssl",
+    "PortNumber": "448",
+    "Description": "DDM-Remote DB Access Using Secure Sockets"
+  },
+  {
+    "ServiceName": "as-servermap",
+    "PortNumber": "449",
+    "Description": "AS Server Mapper"
+  },
+  {
+    "ServiceName": "tserver",
+    "PortNumber": "450",
+    "Description": "Computer Supported Telecomunication Applications"
+  },
+  {
+    "ServiceName": "sfs-smp-net",
+    "PortNumber": "451",
+    "Description": "Cray Network Semaphore server"
+  },
+  {
+    "ServiceName": "sfs-config",
+    "PortNumber": "452",
+    "Description": "Cray SFS config server"
+  },
+  {
+    "ServiceName": "creativeserver",
+    "PortNumber": "453",
+    "Description": "CreativeServer"
+  },
+  {
+    "ServiceName": "contentserver",
+    "PortNumber": "454",
+    "Description": "ContentServer"
+  },
+  {
+    "ServiceName": "creativepartnr",
+    "PortNumber": "455",
+    "Description": "CreativePartnr"
+  },
+  {
+    "ServiceName": "macon-tcp",
+    "PortNumber": "456",
+    "Description": "macon-tcp"
+  },
+  {
+    "ServiceName": "scohelp",
+    "PortNumber": "457",
+    "Description": "scohelp"
+  },
+  {
+    "ServiceName": "appleqtc",
+    "PortNumber": "458",
+    "Description": "apple quick time"
+  },
+  {
+    "ServiceName": "ampr-rcmd",
+    "PortNumber": "459",
+    "Description": "ampr-rcmd"
+  },
+  {
+    "ServiceName": "skronk",
+    "PortNumber": "460",
+    "Description": "skronk"
+  },
+  {
+    "ServiceName": "datasurfsrv",
+    "PortNumber": "461",
+    "Description": "DataRampSrv"
+  },
+  {
+    "ServiceName": "datasurfsrvsec",
+    "PortNumber": "462",
+    "Description": "DataRampSrvSec"
+  },
+  {
+    "ServiceName": "alpes",
+    "PortNumber": "463",
+    "Description": "alpes"
+  },
+  {
+    "ServiceName": "kpasswd",
+    "PortNumber": "464",
+    "Description": "kpasswd"
+  },
+  {
+    "ServiceName": "urd",
+    "PortNumber": "465",
+    "Description": "URL Rendesvous Directory for SSM"
+  },
+  {
+    "ServiceName": "digital-vrc",
+    "PortNumber": "466",
+    "Description": "digital-vrc"
+  },
+  {
+    "ServiceName": "mylex-mapd",
+    "PortNumber": "467",
+    "Description": "mylex-mapd"
+  },
+  {
+    "ServiceName": "photuris",
+    "PortNumber": "468",
+    "Description": "proturis"
+  },
+  {
+    "ServiceName": "rcp",
+    "PortNumber": "469",
+    "Description": "Radio Control Protocol"
+  },
+  {
+    "ServiceName": "scx-proxy",
+    "PortNumber": "470",
+    "Description": "scx-proxy"
+  },
+  {
+    "ServiceName": "mondex",
+    "PortNumber": "471",
+    "Description": "Mondex"
+  },
+  {
+    "ServiceName": "ljk-login",
+    "PortNumber": "472",
+    "Description": "ljk-login"
+  },
+  {
+    "ServiceName": "hybrid-pop",
+    "PortNumber": "473",
+    "Description": "hybrid-pop"
+  },
+  {
+    "ServiceName": "tn-tl-w1",
+    "PortNumber": "474",
+    "Description": "tn-tl-w1"
+  },
+  {
+    "ServiceName": "tcpnethaspsrv",
+    "PortNumber": "475",
+    "Description": "tcpnethaspsrv"
+  },
+  {
+    "ServiceName": "tn-tl-fd1",
+    "PortNumber": "476",
+    "Description": "tn-tl-fd1"
+  },
+  {
+    "ServiceName": "ss7ns",
+    "PortNumber": "477",
+    "Description": "ss7ns"
+  },
+  {
+    "ServiceName": "spsc",
+    "PortNumber": "478",
+    "Description": "spsc"
+  },
+  {
+    "ServiceName": "iafserver",
+    "PortNumber": "479",
+    "Description": "iafserver"
+  },
+  {
+    "ServiceName": "iafdbase",
+    "PortNumber": "480",
+    "Description": "iafdbase"
+  },
+  {
+    "ServiceName": "ph",
+    "PortNumber": "481",
+    "Description": "Ph service"
+  },
+  {
+    "ServiceName": "bgs-nsi",
+    "PortNumber": "482",
+    "Description": "bgs-nsi"
+  },
+  {
+    "ServiceName": "ulpnet",
+    "PortNumber": "483",
+    "Description": "ulpnet"
+  },
+  {
+    "ServiceName": "integra-sme",
+    "PortNumber": "484",
+    "Description": "Integra Software Management Environment"
+  },
+  {
+    "ServiceName": "powerburst",
+    "PortNumber": "485",
+    "Description": "Air Soft Power Burst"
+  },
+  {
+    "ServiceName": "avian",
+    "PortNumber": "486",
+    "Description": "avian"
+  },
+  {
+    "ServiceName": "saft",
+    "PortNumber": "487",
+    "Description": "saft Simple Asynchronous File Transfer"
+  },
+  {
+    "ServiceName": "gss-http",
+    "PortNumber": "488",
+    "Description": "gss-http"
+  },
+  {
+    "ServiceName": "nest-protocol",
+    "PortNumber": "489",
+    "Description": "nest-protocol"
+  },
+  {
+    "ServiceName": "micom-pfs",
+    "PortNumber": "490",
+    "Description": "micom-pfs"
+  },
+  {
+    "ServiceName": "go-login",
+    "PortNumber": "491",
+    "Description": "go-login"
+  },
+  {
+    "ServiceName": "ticf-1",
+    "PortNumber": "492",
+    "Description": "Transport Independent Convergence for FNA"
+  },
+  {
+    "ServiceName": "ticf-2",
+    "PortNumber": "493",
+    "Description": "Transport Independent Convergence for FNA"
+  },
+  {
+    "ServiceName": "pov-ray",
+    "PortNumber": "494",
+    "Description": "POV-Ray"
+  },
+  {
+    "ServiceName": "intecourier",
+    "PortNumber": "495",
+    "Description": "intecourier"
+  },
+  {
+    "ServiceName": "pim-rp-disc",
+    "PortNumber": "496",
+    "Description": "PIM-RP-DISC"
+  },
+  {
+    "ServiceName": "retrospect",
+    "PortNumber": "497",
+    "Description": "Retrospect backup and restore service"
+  },
+  {
+    "ServiceName": "siam",
+    "PortNumber": "498",
+    "Description": "siam"
+  },
+  {
+    "ServiceName": "iso-ill",
+    "PortNumber": "499",
+    "Description": "ISO ILL Protocol"
+  },
+  {
+    "ServiceName": "isakmp",
+    "PortNumber": "500",
+    "Description": "isakmp"
+  },
+  {
+    "ServiceName": "stmf",
+    "PortNumber": "501",
+    "Description": "STMF"
+  },
+  {
+    "ServiceName": "mbap",
+    "PortNumber": "502",
+    "Description": "Modbus Application Protocol"
+  },
+  {
+    "ServiceName": "intrinsa",
+    "PortNumber": "503",
+    "Description": "Intrinsa"
+  },
+  {
+    "ServiceName": "citadel",
+    "PortNumber": "504",
+    "Description": "citadel"
+  },
+  {
+    "ServiceName": "mailbox-lm",
+    "PortNumber": "505",
+    "Description": "mailbox-lm"
+  },
+  {
+    "ServiceName": "ohimsrv",
+    "PortNumber": "506",
+    "Description": "ohimsrv"
+  },
+  {
+    "ServiceName": "crs",
+    "PortNumber": "507",
+    "Description": "crs"
+  },
+  {
+    "ServiceName": "xvttp",
+    "PortNumber": "508",
+    "Description": "xvttp"
+  },
+  {
+    "ServiceName": "snare",
+    "PortNumber": "509",
+    "Description": "snare"
+  },
+  {
+    "ServiceName": "fcp",
+    "PortNumber": "510",
+    "Description": "FirstClass Protocol"
+  },
+  {
+    "ServiceName": "passgo",
+    "PortNumber": "511",
+    "Description": "PassGo"
+  },
+  {
+    "ServiceName": "exec",
+    "PortNumber": "512",
+    "Description": "remote process execution; authentication performed using passwords and UNIX login names"
+  },
+  {
+    "ServiceName": "login",
+    "PortNumber": "513",
+    "Description": "remote login a la telnet; automatic authentication performed based on priviledged port numbers and distributed data bases which identify \"authentication domains\""
+  },
+  {
+    "ServiceName": "shell",
+    "PortNumber": "514",
+    "Description": "cmd like exec, but automatic authentication is performed as for login server"
+  },
+  {
+    "ServiceName": "printer",
+    "PortNumber": "515",
+    "Description": "spooler"
+  },
+  {
+    "ServiceName": "videotex",
+    "PortNumber": "516",
+    "Description": "videotex"
+  },
+  {
+    "ServiceName": "talk",
+    "PortNumber": "517",
+    "Description": "like tenex link, but across machine - unfortunately, doesn't use link protocol (this is actually just a rendezvous port from which a tcp connection is established)"
+  },
+  {
+    "ServiceName": "ntalk",
+    "PortNumber": "518"
+  },
+  {
+    "ServiceName": "utime",
+    "PortNumber": "519",
+    "Description": "unixtime"
+  },
+  {
+    "ServiceName": "efs",
+    "PortNumber": "520",
+    "Description": "extended file name server"
+  },
+  {
+    "ServiceName": "ripng",
+    "PortNumber": "521",
+    "Description": "ripng"
+  },
+  {
+    "ServiceName": "ulp",
+    "PortNumber": "522",
+    "Description": "ULP"
+  },
+  {
+    "ServiceName": "ibm-db2",
+    "PortNumber": "523",
+    "Description": "IBM-DB2"
+  },
+  {
+    "ServiceName": "ncp",
+    "PortNumber": "524",
+    "Description": "NCP"
+  },
+  {
+    "ServiceName": "timed",
+    "PortNumber": "525",
+    "Description": "timeserver"
+  },
+  {
+    "ServiceName": "tempo",
+    "PortNumber": "526",
+    "Description": "newdate"
+  },
+  {
+    "ServiceName": "stx",
+    "PortNumber": "527",
+    "Description": "Stock IXChange"
+  },
+  {
+    "ServiceName": "custix",
+    "PortNumber": "528",
+    "Description": "Customer IXChange"
+  },
+  {
+    "ServiceName": "irc-serv",
+    "PortNumber": "529",
+    "Description": "IRC-SERV"
+  },
+  {
+    "ServiceName": "courier",
+    "PortNumber": "530",
+    "Description": "rpc"
+  },
+  {
+    "ServiceName": "conference",
+    "PortNumber": "531",
+    "Description": "chat"
+  },
+  {
+    "ServiceName": "netnews",
+    "PortNumber": "532",
+    "Description": "readnews"
+  },
+  {
+    "ServiceName": "netwall",
+    "PortNumber": "533",
+    "Description": "for emergency broadcasts"
+  },
+  {
+    "ServiceName": "windream",
+    "PortNumber": "534",
+    "Description": "windream Admin"
+  },
+  {
+    "ServiceName": "iiop",
+    "PortNumber": "535",
+    "Description": "iiop"
+  },
+  {
+    "ServiceName": "opalis-rdv",
+    "PortNumber": "536",
+    "Description": "opalis-rdv"
+  },
+  {
+    "ServiceName": "nmsp",
+    "PortNumber": "537",
+    "Description": "Networked Media Streaming Protocol"
+  },
+  {
+    "ServiceName": "gdomap",
+    "PortNumber": "538",
+    "Description": "gdomap"
+  },
+  {
+    "ServiceName": "apertus-ldp",
+    "PortNumber": "539",
+    "Description": "Apertus Technologies Load Determination"
+  },
+  {
+    "ServiceName": "uucp",
+    "PortNumber": "540",
+    "Description": "uucpd"
+  },
+  {
+    "ServiceName": "uucp-rlogin",
+    "PortNumber": "541",
+    "Description": "uucp-rlogin"
+  },
+  {
+    "ServiceName": "commerce",
+    "PortNumber": "542",
+    "Description": "commerce"
+  },
+  {
+    "ServiceName": "klogin",
+    "PortNumber": "543"
+  },
+  {
+    "ServiceName": "kshell",
+    "PortNumber": "544",
+    "Description": "krcmd"
+  },
+  {
+    "ServiceName": "appleqtcsrvr",
+    "PortNumber": "545",
+    "Description": "appleqtcsrvr"
+  },
+  {
+    "ServiceName": "dhcpv6-client",
+    "PortNumber": "546",
+    "Description": "DHCPv6 Client"
+  },
+  {
+    "ServiceName": "dhcpv6-server",
+    "PortNumber": "547",
+    "Description": "DHCPv6 Server"
+  },
+  {
+    "ServiceName": "afpovertcp",
+    "PortNumber": "548",
+    "Description": "AFP over TCP"
+  },
+  {
+    "ServiceName": "idfp",
+    "PortNumber": "549",
+    "Description": "IDFP"
+  },
+  {
+    "ServiceName": "new-rwho",
+    "PortNumber": "550",
+    "Description": "new-who"
+  },
+  {
+    "ServiceName": "cybercash",
+    "PortNumber": "551",
+    "Description": "cybercash"
+  },
+  {
+    "ServiceName": "devshr-nts",
+    "PortNumber": "552",
+    "Description": "DeviceShare"
+  },
+  {
+    "ServiceName": "pirp",
+    "PortNumber": "553",
+    "Description": "pirp"
+  },
+  {
+    "ServiceName": "rtsp",
+    "PortNumber": "554",
+    "Description": "Real Time Streaming Protocol (RTSP)"
+  },
+  {
+    "ServiceName": "dsf",
+    "PortNumber": "555"
+  },
+  {
+    "ServiceName": "remotefs",
+    "PortNumber": "556",
+    "Description": "rfs server"
+  },
+  {
+    "ServiceName": "openvms-sysipc",
+    "PortNumber": "557",
+    "Description": "openvms-sysipc"
+  },
+  {
+    "ServiceName": "sdnskmp",
+    "PortNumber": "558",
+    "Description": "SDNSKMP"
+  },
+  {
+    "ServiceName": "teedtap",
+    "PortNumber": "559",
+    "Description": "TEEDTAP"
+  },
+  {
+    "ServiceName": "rmonitor",
+    "PortNumber": "560",
+    "Description": "rmonitord"
+  },
+  {
+    "ServiceName": "monitor",
+    "PortNumber": "561"
+  },
+  {
+    "ServiceName": "chshell",
+    "PortNumber": "562",
+    "Description": "chcmd"
+  },
+  {
+    "ServiceName": "nntps",
+    "PortNumber": "563",
+    "Description": "nntp protocol over TLS/SSL (was snntp)"
+  },
+  {
+    "ServiceName": "9pfs",
+    "PortNumber": "564",
+    "Description": "plan 9 file service"
+  },
+  {
+    "ServiceName": "whoami",
+    "PortNumber": "565",
+    "Description": "whoami"
+  },
+  {
+    "ServiceName": "streettalk",
+    "PortNumber": "566",
+    "Description": "streettalk"
+  },
+  {
+    "ServiceName": "banyan-rpc",
+    "PortNumber": "567",
+    "Description": "banyan-rpc"
+  },
+  {
+    "ServiceName": "ms-shuttle",
+    "PortNumber": "568",
+    "Description": "microsoft shuttle"
+  },
+  {
+    "ServiceName": "ms-rome",
+    "PortNumber": "569",
+    "Description": "microsoft rome"
+  },
+  {
+    "ServiceName": "meter",
+    "PortNumber": "570",
+    "Description": "demon"
+  },
+  {
+    "ServiceName": "meter",
+    "PortNumber": "571",
+    "Description": "udemon"
+  },
+  {
+    "ServiceName": "sonar",
+    "PortNumber": "572",
+    "Description": "sonar"
+  },
+  {
+    "ServiceName": "banyan-vip",
+    "PortNumber": "573",
+    "Description": "banyan-vip"
+  },
+  {
+    "ServiceName": "ftp-agent",
+    "PortNumber": "574",
+    "Description": "FTP Software Agent System"
+  },
+  {
+    "ServiceName": "vemmi",
+    "PortNumber": "575",
+    "Description": "VEMMI"
+  },
+  {
+    "ServiceName": "ipcd",
+    "PortNumber": "576",
+    "Description": "ipcd"
+  },
+  {
+    "ServiceName": "vnas",
+    "PortNumber": "577",
+    "Description": "vnas"
+  },
+  {
+    "ServiceName": "ipdd",
+    "PortNumber": "578",
+    "Description": "ipdd"
+  },
+  {
+    "ServiceName": "decbsrv",
+    "PortNumber": "579",
+    "Description": "decbsrv"
+  },
+  {
+    "ServiceName": "sntp-heartbeat",
+    "PortNumber": "580",
+    "Description": "SNTP HEARTBEAT"
+  },
+  {
+    "ServiceName": "bdp",
+    "PortNumber": "581",
+    "Description": "Bundle Discovery Protocol"
+  },
+  {
+    "ServiceName": "scc-security",
+    "PortNumber": "582",
+    "Description": "SCC Security"
+  },
+  {
+    "ServiceName": "philips-vc",
+    "PortNumber": "583",
+    "Description": "Philips Video-Conferencing"
+  },
+  {
+    "ServiceName": "keyserver",
+    "PortNumber": "584",
+    "Description": "Key Server"
+  },
+  {
+    "ServiceName": "password-chg",
+    "PortNumber": "586",
+    "Description": "Password Change"
+  },
+  {
+    "ServiceName": "submission",
+    "PortNumber": "587",
+    "Description": "Message Submission"
+  },
+  {
+    "ServiceName": "cal",
+    "PortNumber": "588",
+    "Description": "CAL"
+  },
+  {
+    "ServiceName": "eyelink",
+    "PortNumber": "589",
+    "Description": "EyeLink"
+  },
+  {
+    "ServiceName": "tns-cml",
+    "PortNumber": "590",
+    "Description": "TNS CML"
+  },
+  {
+    "ServiceName": "http-alt",
+    "PortNumber": "591",
+    "Description": "FileMaker, Inc. - HTTP Alternate (see Port 80)"
+  },
+  {
+    "ServiceName": "eudora-set",
+    "PortNumber": "592",
+    "Description": "Eudora Set"
+  },
+  {
+    "ServiceName": "http-rpc-epmap",
+    "PortNumber": "593",
+    "Description": "HTTP RPC Ep Map"
+  },
+  {
+    "ServiceName": "tpip",
+    "PortNumber": "594",
+    "Description": "TPIP"
+  },
+  {
+    "ServiceName": "cab-protocol",
+    "PortNumber": "595",
+    "Description": "CAB Protocol"
+  },
+  {
+    "ServiceName": "smsd",
+    "PortNumber": "596",
+    "Description": "SMSD"
+  },
+  {
+    "ServiceName": "ptcnameservice",
+    "PortNumber": "597",
+    "Description": "PTC Name Service"
+  },
+  {
+    "ServiceName": "sco-websrvrmg3",
+    "PortNumber": "598",
+    "Description": "SCO Web Server Manager 3"
+  },
+  {
+    "ServiceName": "acp",
+    "PortNumber": "599",
+    "Description": "Aeolon Core Protocol"
+  },
+  {
+    "ServiceName": "ipcserver",
+    "PortNumber": "600",
+    "Description": "Sun IPC server"
+  },
+  {
+    "ServiceName": "syslog-conn",
+    "PortNumber": "601",
+    "Description": "Reliable Syslog Service"
+  },
+  {
+    "ServiceName": "xmlrpc-beep",
+    "PortNumber": "602",
+    "Description": "XML-RPC over BEEP"
+  },
+  {
+    "ServiceName": "idxp",
+    "PortNumber": "603",
+    "Description": "IDXP"
+  },
+  {
+    "ServiceName": "tunnel",
+    "PortNumber": "604",
+    "Description": "TUNNEL"
+  },
+  {
+    "ServiceName": "soap-beep",
+    "PortNumber": "605",
+    "Description": "SOAP over BEEP"
+  },
+  {
+    "ServiceName": "urm",
+    "PortNumber": "606",
+    "Description": "Cray Unified Resource Manager"
+  },
+  {
+    "ServiceName": "nqs",
+    "PortNumber": "607",
+    "Description": "nqs"
+  },
+  {
+    "ServiceName": "sift-uft",
+    "PortNumber": "608",
+    "Description": "Sender-Initiated/Unsolicited File Transfer"
+  },
+  {
+    "ServiceName": "npmp-trap",
+    "PortNumber": "609",
+    "Description": "npmp-trap"
+  },
+  {
+    "ServiceName": "npmp-local",
+    "PortNumber": "610",
+    "Description": "npmp-local"
+  },
+  {
+    "ServiceName": "npmp-gui",
+    "PortNumber": "611",
+    "Description": "npmp-gui"
+  },
+  {
+    "ServiceName": "hmmp-ind",
+    "PortNumber": "612",
+    "Description": "HMMP Indication"
+  },
+  {
+    "ServiceName": "hmmp-op",
+    "PortNumber": "613",
+    "Description": "HMMP Operation"
+  },
+  {
+    "ServiceName": "sshell",
+    "PortNumber": "614",
+    "Description": "SSLshell"
+  },
+  {
+    "ServiceName": "sco-inetmgr",
+    "PortNumber": "615",
+    "Description": "Internet Configuration Manager"
+  },
+  {
+    "ServiceName": "sco-sysmgr",
+    "PortNumber": "616",
+    "Description": "SCO System Administration Server"
+  },
+  {
+    "ServiceName": "sco-dtmgr",
+    "PortNumber": "617",
+    "Description": "SCO Desktop Administration Server"
+  },
+  {
+    "ServiceName": "dei-icda",
+    "PortNumber": "618",
+    "Description": "DEI-ICDA"
+  },
+  {
+    "ServiceName": "compaq-evm",
+    "PortNumber": "619",
+    "Description": "Compaq EVM"
+  },
+  {
+    "ServiceName": "sco-websrvrmgr",
+    "PortNumber": "620",
+    "Description": "SCO WebServer Manager"
+  },
+  {
+    "ServiceName": "escp-ip",
+    "PortNumber": "621",
+    "Description": "ESCP"
+  },
+  {
+    "ServiceName": "collaborator",
+    "PortNumber": "622",
+    "Description": "Collaborator"
+  },
+  {
+    "ServiceName": "oob-ws-http",
+    "PortNumber": "623",
+    "Description": "DMTF out-of-band web services management protocol"
+  },
+  {
+    "ServiceName": "cryptoadmin",
+    "PortNumber": "624",
+    "Description": "Crypto Admin"
+  },
+  {
+    "ServiceName": "dec-dlm",
+    "PortNumber": "625",
+    "Description": "DEC DLM\nIANA assigned this well-formed service name as a replacement for \"dec_dlm\"."
+  },
+  {
+    "ServiceName": "dec_dlm",
+    "PortNumber": "625",
+    "Description": "DEC DLM"
+  },
+  {
+    "ServiceName": "asia",
+    "PortNumber": "626",
+    "Description": "ASIA"
+  },
+  {
+    "ServiceName": "passgo-tivoli",
+    "PortNumber": "627",
+    "Description": "PassGo Tivoli"
+  },
+  {
+    "ServiceName": "qmqp",
+    "PortNumber": "628",
+    "Description": "QMQP"
+  },
+  {
+    "ServiceName": "3com-amp3",
+    "PortNumber": "629",
+    "Description": "3Com AMP3"
+  },
+  {
+    "ServiceName": "rda",
+    "PortNumber": "630",
+    "Description": "RDA"
+  },
+  {
+    "ServiceName": "ipp",
+    "PortNumber": "631",
+    "Description": "IPP (Internet Printing Protocol)"
+  },
+  {
+    "ServiceName": "bmpp",
+    "PortNumber": "632",
+    "Description": "bmpp"
+  },
+  {
+    "ServiceName": "servstat",
+    "PortNumber": "633",
+    "Description": "Service Status update (Sterling Software)"
+  },
+  {
+    "ServiceName": "ginad",
+    "PortNumber": "634",
+    "Description": "ginad"
+  },
+  {
+    "ServiceName": "rlzdbase",
+    "PortNumber": "635",
+    "Description": "RLZ DBase"
+  },
+  {
+    "ServiceName": "ldaps",
+    "PortNumber": "636",
+    "Description": "ldap protocol over TLS/SSL (was sldap)"
+  },
+  {
+    "ServiceName": "lanserver",
+    "PortNumber": "637",
+    "Description": "lanserver"
+  },
+  {
+    "ServiceName": "mcns-sec",
+    "PortNumber": "638",
+    "Description": "mcns-sec"
+  },
+  {
+    "ServiceName": "msdp",
+    "PortNumber": "639",
+    "Description": "MSDP"
+  },
+  {
+    "ServiceName": "entrust-sps",
+    "PortNumber": "640",
+    "Description": "entrust-sps"
+  },
+  {
+    "ServiceName": "repcmd",
+    "PortNumber": "641",
+    "Description": "repcmd"
+  },
+  {
+    "ServiceName": "esro-emsdp",
+    "PortNumber": "642",
+    "Description": "ESRO-EMSDP V1.3"
+  },
+  {
+    "ServiceName": "sanity",
+    "PortNumber": "643",
+    "Description": "SANity"
+  },
+  {
+    "ServiceName": "dwr",
+    "PortNumber": "644",
+    "Description": "dwr"
+  },
+  {
+    "ServiceName": "pssc",
+    "PortNumber": "645",
+    "Description": "PSSC"
+  },
+  {
+    "ServiceName": "ldp",
+    "PortNumber": "646",
+    "Description": "LDP"
+  },
+  {
+    "ServiceName": "dhcp-failover",
+    "PortNumber": "647",
+    "Description": "DHCP Failover"
+  },
+  {
+    "ServiceName": "rrp",
+    "PortNumber": "648",
+    "Description": "Registry Registrar Protocol (RRP)"
+  },
+  {
+    "ServiceName": "cadview-3d",
+    "PortNumber": "649",
+    "Description": "Cadview-3d - streaming 3d models over the internet"
+  },
+  {
+    "ServiceName": "obex",
+    "PortNumber": "650",
+    "Description": "OBEX"
+  },
+  {
+    "ServiceName": "ieee-mms",
+    "PortNumber": "651",
+    "Description": "IEEE MMS"
+  },
+  {
+    "ServiceName": "hello-port",
+    "PortNumber": "652",
+    "Description": "HELLO_PORT"
+  },
+  {
+    "ServiceName": "repscmd",
+    "PortNumber": "653",
+    "Description": "RepCmd"
+  },
+  {
+    "ServiceName": "aodv",
+    "PortNumber": "654",
+    "Description": "AODV"
+  },
+  {
+    "ServiceName": "tinc",
+    "PortNumber": "655",
+    "Description": "TINC"
+  },
+  {
+    "ServiceName": "spmp",
+    "PortNumber": "656",
+    "Description": "SPMP"
+  },
+  {
+    "ServiceName": "rmc",
+    "PortNumber": "657",
+    "Description": "RMC"
+  },
+  {
+    "ServiceName": "tenfold",
+    "PortNumber": "658",
+    "Description": "TenFold"
+  },
+  {
+    "ServiceName": "mac-srvr-admin",
+    "PortNumber": "660",
+    "Description": "MacOS Server Admin"
+  },
+  {
+    "ServiceName": "hap",
+    "PortNumber": "661",
+    "Description": "HAP"
+  },
+  {
+    "ServiceName": "pftp",
+    "PortNumber": "662",
+    "Description": "PFTP"
+  },
+  {
+    "ServiceName": "purenoise",
+    "PortNumber": "663",
+    "Description": "PureNoise"
+  },
+  {
+    "ServiceName": "oob-ws-https",
+    "PortNumber": "664",
+    "Description": "DMTF out-of-band secure web services management protocol"
+  },
+  {
+    "ServiceName": "sun-dr",
+    "PortNumber": "665",
+    "Description": "Sun DR"
+  },
+  {
+    "ServiceName": "mdqs",
+    "PortNumber": "666"
+  },
+  {
+    "ServiceName": "doom",
+    "PortNumber": "666",
+    "Description": "doom Id Software"
+  },
+  {
+    "ServiceName": "disclose",
+    "PortNumber": "667",
+    "Description": "campaign contribution disclosures - SDR Technologies"
+  },
+  {
+    "ServiceName": "mecomm",
+    "PortNumber": "668",
+    "Description": "MeComm"
+  },
+  {
+    "ServiceName": "meregister",
+    "PortNumber": "669",
+    "Description": "MeRegister"
+  },
+  {
+    "ServiceName": "vacdsm-sws",
+    "PortNumber": "670",
+    "Description": "VACDSM-SWS"
+  },
+  {
+    "ServiceName": "vacdsm-app",
+    "PortNumber": "671",
+    "Description": "VACDSM-APP"
+  },
+  {
+    "ServiceName": "vpps-qua",
+    "PortNumber": "672",
+    "Description": "VPPS-QUA"
+  },
+  {
+    "ServiceName": "cimplex",
+    "PortNumber": "673",
+    "Description": "CIMPLEX"
+  },
+  {
+    "ServiceName": "acap",
+    "PortNumber": "674",
+    "Description": "ACAP"
+  },
+  {
+    "ServiceName": "dctp",
+    "PortNumber": "675",
+    "Description": "DCTP"
+  },
+  {
+    "ServiceName": "vpps-via",
+    "PortNumber": "676",
+    "Description": "VPPS Via"
+  },
+  {
+    "ServiceName": "vpp",
+    "PortNumber": "677",
+    "Description": "Virtual Presence Protocol"
+  },
+  {
+    "ServiceName": "ggf-ncp",
+    "PortNumber": "678",
+    "Description": "GNU Generation Foundation NCP"
+  },
+  {
+    "ServiceName": "mrm",
+    "PortNumber": "679",
+    "Description": "MRM"
+  },
+  {
+    "ServiceName": "entrust-aaas",
+    "PortNumber": "680",
+    "Description": "entrust-aaas"
+  },
+  {
+    "ServiceName": "entrust-aams",
+    "PortNumber": "681",
+    "Description": "entrust-aams"
+  },
+  {
+    "ServiceName": "xfr",
+    "PortNumber": "682",
+    "Description": "XFR"
+  },
+  {
+    "ServiceName": "corba-iiop",
+    "PortNumber": "683",
+    "Description": "CORBA IIOP"
+  },
+  {
+    "ServiceName": "corba-iiop-ssl",
+    "PortNumber": "684",
+    "Description": "CORBA IIOP SSL"
+  },
+  {
+    "ServiceName": "mdc-portmapper",
+    "PortNumber": "685",
+    "Description": "MDC Port Mapper"
+  },
+  {
+    "ServiceName": "hcp-wismar",
+    "PortNumber": "686",
+    "Description": "Hardware Control Protocol Wismar"
+  },
+  {
+    "ServiceName": "asipregistry",
+    "PortNumber": "687",
+    "Description": "asipregistry"
+  },
+  {
+    "ServiceName": "realm-rusd",
+    "PortNumber": "688",
+    "Description": "ApplianceWare managment protocol"
+  },
+  {
+    "ServiceName": "nmap",
+    "PortNumber": "689",
+    "Description": "NMAP"
+  },
+  {
+    "ServiceName": "vatp",
+    "PortNumber": "690",
+    "Description": "Velneo Application Transfer Protocol"
+  },
+  {
+    "ServiceName": "msexch-routing",
+    "PortNumber": "691",
+    "Description": "MS Exchange Routing"
+  },
+  {
+    "ServiceName": "hyperwave-isp",
+    "PortNumber": "692",
+    "Description": "Hyperwave-ISP"
+  },
+  {
+    "ServiceName": "connendp",
+    "PortNumber": "693",
+    "Description": "almanid Connection Endpoint"
+  },
+  {
+    "ServiceName": "ha-cluster",
+    "PortNumber": "694",
+    "Description": "ha-cluster"
+  },
+  {
+    "ServiceName": "ieee-mms-ssl",
+    "PortNumber": "695",
+    "Description": "IEEE-MMS-SSL"
+  },
+  {
+    "ServiceName": "rushd",
+    "PortNumber": "696",
+    "Description": "RUSHD"
+  },
+  {
+    "ServiceName": "uuidgen",
+    "PortNumber": "697",
+    "Description": "UUIDGEN"
+  },
+  {
+    "ServiceName": "olsr",
+    "PortNumber": "698",
+    "Description": "OLSR"
+  },
+  {
+    "ServiceName": "accessnetwork",
+    "PortNumber": "699",
+    "Description": "Access Network"
+  },
+  {
+    "ServiceName": "epp",
+    "PortNumber": "700",
+    "Description": "Extensible Provisioning Protocol"
+  },
+  {
+    "ServiceName": "lmp",
+    "PortNumber": "701",
+    "Description": "Link Management Protocol (LMP)"
+  },
+  {
+    "ServiceName": "iris-beep",
+    "PortNumber": "702",
+    "Description": "IRIS over BEEP"
+  },
+  {
+    "ServiceName": "elcsd",
+    "PortNumber": "704",
+    "Description": "errlog copy/server daemon"
+  },
+  {
+    "ServiceName": "agentx",
+    "PortNumber": "705",
+    "Description": "AgentX"
+  },
+  {
+    "ServiceName": "silc",
+    "PortNumber": "706",
+    "Description": "SILC"
+  },
+  {
+    "ServiceName": "borland-dsj",
+    "PortNumber": "707",
+    "Description": "Borland DSJ"
+  },
+  {
+    "ServiceName": "entrust-kmsh",
+    "PortNumber": "709",
+    "Description": "Entrust Key Management Service Handler"
+  },
+  {
+    "ServiceName": "entrust-ash",
+    "PortNumber": "710",
+    "Description": "Entrust Administration Service Handler"
+  },
+  {
+    "ServiceName": "cisco-tdp",
+    "PortNumber": "711",
+    "Description": "Cisco TDP"
+  },
+  {
+    "ServiceName": "tbrpf",
+    "PortNumber": "712",
+    "Description": "TBRPF"
+  },
+  {
+    "ServiceName": "iris-xpc",
+    "PortNumber": "713",
+    "Description": "IRIS over XPC"
+  },
+  {
+    "ServiceName": "iris-xpcs",
+    "PortNumber": "714",
+    "Description": "IRIS over XPCS"
+  },
+  {
+    "ServiceName": "iris-lwz",
+    "PortNumber": "715",
+    "Description": "IRIS-LWZ"
+  },
+  {
+    "ServiceName": "netviewdm1",
+    "PortNumber": "729",
+    "Description": "IBM NetView DM/6000 Server/Client"
+  },
+  {
+    "ServiceName": "netviewdm2",
+    "PortNumber": "730",
+    "Description": "IBM NetView DM/6000 send/tcp"
+  },
+  {
+    "ServiceName": "netviewdm3",
+    "PortNumber": "731",
+    "Description": "IBM NetView DM/6000 receive/tcp"
+  },
+  {
+    "ServiceName": "netgw",
+    "PortNumber": "741",
+    "Description": "netGW"
+  },
+  {
+    "ServiceName": "netrcs",
+    "PortNumber": "742",
+    "Description": "Network based Rev. Cont. Sys."
+  },
+  {
+    "ServiceName": "flexlm",
+    "PortNumber": "744",
+    "Description": "Flexible License Manager"
+  },
+  {
+    "ServiceName": "fujitsu-dev",
+    "PortNumber": "747",
+    "Description": "Fujitsu Device Control"
+  },
+  {
+    "ServiceName": "ris-cm",
+    "PortNumber": "748",
+    "Description": "Russell Info Sci Calendar Manager"
+  },
+  {
+    "ServiceName": "kerberos-adm",
+    "PortNumber": "749",
+    "Description": "kerberos administration"
+  },
+  {
+    "ServiceName": "rfile",
+    "PortNumber": "750"
+  },
+  {
+    "ServiceName": "pump",
+    "PortNumber": "751"
+  },
+  {
+    "ServiceName": "qrh",
+    "PortNumber": "752"
+  },
+  {
+    "ServiceName": "rrh",
+    "PortNumber": "753"
+  },
+  {
+    "ServiceName": "tell",
+    "PortNumber": "754",
+    "Description": "send"
+  },
+  {
+    "ServiceName": "nlogin",
+    "PortNumber": "758"
+  },
+  {
+    "ServiceName": "con",
+    "PortNumber": "759"
+  },
+  {
+    "ServiceName": "ns",
+    "PortNumber": "760"
+  },
+  {
+    "ServiceName": "rxe",
+    "PortNumber": "761"
+  },
+  {
+    "ServiceName": "quotad",
+    "PortNumber": "762"
+  },
+  {
+    "ServiceName": "cycleserv",
+    "PortNumber": "763"
+  },
+  {
+    "ServiceName": "omserv",
+    "PortNumber": "764"
+  },
+  {
+    "ServiceName": "webster",
+    "PortNumber": "765"
+  },
+  {
+    "ServiceName": "phonebook",
+    "PortNumber": "767",
+    "Description": "phone"
+  },
+  {
+    "ServiceName": "vid",
+    "PortNumber": "769"
+  },
+  {
+    "ServiceName": "cadlock",
+    "PortNumber": "770"
+  },
+  {
+    "ServiceName": "rtip",
+    "PortNumber": "771"
+  },
+  {
+    "ServiceName": "cycleserv2",
+    "PortNumber": "772"
+  },
+  {
+    "ServiceName": "submit",
+    "PortNumber": "773"
+  },
+  {
+    "ServiceName": "rpasswd",
+    "PortNumber": "774"
+  },
+  {
+    "ServiceName": "entomb",
+    "PortNumber": "775"
+  },
+  {
+    "ServiceName": "wpages",
+    "PortNumber": "776"
+  },
+  {
+    "ServiceName": "multiling-http",
+    "PortNumber": "777",
+    "Description": "Multiling HTTP"
+  },
+  {
+    "ServiceName": "wpgs",
+    "PortNumber": "780"
+  },
+  {
+    "ServiceName": "mdbs-daemon",
+    "PortNumber": "800",
+    "Description": "IANA assigned this well-formed service name as a replacement for \"mdbs_daemon\"."
+  },
+  {
+    "ServiceName": "mdbs_daemon",
+    "PortNumber": "800"
+  },
+  {
+    "ServiceName": "device",
+    "PortNumber": "801"
+  },
+  {
+    "ServiceName": "mbap-s",
+    "PortNumber": "802",
+    "Description": "Modbus Application Protocol Secure"
+  },
+  {
+    "ServiceName": "fcp-udp",
+    "PortNumber": "810",
+    "Description": "FCP"
+  },
+  {
+    "ServiceName": "itm-mcell-s",
+    "PortNumber": "828",
+    "Description": "itm-mcell-s"
+  },
+  {
+    "ServiceName": "pkix-3-ca-ra",
+    "PortNumber": "829",
+    "Description": "PKIX-3 CA/RA"
+  },
+  {
+    "ServiceName": "netconf-ssh",
+    "PortNumber": "830",
+    "Description": "NETCONF over SSH"
+  },
+  {
+    "ServiceName": "netconf-beep",
+    "PortNumber": "831",
+    "Description": "NETCONF over BEEP"
+  },
+  {
+    "ServiceName": "netconfsoaphttp",
+    "PortNumber": "832",
+    "Description": "NETCONF for SOAP over HTTPS"
+  },
+  {
+    "ServiceName": "netconfsoapbeep",
+    "PortNumber": "833",
+    "Description": "NETCONF for SOAP over BEEP"
+  },
+  {
+    "ServiceName": "dhcp-failover2",
+    "PortNumber": "847",
+    "Description": "dhcp-failover 2"
+  },
+  {
+    "ServiceName": "gdoi",
+    "PortNumber": "848",
+    "Description": "GDOI"
+  },
+  {
+    "ServiceName": "iscsi",
+    "PortNumber": "860",
+    "Description": "iSCSI"
+  },
+  {
+    "ServiceName": "owamp-control",
+    "PortNumber": "861",
+    "Description": "OWAMP-Control"
+  },
+  {
+    "ServiceName": "twamp-control",
+    "PortNumber": "862",
+    "Description": "Two-way Active Measurement Protocol (TWAMP) Control"
+  },
+  {
+    "ServiceName": "rsync",
+    "PortNumber": "873",
+    "Description": "rsync"
+  },
+  {
+    "ServiceName": "iclcnet-locate",
+    "PortNumber": "886",
+    "Description": "ICL coNETion locate server"
+  },
+  {
+    "ServiceName": "iclcnet-svinfo",
+    "PortNumber": "887",
+    "Description": "ICL coNETion server info\nIANA assigned this well-formed service name as a replacement for \"iclcnet_svinfo\"."
+  },
+  {
+    "ServiceName": "iclcnet_svinfo",
+    "PortNumber": "887",
+    "Description": "ICL coNETion server info"
+  },
+  {
+    "ServiceName": "accessbuilder",
+    "PortNumber": "888",
+    "Description": "AccessBuilder"
+  },
+  {
+    "ServiceName": "cddbp",
+    "PortNumber": "888",
+    "Description": "CD Database Protocol"
+  },
+  {
+    "ServiceName": "omginitialrefs",
+    "PortNumber": "900",
+    "Description": "OMG Initial Refs"
+  },
+  {
+    "ServiceName": "smpnameres",
+    "PortNumber": "901",
+    "Description": "SMPNAMERES"
+  },
+  {
+    "ServiceName": "ideafarm-door",
+    "PortNumber": "902",
+    "Description": "self documenting Telnet Door"
+  },
+  {
+    "ServiceName": "ideafarm-panic",
+    "PortNumber": "903",
+    "Description": "self documenting Telnet Panic Door"
+  },
+  {
+    "ServiceName": "kink",
+    "PortNumber": "910",
+    "Description": "Kerberized Internet Negotiation of Keys (KINK)"
+  },
+  {
+    "ServiceName": "xact-backup",
+    "PortNumber": "911",
+    "Description": "xact-backup"
+  },
+  {
+    "ServiceName": "apex-mesh",
+    "PortNumber": "912",
+    "Description": "APEX relay-relay service"
+  },
+  {
+    "ServiceName": "apex-edge",
+    "PortNumber": "913",
+    "Description": "APEX endpoint-relay service"
+  },
+  {
+    "ServiceName": "ftps-data",
+    "PortNumber": "989",
+    "Description": "ftp protocol, data, over TLS/SSL"
+  },
+  {
+    "ServiceName": "ftps",
+    "PortNumber": "990",
+    "Description": "ftp protocol, control, over TLS/SSL"
+  },
+  {
+    "ServiceName": "nas",
+    "PortNumber": "991",
+    "Description": "Netnews Administration System"
+  },
+  {
+    "ServiceName": "telnets",
+    "PortNumber": "992",
+    "Description": "telnet protocol over TLS/SSL"
+  },
+  {
+    "ServiceName": "imaps",
+    "PortNumber": "993",
+    "Description": "imap4 protocol over TLS/SSL"
+  },
+  {
+    "ServiceName": "pop3s",
+    "PortNumber": "995",
+    "Description": "pop3 protocol over TLS/SSL (was spop3)"
+  },
+  {
+    "ServiceName": "vsinet",
+    "PortNumber": "996",
+    "Description": "vsinet"
+  },
+  {
+    "ServiceName": "maitrd",
+    "PortNumber": "997"
+  },
+  {
+    "ServiceName": "busboy",
+    "PortNumber": "998"
+  },
+  {
+    "ServiceName": "garcon",
+    "PortNumber": "999"
+  },
+  {
+    "ServiceName": "puprouter",
+    "PortNumber": "999"
+  },
+  {
+    "ServiceName": "cadlock2",
+    "PortNumber": "1000"
+  },
+  {
+    "ServiceName": "surf",
+    "PortNumber": "1010",
+    "Description": "surf"
+  },
+  {
+    "ServiceName": "exp1",
+    "PortNumber": "1021",
+    "Description": "RFC3692-style Experiment 1"
+  },
+  {
+    "ServiceName": "exp2",
+    "PortNumber": "1022",
+    "Description": "RFC3692-style Experiment 2"
+  }
+]
