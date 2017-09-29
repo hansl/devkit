@@ -43,6 +43,9 @@ export interface FilePredicate<T> {
 
 
 export interface Tree {
+  subtrees(): { [name: string]: Tree };
+  subfiles(): { [name: string]: FileEntry };
+
   // Readonly.
   readonly files: string[];
   exists(path: string): boolean;
