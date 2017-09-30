@@ -47,6 +47,9 @@ export interface Tree {
   subfiles(): { [name: string]: FileEntry };
 
   // Readonly.
+  /**
+   * @deprecated
+   */
   readonly files: string[];
   exists(path: string): boolean;
 
@@ -64,8 +67,17 @@ export interface Tree {
   delete(path: string): void;
   rename(from: string, to: string): void;
 
+  // Version management.
+  readonly version: number | null;
+  readonly staging: Staging;
+  readonly base: Tree | null;
+}
+
+
+export interface Staging extends Tree {
   apply(action: Action, strategy?: MergeStrategy): void;
   readonly actions: Action[];
+  branch(): Tree;
 }
 
 

@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Path, normalize } from '@angular-devkit/core';
+import { Path, normalize, rest, rootname } from '@angular-devkit/core';
 import {
   ContentHasMutatedException,
   FileAlreadyExistException,
@@ -17,15 +17,19 @@ import { Action, ActionList, UnknownActionException } from './action';
 import { SimpleFileEntry } from './entry';
 import { FileEntry, MergeStrategy, Tree, UpdateRecorder } from './interface';
 import { UpdateRecorderBase } from './recorder';
+import { Staging } from '@angular-devkit/schematics';
 
 
 /**
  * The root class of most trees.
  */
 export class VirtualTree implements Tree {
-  protected _root = new Map<Path, FileEntry>();
+  protected _dirs = new Map<string, Tree>();
+  protected _files = new Map<string, FileEntry>();
+
   protected _actions = new ActionList();
-  protected _cacheMap = new Map<Path, FileEntry>();
+
+  protected _base: Tree | null;
 
   /**
    * Normalize the path. Made available to subclasses to overload.
@@ -39,29 +43,51 @@ export class VirtualTree implements Tree {
   /**
    * A list of file names contained by this Tree.
    * @returns {[string]} File paths.
+   * @deprecated
    */
   get files(): string[] {
-    return [...new Set<string>([...this._root.keys(), ...this._cacheMap.keys()]).values()];
+    return ([] as string[]).concat(
+      ...this._files.keys(),
+      ...[...this._dirs.keys()].map(x => {
+        const v = this._dirs.get(x);
+        if (v) {
+          return v.files.map(y => x + '/' + y);
+        }
+
+        return [];
+      }),
+    );
   }
 
-  get root() {
-    return new Map(this._root);
-  }
-  get staging() {
-    return new Map(this._cacheMap);
-  }
+  get base() { return this._base; }
 
   get(path: string): FileEntry | null {
     const normalizedPath = this._normalizePath(path);
+    const [root, p] = [rootname(normalizedPath), rest(normalizedPath)];
 
-    return this._cacheMap.get(normalizedPath) || this._root.get(normalizedPath) || null;
+    if (!p) {
+      const maybe = this._files.get(root);
+      if (maybe) {
+        return maybe;
+      }
+    } else {
+      const dir = this._dirs.get(root);
+      if (dir) {
+        const maybe = dir.get(p);
+        if (maybe) {
+          return maybe;
+        }
+      }
+    }
+
+    return this._base ? this._base.get(path) : null;
   }
   has(path: string) {
     return this.get(path) != null;
   }
-  set(entry: FileEntry) {
-    return this._cacheMap.set(entry.path, entry);
-  }
+  // set(entry: FileEntry) {
+  //   return this._cacheMap.set(entry.path, entry);
+  // }
 
   exists(path: string): boolean {
     return this.has(path);

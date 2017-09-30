@@ -83,6 +83,20 @@ export function rootname(path: Path): Path {
   }
 }
 
+/**
+ * Return the rest of the path without the first directory, or empty string.
+ * @returns {Path} The rest of the path.
+ */
+export function rest(path: Path): Path {
+  if (isAbsolute(path)) {
+    return path.substr(path.indexOf(NormalizedSep, 1) + 1) as Path;
+  } else if (path.indexOf(NormalizedSep) != -1) {
+    return '' as Path;
+  } else {
+    return path.substr(path.indexOf(NormalizedSep) + 1) as Path;
+  }
+}
+
 
 /**
  * Return the basename of the path, as a Path. See path.basename
