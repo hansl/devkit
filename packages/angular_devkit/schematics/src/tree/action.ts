@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { BaseException, Path } from '@angular-devkit/core';
+import { BaseException, Path, PathFragment } from '@angular-devkit/core';
 
 
 export class UnknownActionException extends BaseException {
@@ -32,24 +32,27 @@ export class ActionList implements Iterable<Action> {
   private _actions: Action[] = [];
 
   protected _action(action: Partial<Action>) {
-    this._actions.push({
+    const a = {
       id: _id++,
       parent: this._actions[this._actions.length - 1] || 0,
       ...action,
-    } as Action);
+    } as Action;
+    this._actions.push(a);
+
+    return a;
   }
 
-  create(path: Path, content: Buffer) {
-    this._action({ kind: 'c', path, content });
+  create(path: PathFragment, content: Buffer) {
+    return this._action({ kind: 'c', path, content });
   }
-  overwrite(path: Path, content: Buffer) {
-    this._action({ kind: 'o', path, content });
+  overwrite(path: PathFragment, content: Buffer) {
+    return this._action({ kind: 'o', path, content });
   }
-  rename(path: Path, to: Path) {
-    this._action({ kind: 'r', path, to });
+  rename(path: PathFragment, to: PathFragment) {
+    return this._action({ kind: 'r', path, to });
   }
-  delete(path: Path) {
-    this._action({ kind: 'd', path });
+  delete(path: PathFragment) {
+    return this._action({ kind: 'd', path });
   }
 
 

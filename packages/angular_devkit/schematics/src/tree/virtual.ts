@@ -40,29 +40,26 @@ export class VirtualTree implements Tree {
     return normalize('/' + path);
   }
 
-  /**
-   * A list of file names contained by this Tree.
-   * @returns {[string]} File paths.
-   * @deprecated
-   */
-  get files(): string[] {
-    return ([] as string[]).concat(
-      ...this._files.keys(),
-      ...[...this._dirs.keys()].map(x => {
-        const v = this._dirs.get(x);
-        if (v) {
-          return v.files.map(y => x + '/' + y);
-        }
+  subtrees() {
+    const result = {} as { [name: string]: Tree };
+    for (const [name, tree] of this._dirs.entries()) {
+      result[name] = tree;
+    }
 
-        return [];
-      }),
-    );
+    return result;
   }
+  subfiles() {
+    const result = {} as { [name: string]: FileEntry };
+    for (const [name, tree] of this._files.entries()) {
+      result[name] = tree;
+    }
 
+    return result;
+  }
   get base() { return this._base; }
+  get version() { return 0; }
 
-  get(path: string): FileEntry | null {
-    const normalizedPath = this._normalizePath(path);
+  dirOf(path: string) {
     const [root, p] = [rootname(normalizedPath), rest(normalizedPath)];
 
     if (!p) {
@@ -79,6 +76,9 @@ export class VirtualTree implements Tree {
         }
       }
     }
+  }
+  get(path: string): FileEntry | null {
+    const normalizedPath = this._normalizePath(path);
 
     return this._base ? this._base.get(path) : null;
   }

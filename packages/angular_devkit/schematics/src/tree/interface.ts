@@ -45,17 +45,16 @@ export interface FilePredicate<T> {
 export interface Tree {
   subtrees(): { [name: string]: Tree };
   subfiles(): { [name: string]: FileEntry };
+  dir(name: string): Tree | null;
+  file(name: string): FileEntry | null;
 
   // Readonly.
-  /**
-   * @deprecated
-   */
-  readonly files: string[];
   exists(path: string): boolean;
 
   // Content access.
   read(path: string): Buffer | null;
   get(path: string): FileEntry | null;
+  getTreeOf(path: string): Tree | null;
 
   // Change content of host files.
   overwrite(path: string, content: Buffer | string): void;
@@ -75,9 +74,8 @@ export interface Tree {
 
 
 export interface Staging extends Tree {
-  apply(action: Action, strategy?: MergeStrategy): void;
+  push(action: Action, strategy?: MergeStrategy): void;
   readonly actions: Action[];
-  branch(): Tree;
 }
 
 

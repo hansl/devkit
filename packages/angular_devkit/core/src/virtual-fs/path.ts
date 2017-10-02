@@ -23,6 +23,13 @@ export type Path = string & {
   __PRIVATE_DEVKIT_PATH: void;
 };
 
+/**
+ * A fragment of a path, IE a path that cannot contain a path separator.
+ */
+export type PathFragment = Path & {
+  __PRIVATE_DEVKIT_PATH_FRAGMENT: void;
+};
+
 
 /**
  * The Separator for normalized path.

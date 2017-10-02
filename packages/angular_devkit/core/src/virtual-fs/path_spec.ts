@@ -12,7 +12,8 @@ import {
   dirname,
   join,
   normalize,
-  relative, split,
+  relative,
+  split,
 } from './path';
 
 
