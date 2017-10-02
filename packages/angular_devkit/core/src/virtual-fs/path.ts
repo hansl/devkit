@@ -14,6 +14,9 @@ export class InvalidPathException extends BaseException {
 export class PathMustBeAbsoluteException extends BaseException {
   constructor(path: string) { super(`Path ${JSON.stringify(path)} must be absolute.`); }
 }
+export class PathCannotBeFragmentException extends BaseException {
+  constructor(path: string) { super(`Path ${JSON.stringify(path)} cannot be made a fragment.`); }
+}
 
 
 /**
@@ -35,14 +38,14 @@ export type PathFragment = Path & {
  * The Separator for normalized path.
  * @type {Path}
  */
-export const NormalizedSep = '/' as Path;
+const NormalizedSep = '/' as Path;
 
 
 /**
  * The root of a normalized path.
  * @type {Path}
  */
-export const NormalizedRoot = NormalizedSep as Path;
+const NormalizedRoot = NormalizedSep as Path;
 
 
 /**
@@ -51,10 +54,8 @@ export const NormalizedRoot = NormalizedSep as Path;
  * @param {Path} path The path to split.
  * @returns {Path[]} An array of path fragments.
  */
-export function split(path: Path): Path[] {
-  const arr = path.split(NormalizedSep);
-
-  return arr.map((fragment, i) => fragment + (i < arr.length - 1 ? NormalizedSep : '')) as Path[];
+export function split(path: Path): PathFragment[] {
+  return path.split(NormalizedSep) as PathFragment[];
 }
 
 /**
@@ -79,14 +80,14 @@ export function extname(path: Path): string {
  * @param path The path to get the rootname from.
  * @returns {Path} The first directory name.
  */
-export function rootname(path: Path): Path {
+export function rootname(path: Path): PathFragment {
   const i = path.indexOf(NormalizedSep);
   if (!isAbsolute(path)) {
-    return '.' as Path;
+    return '.' as PathFragment;
   } else if (i == -1) {
-    return path;
+    return path as PathFragment;
   } else {
-    return path.substr(path.lastIndexOf(NormalizedSep) + 1) as Path;
+    return path.substr(path.lastIndexOf(NormalizedSep) + 1) as PathFragment;
   }
 }
 
@@ -108,12 +109,12 @@ export function rest(path: Path): Path {
 /**
  * Return the basename of the path, as a Path. See path.basename
  */
-export function basename(path: Path): Path {
+export function basename(path: Path): PathFragment {
   const i = path.lastIndexOf(NormalizedSep);
   if (i == -1) {
-    return path;
+    return path as PathFragment;
   } else {
-    return path.substr(path.lastIndexOf(NormalizedSep) + 1) as Path;
+    return path.substr(path.lastIndexOf(NormalizedSep) + 1) as PathFragment;
   }
 }
 
@@ -192,12 +193,27 @@ export function relative(from: Path, to: Path): Path {
  * Returns a Path that is the resolution of p2, from p1. If p2 is absolute, it will return p2,
  * otherwise will join both p1 and p2.
  */
-export function resolve(p1: Path, p2: Path) {
+export function resolve(p1: Path, p2: Path): Path {
   if (isAbsolute(p2)) {
     return p2;
   } else {
     return join(p1, p2);
   }
+}
+
+/**
+ * Assert that a string or path can be a fragment, and transform it into one.
+ */
+export function fragment(path: string | Path): PathFragment {
+  const original = path;
+  if (typeof path === 'string') {
+    path = normalize(path);
+  }
+  if (path.indexOf(NormalizedSep) != -1) {
+    throw new PathCannotBeFragmentException(original);
+  }
+
+  return path as PathFragment;
 }
 
 

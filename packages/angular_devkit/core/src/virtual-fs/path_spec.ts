@@ -83,8 +83,8 @@ describe('path', () => {
   describe('split', () => {
     const tests = [
       ['a', ['a']],
-      ['/a/b', ['/', 'a/', 'b']],
-      ['a/b', ['a/', 'b']],
+      ['/a/b', ['', 'a', 'b']],
+      ['a/b', ['a', 'b']],
     ];
 
     for (const goldens of tests) {

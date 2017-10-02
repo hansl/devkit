@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Path } from '@angular-devkit/core';
+import { Path, PathFragment } from '@angular-devkit/core';
 import { Action } from './action';
 
 
@@ -43,18 +43,21 @@ export interface FilePredicate<T> {
 
 
 export interface Tree {
-  subtrees(): { [name: string]: Tree };
-  subfiles(): { [name: string]: FileEntry };
-  dir(name: string): Tree | null;
-  file(name: string): FileEntry | null;
+  // These work on this level only, and only understand fragments.
+  subtrees(): PathFragment[];
+  subfiles(): PathFragment[];
+  dir(name: PathFragment): Tree;
+  file(name: PathFragment): FileEntry | null;
+
+  // These can include subdirectory and the paths passed in will be normalized.
 
   // Readonly.
   exists(path: string): boolean;
 
   // Content access.
-  read(path: string): Buffer | null;
   get(path: string): FileEntry | null;
-  getTreeOf(path: string): Tree | null;
+  getTreeOf(path: string): Tree;
+  read(path: string): Buffer | null;
 
   // Change content of host files.
   overwrite(path: string, content: Buffer | string): void;
@@ -73,9 +76,30 @@ export interface Tree {
 }
 
 
-export interface Staging extends Tree {
+export interface Staging {
   push(action: Action, strategy?: MergeStrategy): void;
   readonly actions: Action[];
+
+  // Readonly.
+  exists(path: string): boolean;
+
+  // Content access.
+  get(path: string): FileEntry | null;
+  getTreeOf(path: string): Tree;
+  read(path: string): Buffer | null;
+
+  // Change content of host files.
+  overwrite(path: string, content: Buffer | string): void;
+  beginUpdate(path: string): UpdateRecorder;
+  commitUpdate(record: UpdateRecorder): void;
+
+  // Structural methods.
+  create(path: string, content: Buffer | string): void;
+  delete(path: string): void;
+  rename(from: string, to: string): void;
+
+  // Version management.
+  readonly version: number | null;
 }
 
 

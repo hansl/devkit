@@ -9,7 +9,7 @@ import {
   ContentHasMutatedException,
   FileDoesNotExistException,
   InvalidUpdateRecordException,
-  Path,
+  PathFragment,
   basename,
   normalize,
   split,
@@ -25,22 +25,12 @@ import {
 import { UpdateRecorderBase } from './recorder';
 
 
-export class SimpleTreeBase implements Tree {
-  'constructor': typeof SimpleTreeBase;
-
-  protected _dirs = new Map<string, Tree>();
-  protected _files = new Map<string, FileEntry>();
-
+export abstract class SimpleTreeBase implements Tree {
   protected _version: number | null = null;
-
   protected _staging: Staging | null = null;
 
-  constructor(private _base: Tree | null) {
+  constructor(protected _base: Tree | null) {
     if (_base) {
-      const trees = _base.subtrees();
-      for (const name of Object.keys(trees)) {
-        this._dirs.set(name, new (this.constructor)(trees[name]));
-      }
       this._version = _base.version;
     }
   }
@@ -51,42 +41,15 @@ export class SimpleTreeBase implements Tree {
   }
   get version() { return this._version; }
 
-  dir(name: string): Tree | null {
-    if (name.endsWith('/')) {
-      return this._dirs.get(name.slice(0, -1) as Path) || null;
-    }
+  abstract subtrees(): PathFragment[];
+  abstract subfiles(): PathFragment[];
+  abstract dir(name: PathFragment): Tree;
+  abstract file(name: PathFragment): FileEntry | null;
 
-    return this._dirs.get(name as Path) || null;
-  }
-  file(name: string): FileEntry | null {
-    return this._files.get(name as Path) || null;
-  }
-
-  subtrees() {
-    const result: { [name: string]: Tree } = {};
-    for (const [name, tree] of this._dirs.entries()) {
-      result[name] = tree;
-    }
-
-    return result;
-  }
-
-  subfiles() {
-    const result: { [name: string]: FileEntry } = {};
-    for (const [name, file] of this._files.entries()) {
-      result[name] = file;
-    }
-
-    return result;
-  }
-
-  getTreeOf(path: string): Tree | null {
+  getTreeOf(path: string): Tree {
     const p = normalize(path);
-    let tree: Tree | null = this;
+    let tree: Tree = this;
     for (const fragment of split(p).slice(0, -1)) {
-      if (tree === null) {
-        return null;
-      }
       tree = tree.dir(fragment);
     }
 
@@ -102,12 +65,7 @@ export class SimpleTreeBase implements Tree {
     return maybeFile ? maybeFile.content : null;
   }
   get(path: string) {
-    const maybeTree = this.getTreeOf(path);
-    if (!maybeTree) {
-      return null;
-    }
-
-    return maybeTree.file(basename(normalize(path)));
+    return this.getTreeOf(path).file(basename(normalize(path)));
   }
 
   overwrite(path: string, content: Buffer | string): void {
@@ -151,6 +109,17 @@ export class SimpleTreeBase implements Tree {
 }
 
 
+export class InMemoryTree extends SimpleTreeBase {
+  protected _dirs = new Map<PathFragment, SimpleTreeBase>();
+  protected _files = new Map<PathFragment, FileEntry>();
+
+  subtrees(): PathFragment[];
+  subfiles(): PathFragment[];
+  dir(name: PathFragment): Tree;
+  file(name: PathFragment): FileEntry | null;
+}
+
+
 export class SimpleStagingBase extends SimpleTreeBase implements Staging {
   protected _actions: ActionList;
 
@@ -164,7 +133,7 @@ export class SimpleStagingBase extends SimpleTreeBase implements Staging {
   get actions() { return [...this._actions]; }
   push(action: Action, _strategy?: MergeStrategy) {
     // TODO: validate the merge strategy.
-    (this.getTreeOf(action.path) as SimpleStagingBase)._actions.push({
+    this._actions.push({
       ...action,
       path: basename(action.path),
     });
@@ -175,8 +144,7 @@ export class SimpleStagingBase extends SimpleTreeBase implements Staging {
       content = new Buffer(content, 'utf-8');
     }
 
-    (this.getTreeOf(action.path) as SimpleStagingBase)._actions.push(action);
-    return this._actions.overwrite(normalize(path), content);
+    this._actions.overwrite(normalize(path), content);
   }
 
   // Structural methods.
@@ -185,12 +153,12 @@ export class SimpleStagingBase extends SimpleTreeBase implements Staging {
       content = new Buffer(content, 'utf-8');
     }
 
-    return this._actions.create(normalize(path), content);
+    this._actions.create(normalize(path), content);
   }
   delete(path: string): void {
-    return this._actions.delete(normalize(path));
+    this._actions.delete(normalize(path));
   }
   rename(from: string, to: string): void {
-    return this._actions.rename(from, to);
+    this._actions.rename(normalize(from), normalize(to));
   }
 }

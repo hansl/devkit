@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { BaseException, Path, PathFragment } from '@angular-devkit/core';
+import { BaseException, Path } from '@angular-devkit/core';
 
 
 export class UnknownActionException extends BaseException {
@@ -42,16 +42,16 @@ export class ActionList implements Iterable<Action> {
     return a;
   }
 
-  create(path: PathFragment, content: Buffer) {
+  create(path: Path, content: Buffer) {
     return this._action({ kind: 'c', path, content });
   }
-  overwrite(path: PathFragment, content: Buffer) {
+  overwrite(path: Path, content: Buffer) {
     return this._action({ kind: 'o', path, content });
   }
-  rename(path: PathFragment, to: PathFragment) {
+  rename(path: Path, to: Path) {
     return this._action({ kind: 'r', path, to });
   }
-  delete(path: PathFragment) {
+  delete(path: Path) {
     return this._action({ kind: 'd', path });
   }
 
