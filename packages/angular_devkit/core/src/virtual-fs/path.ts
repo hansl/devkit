@@ -81,14 +81,7 @@ export function extname(path: Path): string {
  * @returns {Path} The first directory name.
  */
 export function rootname(path: Path): PathFragment {
-  const i = path.indexOf(NormalizedSep);
-  if (!isAbsolute(path)) {
-    return path.substr(0, i) as PathFragment;
-  } else if (i == -1) {
-    return path as PathFragment;
-  } else {
-    return path.substr(i + 1, path.indexOf(NormalizedSep, i + 1) - 1) as PathFragment;
-  }
+  return split(path)[0];
 }
 
 /**

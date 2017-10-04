@@ -64,11 +64,11 @@ export function findModule(host: Tree, generateDir: string): Path {
   let modulePath: PathFragment | null = null;
   const moduleRe = /\.module\.ts$/;
   const routingModuleRe = /-routing\.module\.ts/;
-console.log(host.root.subdirs())
+
   while (dir) {
     const matches = dir.subfiles()
       .filter(p => moduleRe.test(p) && !routingModuleRe.test(p));
-console.log(dir.path, dir.subfiles(), matches);
+
     if (matches.length == 1) {
       modulePath = matches[0];
       break;
@@ -84,7 +84,7 @@ console.log(dir.path, dir.subfiles(), matches);
       + 'option to skip importing components in NgModule.');
   }
 
-  return join(path, modulePath);
+  return join(dir.path, modulePath);
 }
 
 /**

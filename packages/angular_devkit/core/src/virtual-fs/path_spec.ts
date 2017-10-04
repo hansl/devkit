@@ -152,9 +152,9 @@ describe('path', () => {
   });
 
   it('rootname', () => {
-    expect(rootname(normalize('a'))).toBe('');
-    expect(rootname(normalize('./c'))).toBe('');
-    expect(rootname(normalize('/a/b/c'))).toBe('a');
+    expect(rootname(normalize('a'))).toBe('a');
+    expect(rootname(normalize('./c'))).toBe('c');
+    expect(rootname(normalize('/a/b/c'))).toBe('');
     expect(rootname(normalize('a/b/c'))).toBe('a');
   });
 

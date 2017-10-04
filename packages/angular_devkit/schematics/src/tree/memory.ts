@@ -90,6 +90,9 @@ export class InMemorySimpleDirEntry extends SimpleDirEntryBase {
   }
 
   dir(name: PathFragment): DirEntry {
+    if (name == '') {
+      return this;
+    }
     let maybe = this._subdirs.get(name);
     if (!maybe) {
       const path = join(this.path, name);

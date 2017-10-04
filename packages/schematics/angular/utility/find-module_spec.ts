@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { EmptyTree, Tree } from '@angular-devkit/schematics';
+import { EmptyTree, InMemorySimpleTree, Tree } from '@angular-devkit/schematics';
 import { findModule } from './find-module';
 
 
@@ -15,7 +15,7 @@ describe('find-module', () => {
     let host: Tree;
     const modulePath = '/foo/src/app/app.module.ts';
     beforeEach(() => {
-      host = new EmptyTree();
+      host = new InMemorySimpleTree();
       host.create(modulePath, 'app module');
     });
 

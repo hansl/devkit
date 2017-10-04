@@ -26,7 +26,7 @@ export class NullDirEntry implements DirEntry {
   subdirs(): PathFragment[] { return []; }
   subfiles(): PathFragment[] { return []; }
 
-  dir(name: PathFragment) { return new NullDirEntry(join(this.path, name)); }
+  dir(name: PathFragment) { return name ? new NullDirEntry(join(this.path, name)) : this; }
   file(_: PathFragment) { return null; }
 }
 
