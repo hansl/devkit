@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 // tslint:disable:non-null-operator
-import { normalize, NullLogger } from '@angular-devkit/core';
+import { NullLogger } from '@angular-devkit/core';
 import { listFiles } from '@angular-devkit/schematics/test';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toArray';

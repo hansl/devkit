@@ -17,7 +17,7 @@ import {
 } from '@angular-devkit/core';
 import { LazyFileEntry } from './entry';
 import { DirEntry, FileEntry, Staging, Tree } from './interface';
-import { InMemorySimpleStaging } from './memory';
+import { InMemorySimpleStaging, InMemorySimpleTree } from './memory';
 import { SimpleDirEntryBase, SimpleTreeBase } from './simple-tree-base';
 
 
@@ -130,6 +130,15 @@ export class FileSystemTree extends SimpleTreeBase {
 
       return dir.file(basename(p)) || null;
     }
+  }
+}
+
+
+export class FileSystemStageTree extends InMemorySimpleTree {
+  constructor(host: FileSystemTreeHost) {
+    super();  // FileSystemStageTree cannot have a base.
+
+    new FileSystemTree(host).visit((path, entry) => entry && this.create(path, entry.content));
   }
 }
 

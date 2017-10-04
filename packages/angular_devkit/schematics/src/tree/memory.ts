@@ -107,7 +107,7 @@ export class InMemorySimpleDirEntry extends SimpleDirEntryBase {
 
 
 export class InMemorySimpleTree extends SimpleTreeBase {
-  protected _root = new InMemorySimpleDirEntry(normalize('/'), this);
+  protected _root = new InMemorySimpleDirEntry(this._normalize('/'), this);
   protected _staging = new InMemorySimpleStaging(this);
 
   protected _cache = new Map<Path, FileEntry>();
@@ -118,9 +118,12 @@ export class InMemorySimpleTree extends SimpleTreeBase {
   get staging(): Staging { return this._staging; }
 
   get(path: string): FileEntry | null {
-    const p = normalize(path);
+    const p = this._normalize(path);
 
-    return this._cache.get(p) || this.staging.get(p) || null;
+    return this._cache.get(p)
+        || this.staging.get(p)
+        || (this._base && this._base.get(p))
+        || null;
   }
 
   constructor(protected _base?: Tree) { super(); }
@@ -131,7 +134,11 @@ export class InMemorySimpleStaging extends SimpleStagingBase {
   protected _actions = new ActionList();
   protected _cache = new Map<Path, FileEntry>();
 
-  get actions() { return [...this._actions]; }
+  get actions() {
+    this._actions.optimize();
+
+    return [...this._actions];
+  }
   get base(): Tree { return this._base; }
   get version() { return null; }
 

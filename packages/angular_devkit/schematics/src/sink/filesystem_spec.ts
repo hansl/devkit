@@ -9,9 +9,10 @@ import { listFiles } from '@angular-devkit/schematics/test';
 import * as fs from 'fs';
 import * as glob from 'glob';
 import { join } from 'path';
-import { InMemoryFileSystemTreeHost, FileSystemTree } from '../tree/filesystem';
+import { InMemoryFileSystemTreeHost } from '../tree/filesystem';
 import { optimize } from '../tree/static';
 import { FileSystemSink } from './filesystem';
+import { FileSystemStageTree } from '@angular-devkit/schematics';
 
 const temp = require('temp');
 
@@ -29,7 +30,7 @@ describe('FileSystemSink', () => {
       '/sub/directory/file2': '',
       '/sub/file1': '',
     });
-    const tree = new FileSystemTree(host);
+    const tree = new FileSystemStageTree(host);
 
     tree.create('/test', 'testing 1 2');
     const recorder = tree.beginUpdate('/test');
@@ -37,7 +38,7 @@ describe('FileSystemSink', () => {
     tree.commitUpdate(recorder);
 
     const files = ['/hello', '/sub/directory/file2', '/sub/file1', '/test'];
-    expect(listFiles(tree)).toEqual(files);
+    expect(listFiles(tree).sort()).toEqual(files);
 
     const sink = new FileSystemSink(outputRoot);
     sink.commit(optimize(tree))

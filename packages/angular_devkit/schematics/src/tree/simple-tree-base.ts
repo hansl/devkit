@@ -89,9 +89,11 @@ export abstract class SimpleTreeBase implements Tree {
     return this.getDir(dirname(p)).file(basename(p));
   }
   visit(visitor: TreeVisitor) {
+    const files: (FileEntry | null)[] = new Array(64);
+    let i = 0;
     function visitDir(dir: DirEntry) {
       dir.subfiles().forEach(fragment => {
-        visitor(join(dir.path, fragment), dir.file(fragment));
+        files[i++] = dir.file(fragment);
       });
       dir.subdirs().forEach(fragment => {
         visitDir(dir.dir(fragment));
@@ -100,6 +102,7 @@ export abstract class SimpleTreeBase implements Tree {
 
     try {
       visitDir(this.root);
+      files.forEach(entry => entry && visitor(entry.path, entry));
     } catch (e) {
       if (e !== TreeVisitorCancel) {
         throw e;
@@ -120,7 +123,7 @@ export abstract class SimpleTreeBase implements Tree {
     this.staging.overwrite(this._normalize(path), content);
   }
   beginUpdate(path: string): UpdateRecorder {
-    const entry = this.get('/' + path);
+    const entry = this.get(path);
     if (!entry) {
       throw new FileDoesNotExistException(path);
     }
@@ -150,7 +153,7 @@ export abstract class SimpleTreeBase implements Tree {
     this.staging.create(this._normalize(path), content);
   }
   delete(path: string): void {
-    this.staging.delete(this._normalize(path);
+    this.staging.delete(this._normalize(path));
   }
   rename(from: string, to: string): void {
     this.staging.rename(this._normalize(from), this._normalize(to));

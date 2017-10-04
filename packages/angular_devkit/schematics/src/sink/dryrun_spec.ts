@@ -13,6 +13,7 @@ import 'rxjs/add/operator/toPromise';
 import { FileSystemTree, InMemoryFileSystemTreeHost } from '../tree/filesystem';
 import { optimize } from '../tree/static';
 import { DryRunSink } from './dryrun';
+import { FileSystemStageTree } from '@angular-devkit/schematics';
 
 const temp = require('temp');
 
@@ -32,7 +33,7 @@ describe('DryRunSink', () => {
   });
 
   it('works when creating everything', done => {
-    const tree = new FileSystemTree(host);
+    const tree = new FileSystemStageTree(host);
 
     tree.create('/test', 'testing 1 2');
     const recorder = tree.beginUpdate('/test');
@@ -41,14 +42,13 @@ describe('DryRunSink', () => {
     tree.overwrite('/hello', 'world');
 
     const files = ['/hello', '/sub/directory/file2', '/sub/file1', '/test'];
-    expect(listFiles(tree).sort()).toEqual(files);
+    expect(listFiles(tree).sort()).toEqual(files.sort());
 
     const sink = new DryRunSink(outputRoot);
     sink.reporter
       .toArray()
       .toPromise()
       .then(infos => {
-        console.log(infos);
         expect(infos.length).toBe(4);
         for (const info of infos) {
           expect(info.kind).toBe('create');

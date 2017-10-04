@@ -46,7 +46,7 @@ export class ActionList implements Iterable<Action> {
   }
 
   create(path: Path, content: Buffer) {
-    return this._action({ kind: 'c', path, content });
+    this._action({ kind: 'c', path, content });
   }
   overwrite(path: Path, content: Buffer) {
     return this._action({ kind: 'o', path, content });
@@ -57,7 +57,6 @@ export class ActionList implements Iterable<Action> {
   delete(path: Path) {
     return this._action({ kind: 'd', path });
   }
-
 
   optimize() {
     const actions = this._actions;
