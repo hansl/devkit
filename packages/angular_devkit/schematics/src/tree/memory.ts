@@ -40,6 +40,7 @@ export class InMemorySimpleDirEntry extends SimpleDirEntryBase {
   }
 
   get path() { return this._path; }
+  get parent() { return this._path == '/' ? null : this._tree.getDir(dirname(this._path)); }
 
   subdirs(): PathFragment[] {
     const subdirs = new Set<PathFragment>(this._subdirs.keys());
@@ -49,7 +50,7 @@ export class InMemorySimpleDirEntry extends SimpleDirEntryBase {
       this._base.subdirs().forEach(subdir => subdirs.add(subdir));
     }
 
-    for (const f of this._tree.files.keys()) {
+    for (const f of this._tree.cache.keys()) {
       if (f.startsWith(this.path) && dirname(f) != this.path) {
         const subf = f.substr(i);
         subdirs.add(rootname(normalize(subf)));
@@ -73,7 +74,7 @@ export class InMemorySimpleDirEntry extends SimpleDirEntryBase {
       this._base.subfiles().forEach(subfile => subfiles.add(subfile));
     }
 
-    for (const f of this._tree.files.keys()) {
+    for (const f of this._tree.cache.keys()) {
       if (f.startsWith(this.path) && dirname(f) == this.path) {
         subfiles.add(basename(f));
       }
@@ -109,17 +110,17 @@ export class InMemorySimpleTree extends SimpleTreeBase {
   protected _root = new InMemorySimpleDirEntry(normalize('/'), this);
   protected _staging = new InMemorySimpleStaging(this);
 
-  protected _files = new Map<Path, FileEntry>();
+  protected _cache = new Map<Path, FileEntry>();
 
   get base(): Tree | null { return this._base || null; }
-  get files() { return this._files; }
+  get cache() { return this._cache; }
   get root(): DirEntry { return this._root; }
   get staging(): Staging { return this._staging; }
 
   get(path: string): FileEntry | null {
     const p = normalize(path);
 
-    return this._files.get(p) || this.staging.get(p) || null;
+    return this._cache.get(p) || this.staging.get(p) || null;
   }
 
   constructor(protected _base?: Tree) { super(); }
@@ -174,9 +175,6 @@ export class InMemorySimpleStaging extends SimpleStagingBase {
   }
 
   protected _overwrite(path: Path, content: Buffer, action?: Action, _strategy?: MergeStrategy) {
-    if (!this.has(path)) {
-      throw new FileDoesNotExistException(path);
-    }
     // Update the action buffer.
     if (action) {
       this._actions.push(action);

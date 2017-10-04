@@ -7,7 +7,6 @@
  */
 import { Path, normalize } from '@angular-devkit/core';
 import { FilteredTree } from './filtered';
-import { visitTree } from './interface';
 import { InMemorySimpleTree } from './memory';
 
 
@@ -21,7 +20,7 @@ describe('FilteredTree', () => {
     const filtered = new FilteredTree(tree, p => p != '/file2');
 
     const acc: Path[] = [];
-    visitTree(filtered, p => acc.push(p));
+    filtered.visit(p => acc.push(p));
     expect(acc.sort()).toEqual(['/file1', '/file3'].map(x => normalize(x)));
   });
 });

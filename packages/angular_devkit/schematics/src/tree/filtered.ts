@@ -31,7 +31,7 @@ export class FilteredDirEntry extends InMemorySimpleDirEntry {
       this._base.subdirs().forEach(subdir => subdirs.add(subdir));
     }
 
-    for (const f of this._tree.files.keys()) {
+    for (const f of this._tree.cache.keys()) {
       const entry = this._tree.get(f);
       if (f.startsWith(this.path) && dirname(f) != this.path && this._filter(f, entry)) {
         subdirs.add(rootname(normalize(f.substr(i))));
@@ -53,14 +53,14 @@ export class FilteredDirEntry extends InMemorySimpleDirEntry {
 
     if (this._base) {
       this._base.subfiles().forEach(subfile => {
-        const entry = this._base.file(subfile);
+        const entry = this._base !.file(subfile);  // tslint:disable-line:non-null-operator
         if (this._filter(join(this.path, subfile), entry)) {
           subfiles.add(subfile);
         }
       });
     }
 
-    for (const f of this._tree.files.keys()) {
+    for (const f of this._tree.cache.keys()) {
       const entry = this._tree.get(f);
       if (f.startsWith(this.path) && dirname(f) == this.path && this._filter(f, entry)) {
         subfiles.add(basename(f));

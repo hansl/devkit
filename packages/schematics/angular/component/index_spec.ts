@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Tree, VirtualTree } from '@angular-devkit/schematics';
+import { InMemorySimpleTree, Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner } from '@angular-devkit/schematics/test';
 import * as path from 'path';
 import { createAppModule, getFileContent } from '../utility/test';
@@ -36,8 +36,7 @@ describe('Component Schematic', () => {
   let appTree: Tree;
 
   beforeEach(() => {
-    appTree = new VirtualTree();
-    appTree = createAppModule(appTree);
+    appTree = createAppModule(new InMemorySimpleTree());
   });
 
   it('should create a component', () => {

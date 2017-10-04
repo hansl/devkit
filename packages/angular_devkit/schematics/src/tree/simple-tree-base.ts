@@ -37,6 +37,7 @@ export abstract class SimpleDirEntryBase implements DirEntry {
   constructor(protected _path: Path) {}
 
   get path() { return this._path; }
+  abstract get parent(): DirEntry | null;
 
   abstract subdirs(): PathFragment[];
   abstract subfiles(): PathFragment[];
@@ -53,7 +54,12 @@ export abstract class SimpleTreeBase implements Tree {
 
   get [TreeSymbol]() { return true; }
 
-  protected _getDirOf(path: Path) {
+  protected _normalize(path: string) {
+    return normalize('/' + path);
+  }
+
+  getDir(path: Path) {
+    path = this._normalize(path);
     let tree = this.root;
     while (path) {
       tree = tree.dir(rootname(path));
@@ -78,9 +84,9 @@ export abstract class SimpleTreeBase implements Tree {
 
   // Content access.
   get(path: string): FileEntry | null {
-    const p = normalize(path);
+    const p = this._normalize(path);
 
-    return this._getDirOf(dirname(p)).file(basename(p));
+    return this.getDir(dirname(p)).file(basename(p));
   }
   visit(visitor: TreeVisitor) {
     function visitDir(dir: DirEntry) {
@@ -111,10 +117,10 @@ export abstract class SimpleTreeBase implements Tree {
     if (typeof content == 'string') {
       content = new Buffer(content);
     }
-    this.staging.overwrite(normalize(path), content);
+    this.staging.overwrite(this._normalize(path), content);
   }
   beginUpdate(path: string): UpdateRecorder {
-    const entry = this.get(path);
+    const entry = this.get('/' + path);
     if (!entry) {
       throw new FileDoesNotExistException(path);
     }
@@ -141,13 +147,13 @@ export abstract class SimpleTreeBase implements Tree {
     if (typeof content == 'string') {
       content = new Buffer(content);
     }
-    this.staging.create(normalize(path), content);
+    this.staging.create(this._normalize(path), content);
   }
   delete(path: string): void {
-    this.staging.delete(normalize(path));
+    this.staging.delete(this._normalize(path);
   }
   rename(from: string, to: string): void {
-    this.staging.rename(normalize(from), normalize(to));
+    this.staging.rename(this._normalize(from), this._normalize(to));
   }
 }
 

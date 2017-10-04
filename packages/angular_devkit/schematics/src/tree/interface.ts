@@ -44,6 +44,7 @@ export interface FilePredicate<T> {
 
 export interface DirEntry {
   readonly path: Path;
+  readonly parent: DirEntry | null;
 
   subdirs(): PathFragment[];
   subfiles(): PathFragment[];
@@ -70,6 +71,7 @@ export interface Tree {
 
   // Content access.
   get(path: string): FileEntry | null;
+  getDir(path: string): DirEntry;
   read(path: string): Buffer | null;
   visit(visitor: TreeVisitor): void;
 

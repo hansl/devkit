@@ -5,11 +5,11 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+import { listFiles } from '@angular-devkit/schematics/test';
 import * as fs from 'fs';
 import * as glob from 'glob';
 import { join } from 'path';
-import { FileSystemTree } from '../tree/filesystem';
-import { InMemoryFileSystemTreeHost } from '../tree/memory';
+import { InMemoryFileSystemTreeHost, FileSystemTree } from '../tree/filesystem';
 import { optimize } from '../tree/static';
 import { FileSystemSink } from './filesystem';
 
@@ -29,7 +29,7 @@ describe('FileSystemSink', () => {
       '/sub/directory/file2': '',
       '/sub/file1': '',
     });
-    const tree = new FileSystemTree(host, true);
+    const tree = new FileSystemTree(host);
 
     tree.create('/test', 'testing 1 2');
     const recorder = tree.beginUpdate('/test');
@@ -37,7 +37,7 @@ describe('FileSystemSink', () => {
     tree.commitUpdate(recorder);
 
     const files = ['/hello', '/sub/directory/file2', '/sub/file1', '/test'];
-    expect(tree.files).toEqual(files);
+    expect(listFiles(tree)).toEqual(files);
 
     const sink = new FileSystemSink(outputRoot);
     sink.commit(optimize(tree))

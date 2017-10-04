@@ -223,7 +223,7 @@ export abstract class FileSystemEngineHostBase implements
           // path.
           const root = resolve(dirname(context.schematic.description.path), url.path);
 
-          return new FileSystemTree(new FileSystemHost(root), true);
+          return new FileSystemTree(new FileSystemHost(root));
         };
     }
 

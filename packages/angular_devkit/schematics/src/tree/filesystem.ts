@@ -34,15 +34,12 @@ export class FileSystemDirEntry extends SimpleDirEntryBase {
   protected _subdirs = new Map<PathFragment, FileSystemDirEntry>();
   protected _subfiles = new Map<PathFragment, FileEntry>();
 
-  constructor(
-    path: Path,
-    protected _system: string,
-    protected _tree: FileSystemTree,
-  ) {
+  constructor(path: Path, protected _system: string, protected _tree: FileSystemTree) {
     super(path);
   }
 
   get path() { return this._path; }
+  get parent() { return this._path == '/' ? null : this._tree.getDir(dirname(this._path)); }
 
   subdirs(): PathFragment[] {
     const subdirs = new Set<PathFragment>(this._subdirs.keys());
@@ -157,7 +154,11 @@ export class InMemoryFileSystemTreeHost implements FileSystemTreeHost {
           .filter(p => p.startsWith(path))
           .map(p => p.substr(path.length))
           .map(p => p.replace(/\/.*$/, ''))
-          .reduce((acc: {[k: string]: boolean}, p) => (acc[p] = true, acc), {}),
+          .reduce((acc: {[k: string]: boolean}, p) => {
+            acc[p] = true;
+
+            return acc;
+          }, {}),
     ).sort();
   }
   isDirectory(path: string) {

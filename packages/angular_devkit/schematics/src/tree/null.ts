@@ -5,7 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { BaseException, Path, PathFragment, normalize } from '@angular-devkit/core';
+import { BaseException, Path, PathFragment, dirname, join, normalize } from '@angular-devkit/core';
 import { FileDoesNotExistException } from '../exception/exception';
 import { Action } from './action';
 import { DirEntry, FileEntry, Staging, Tree, TreeVisitor, UpdateRecorder } from './interface';
@@ -21,10 +21,12 @@ export class CannotCreateFileException extends BaseException {
 export class NullDirEntry implements DirEntry {
   constructor(public readonly path: Path) {}
 
+  get parent() { return this.path == '/' ? null : new NullDirEntry(dirname(this.path)); }
+
   subdirs(): PathFragment[] { return []; }
   subfiles(): PathFragment[] { return []; }
 
-  dir(name: PathFragment) { return new NullDirEntry(name); }
+  dir(name: PathFragment) { return new NullDirEntry(join(this.path, name)); }
   file(_: PathFragment) { return null; }
 }
 
@@ -70,6 +72,7 @@ export class NullTree implements Tree {
   // Simple readonly file system operations.
   exists(_path: string) { return false; }
   get(_path: string) { return null; }
+  getDir(path: string) { return new NullDirEntry(normalize(path)); }
   read(_path: string) { return null; }
   visit(_visitor: TreeVisitor) { /* nothing to visit */ };
 

@@ -116,7 +116,7 @@ export abstract class SimpleSinkBase implements Sink {
   }
 
   commit(tree: Tree): Observable<void> {
-    const actions = Observable.from(tree.actions);
+    const actions = Observable.from(tree.staging.actions);
 
     return (this.preCommit() || Observable.empty<void>())
       .concat(Observable.defer(() => actions))

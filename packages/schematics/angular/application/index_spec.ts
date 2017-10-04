@@ -5,8 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Tree } from '@angular-devkit/schematics';
-import { SchematicTestRunner } from '@angular-devkit/schematics/test';
+import { SchematicTestRunner, TestTree } from '@angular-devkit/schematics/test';
 import * as path from 'path';
 import { getFileContent } from '../utility/test';
 import { Schema as ApplicationOptions } from './schema';
@@ -72,7 +71,7 @@ describe('Application Schematic', () => {
   it('should handle a different sourceDir', () => {
     const options = { ...defaultOptions, sourceDir: 'some/custom/path' };
 
-    let tree: Tree | null = null;
+    let tree: TestTree | null = null;
     expect(() => tree = schematicRunner.runSchematic('application', options))
       .not.toThrow();
 

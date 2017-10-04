@@ -6,3 +6,4 @@
  * found in the LICENSE file at https://angular.io/license
  */
 export * from './schematic-test-runner';
+export * from './tree-utility';

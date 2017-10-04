@@ -5,8 +5,8 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import { Path, dirname, normalize, relative } from '@angular-devkit/core';
-import { Tree } from '@angular-devkit/schematics';
+import { Path, normalize, relative, PathFragment, join } from '@angular-devkit/core';
+import { DirEntry, Tree } from '@angular-devkit/schematics';
 import { dasherize } from '../strings';
 
 
@@ -58,18 +58,16 @@ export function findModuleFromOptions(host: Tree,
  * Function to find the "closest" module to a generated file's path.
  */
 export function findModule(host: Tree, generateDir: string): Path {
-  let closestModule = normalize('/' + generateDir);
-  const allFiles = host.files;
+  const path = normalize('/' + generateDir);
+  let dir: DirEntry | null = host.getDir(path);
 
-  let modulePath: string | null = null;
+  let modulePath: PathFragment | null = null;
   const moduleRe = /\.module\.ts$/;
   const routingModuleRe = /-routing\.module\.ts/;
 
-  while (closestModule) {
-    const matches = allFiles
-      .filter(p => moduleRe.test(p) &&
-        !routingModuleRe.test(p) &&
-        !/\//g.test(p.replace(closestModule + '/', '')));
+  while (dir) {
+    const matches = dir.subfiles()
+      .filter(p => moduleRe.test(p) && !routingModuleRe.test(p));
 
     if (matches.length == 1) {
       modulePath = matches[0];
@@ -78,7 +76,7 @@ export function findModule(host: Tree, generateDir: string): Path {
       throw new Error('More than one module matches. Use skip-import option to skip importing '
         + 'the component into the closest module.');
     }
-    closestModule = dirname(closestModule);
+    dir = dir.parent;
   }
 
   if (!modulePath) {
@@ -86,7 +84,7 @@ export function findModule(host: Tree, generateDir: string): Path {
       + 'option to skip importing components in NgModule.');
   }
 
-  return normalize(modulePath);
+  return join(path, modulePath);
 }
 
 /**
