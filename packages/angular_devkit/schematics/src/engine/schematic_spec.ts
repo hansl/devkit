@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 // tslint:disable:non-null-operator
-import { NullLogger } from '@angular-devkit/core';
+import { normalize, NullLogger, Path } from '@angular-devkit/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toArray';
 import 'rxjs/add/operator/toPromise';
@@ -42,6 +42,13 @@ const collection = {
 } as CollectionDescription<CollectionT>;
 
 
+function filesOf(tree: Tree) {
+  let files: Path[] = [];
+  tree.visit(p => files.push(p));
+
+  return files;
+}
+
 describe('Schematic', () => {
   it('works with a rule', done => {
     let inner: Tree | null = null;
@@ -63,7 +70,7 @@ describe('Schematic', () => {
       .toPromise()
       .then(x => {
         expect(inner !.files).toEqual([]);
-        expect(x.files).toEqual(['/a/b/c']);
+        expect(filesOf(x)).toEqual([normalize('/a/b/c')]);
       })
       .then(done, done.fail);
   });

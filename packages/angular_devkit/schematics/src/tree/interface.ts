@@ -42,12 +42,26 @@ export interface FilePredicate<T> {
 }
 
 
-export interface Tree {
-  // These work on this level only, and only understand fragments.
-  subtrees(): PathFragment[];
+export interface DirEntry {
+  readonly path: Path;
+
+  subdirs(): PathFragment[];
   subfiles(): PathFragment[];
-  dir(name: PathFragment): Tree;
+
+  dir(name: PathFragment): DirEntry;
   file(name: PathFragment): FileEntry | null;
+}
+
+
+export const TreeSymbol = Symbol('tree');
+export const TreeVisitorCancel = Symbol();
+
+
+export type TreeVisitor = (path: Path, entry: Readonly<FileEntry> | null) => void;
+
+
+export interface Tree {
+  readonly root: DirEntry;
 
   // These can include subdirectory and the paths passed in will be normalized.
 
@@ -56,8 +70,8 @@ export interface Tree {
 
   // Content access.
   get(path: string): FileEntry | null;
-  getTreeOf(path: string): Tree;
   read(path: string): Buffer | null;
+  visit(visitor: TreeVisitor): void;
 
   // Change content of host files.
   overwrite(path: string, content: Buffer | string): void;
@@ -77,26 +91,26 @@ export interface Tree {
 
 
 export interface Staging {
-  push(action: Action, strategy?: MergeStrategy): void;
+  readonly base: Tree;
   readonly actions: Action[];
 
+  apply(action: Action, strategy?: MergeStrategy): void;
+  files(): Path[];
+
   // Readonly.
-  exists(path: string): boolean;
+  has(path: Path): boolean;
 
   // Content access.
-  get(path: string): FileEntry | null;
-  getTreeOf(path: string): Tree;
-  read(path: string): Buffer | null;
+  get(path: Path): FileEntry | null;
+  read(path: Path): Buffer | null;
 
   // Change content of host files.
-  overwrite(path: string, content: Buffer | string): void;
-  beginUpdate(path: string): UpdateRecorder;
-  commitUpdate(record: UpdateRecorder): void;
+  overwrite(path: Path, content: Buffer): void;
 
   // Structural methods.
-  create(path: string, content: Buffer | string): void;
-  delete(path: string): void;
-  rename(from: string, to: string): void;
+  create(path: Path, content: Buffer): void;
+  delete(path: Path): void;
+  rename(from: Path, to: Path): void;
 
   // Version management.
   readonly version: number | null;

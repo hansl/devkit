@@ -209,6 +209,8 @@ export default function (args: ParsedArgs, logger: Logger) {
   let regex = 'packages/**/*_spec.ts';
   if (args.glob) {
     regex = `packages/**/${args.glob}/**/*_spec.ts`;
+  } else if (args.test) {
+    regex = `packages/**/${args.test}*_spec.ts`;
   }
 
   if (args['code-coverage']) {

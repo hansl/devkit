@@ -14,6 +14,9 @@ export class BaseException extends Error {
 
 
 // Exceptions
+export class InvalidArgumentValueException extends BaseException {
+  constructor(name: string) { super(`Argument ${name} has an invalid value.`); }
+}
 export class FileDoesNotExistException extends BaseException {
   constructor(path: string) { super(`Path "${path}" does not exist.`); }
 }

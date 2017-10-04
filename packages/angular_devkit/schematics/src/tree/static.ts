@@ -7,17 +7,22 @@
  */
 import { FilteredTree } from './filtered';
 import { FilePredicate, MergeStrategy, Tree } from './interface';
-import { VirtualTree } from './virtual';
+import { InMemorySimpleTree } from './memory';
 
 
-export function empty() { return new VirtualTree(); }
+export function empty() { return new InMemorySimpleTree(); }
 
 export function branch(tree: Tree) {
-  return VirtualTree.branch(tree);
+  return new InMemorySimpleTree(tree);
 }
 
 export function merge(tree: Tree, other: Tree, strategy: MergeStrategy = MergeStrategy.Default) {
-  return VirtualTree.merge(tree, other, strategy);
+  const result = new InMemorySimpleTree(tree);
+  other.staging.actions.forEach(action => {
+    result.staging.apply(action, strategy);
+  });
+
+  return result;
 }
 
 export function partition(tree: Tree, predicate: FilePredicate<boolean>): [Tree, Tree] {
@@ -28,5 +33,5 @@ export function partition(tree: Tree, predicate: FilePredicate<boolean>): [Tree,
 }
 
 export function optimize(tree: Tree) {
-  return VirtualTree.optimize(tree);
+  return tree;
 }

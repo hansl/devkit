@@ -5,13 +5,14 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+import { Path } from '@angular-devkit/core';
 import { ContentHasMutatedException } from '../exception/exception';
 import { UpdateBuffer } from '../utility/update-buffer';
 import { FileEntry, UpdateRecorder } from './interface';
 
 
 export class UpdateRecorderBase implements UpdateRecorder {
-  protected _path: string;
+  protected _path: Path;
   protected _original: Buffer;
   protected _content: UpdateBuffer;
 

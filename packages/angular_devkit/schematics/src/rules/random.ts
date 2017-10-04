@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Source } from '../engine/interface';
-import { VirtualTree } from '../tree/virtual';
+import { InMemorySimpleTree } from '../tree/memory';
 
 
 function generateStringOfLength(l: number) {
@@ -32,7 +32,7 @@ export default function(options: RandomOptions): Source {
   return () => {
     const root = ('root' in options) ? options.root : '/';
 
-    const map = new VirtualTree();
+    const map = new InMemorySimpleTree();
     const nbFiles = ('multiFiles' in options)
                   ? (typeof options.multiFiles == 'number' ? options.multiFiles : random(2, 12))
                   : 1;

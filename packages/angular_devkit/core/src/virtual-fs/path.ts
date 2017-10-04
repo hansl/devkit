@@ -76,18 +76,18 @@ export function extname(path: Path): string {
  * basename.
  *
  * @example rootname('/a/b/c') == 'a'
- * @example rootname('a/b') == '.'
+ * @example rootname('a/b') == ''
  * @param path The path to get the rootname from.
  * @returns {Path} The first directory name.
  */
 export function rootname(path: Path): PathFragment {
   const i = path.indexOf(NormalizedSep);
   if (!isAbsolute(path)) {
-    return '.' as PathFragment;
+    return path.substr(0, i) as PathFragment;
   } else if (i == -1) {
     return path as PathFragment;
   } else {
-    return path.substr(path.lastIndexOf(NormalizedSep) + 1) as PathFragment;
+    return path.substr(i + 1, path.indexOf(NormalizedSep, i + 1) - 1) as PathFragment;
   }
 }
 
@@ -96,13 +96,7 @@ export function rootname(path: Path): PathFragment {
  * @returns {Path} The rest of the path.
  */
 export function rest(path: Path): Path {
-  if (isAbsolute(path)) {
-    return path.substr(path.indexOf(NormalizedSep, 1) + 1) as Path;
-  } else if (path.indexOf(NormalizedSep) != -1) {
-    return '' as Path;
-  } else {
-    return path.substr(path.indexOf(NormalizedSep) + 1) as Path;
-  }
+  return split(path).slice(1).join(NormalizedSep) as Path;
 }
 
 
@@ -126,6 +120,8 @@ export function dirname(path: Path): Path {
   const i = path.lastIndexOf(NormalizedSep);
   if (i == -1) {
     return '' as Path;
+  } else if (i == 0) {
+    return NormalizedRoot;
   } else {
     return normalize(path.substr(0, i));
   }

@@ -11,6 +11,9 @@ import { BaseException, Path } from '@angular-devkit/core';
 export class UnknownActionException extends BaseException {
   constructor(action: Action) { super(`Unknown action: "${action.kind}".`); }
 }
+export class CannotApplyActionException extends BaseException {
+  constructor(action: Action) { super(`Cannot apply action: "${action.kind}".`); }
+}
 
 
 export type Action = CreateFileAction

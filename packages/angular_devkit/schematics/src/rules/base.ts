@@ -13,7 +13,6 @@ import { FileOperator, Rule, SchematicContext, Source } from '../engine/interfac
 import { FilteredTree } from '../tree/filtered';
 import { FileEntry, FilePredicate, MergeStrategy, Tree } from '../tree/interface';
 import { branch, empty as staticEmpty, merge as staticMerge } from '../tree/static';
-import { VirtualTree } from '../tree/virtual';
 import { callRule, callSource } from './call';
 
 
@@ -62,7 +61,7 @@ export function mergeWith(source: Source, strategy: MergeStrategy = MergeStrateg
   return (tree: Tree, context: SchematicContext) => {
     const result = callSource(source, context);
 
-    return result.map(other => VirtualTree.merge(tree, other, strategy || context.strategy));
+    return result.map(other => staticMerge(tree, other, strategy || context.strategy));
   };
 }
 
@@ -105,8 +104,7 @@ export function when(predicate: FilePredicate<boolean>, operator: FileOperator):
 
 export function forEach(operator: FileOperator): Rule {
   return (tree: Tree) => {
-    tree.files.forEach(path => {
-      const entry = tree.get(path);
+    tree.visit((path, entry) => {
       if (!entry) {
         return;
       }

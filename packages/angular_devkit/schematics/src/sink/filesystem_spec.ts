@@ -9,7 +9,7 @@ import * as fs from 'fs';
 import * as glob from 'glob';
 import { join } from 'path';
 import { FileSystemTree } from '../tree/filesystem';
-import { InMemoryFileSystemTreeHost } from '../tree/memory-host';
+import { InMemoryFileSystemTreeHost } from '../tree/memory';
 import { optimize } from '../tree/static';
 import { FileSystemSink } from './filesystem';
 

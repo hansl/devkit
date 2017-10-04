@@ -9,69 +9,110 @@ import {
   ContentHasMutatedException,
   FileDoesNotExistException,
   InvalidUpdateRecordException,
+  Path,
   PathFragment,
   basename,
+  dirname,
+  join,
   normalize,
-  split,
+  rest,
+  rootname,
 } from '@angular-devkit/core';
-import { Action, ActionList } from './action';
+import { Action } from './action';
 import {
+  DirEntry,
   FileEntry,
   MergeStrategy,
   Staging,
   Tree,
+  TreeSymbol,
+  TreeVisitor,
+  TreeVisitorCancel,
   UpdateRecorder,
 } from './interface';
 import { UpdateRecorderBase } from './recorder';
 
 
-export abstract class SimpleTreeBase implements Tree {
-  protected _version: number | null = null;
-  protected _staging: Staging | null = null;
+export abstract class SimpleDirEntryBase implements DirEntry {
+  constructor(protected _path: Path) {}
 
-  constructor(protected _base: Tree | null) {
-    if (_base) {
-      this._version = _base.version;
-    }
-  }
+  get path() { return this._path; }
 
-  get base() { return this._base; }
-  get staging(): Staging {
-    return this._staging || (this._staging = new SimpleStagingBase(this));
-  }
-  get version() { return this._version; }
-
-  abstract subtrees(): PathFragment[];
+  abstract subdirs(): PathFragment[];
   abstract subfiles(): PathFragment[];
-  abstract dir(name: PathFragment): Tree;
-  abstract file(name: PathFragment): FileEntry | null;
 
-  getTreeOf(path: string): Tree {
-    const p = normalize(path);
-    let tree: Tree = this;
-    for (const fragment of split(p).slice(0, -1)) {
-      tree = tree.dir(fragment);
+  abstract dir(name: PathFragment): DirEntry;
+  abstract file(name: PathFragment): FileEntry | null;
+}
+
+
+export abstract class SimpleTreeBase implements Tree {
+  abstract get base(): Tree | null;
+  abstract get root(): DirEntry;
+  abstract get staging(): Staging;
+
+  get [TreeSymbol]() { return true; }
+
+  protected _getDirOf(path: Path) {
+    let tree = this.root;
+    while (path) {
+      tree = tree.dir(rootname(path));
+      path = rest(path);
     }
 
     return tree;
   }
 
-  exists(path: string) {
+  get version() {
+    if (this.base && this.base.version) {
+      return Math.max(this.base.version, this.staging.version || -1);
+    }
+
+    return this.staging.version;
+  }
+
+  // Readonly.
+  exists(path: string): boolean {
     return this.get(path) !== null;
   }
-  read(path: string) {
-    const maybeFile = this.get(path);
 
-    return maybeFile ? maybeFile.content : null;
+  // Content access.
+  get(path: string): FileEntry | null {
+    const p = normalize(path);
+
+    return this._getDirOf(dirname(p)).file(basename(p));
   }
-  get(path: string) {
-    return this.getTreeOf(path).file(basename(normalize(path)));
+  visit(visitor: TreeVisitor) {
+    function visitDir(dir: DirEntry) {
+      dir.subfiles().forEach(fragment => {
+        visitor(join(dir.path, fragment), dir.file(fragment));
+      });
+      dir.subdirs().forEach(fragment => {
+        visitDir(dir.dir(fragment));
+      });
+    }
+
+    try {
+      visitDir(this.root);
+    } catch (e) {
+      if (e !== TreeVisitorCancel) {
+        throw e;
+      }
+    }
+  }
+  read(path: string): Buffer | null {
+    const entry = this.get(path);
+
+    return entry ? entry.content : null;
   }
 
+  // Change content of host files.
   overwrite(path: string, content: Buffer | string): void {
-    return this.staging.overwrite(path, content);
+    if (typeof content == 'string') {
+      content = new Buffer(content);
+    }
+    this.staging.overwrite(normalize(path), content);
   }
-
   beginUpdate(path: string): UpdateRecorder {
     const entry = this.get(path);
     if (!entry) {
@@ -80,8 +121,7 @@ export abstract class SimpleTreeBase implements Tree {
 
     return new UpdateRecorderBase(entry);
   }
-
-  commitUpdate(record: UpdateRecorder) {
+  commitUpdate(record: UpdateRecorder): void {
     if (record instanceof UpdateRecorderBase) {
       const path = record.path;
       const entry = this.get(path);
@@ -89,7 +129,7 @@ export abstract class SimpleTreeBase implements Tree {
         throw new ContentHasMutatedException(path);
       } else {
         const newContent = record.apply(entry.content);
-        this.overwrite(path, newContent);
+        this.staging.overwrite(path, newContent);
       }
     } else {
       throw new InvalidUpdateRecordException();
@@ -98,67 +138,80 @@ export abstract class SimpleTreeBase implements Tree {
 
   // Structural methods.
   create(path: string, content: Buffer | string): void {
-    return this.staging.create(path, content);
+    if (typeof content == 'string') {
+      content = new Buffer(content);
+    }
+    this.staging.create(normalize(path), content);
   }
   delete(path: string): void {
-    return this.staging.delete(path);
+    this.staging.delete(normalize(path));
   }
   rename(from: string, to: string): void {
-    return this.staging.rename(from, to);
+    this.staging.rename(normalize(from), normalize(to));
   }
 }
 
 
-export class InMemoryTree extends SimpleTreeBase {
-  protected _dirs = new Map<PathFragment, SimpleTreeBase>();
-  protected _files = new Map<PathFragment, FileEntry>();
+export abstract class SimpleStagingBase implements Staging {
+  abstract get base(): Tree;
 
-  subtrees(): PathFragment[];
-  subfiles(): PathFragment[];
-  dir(name: PathFragment): Tree;
-  file(name: PathFragment): FileEntry | null;
-}
+  abstract get actions(): Action[];
+  abstract apply(action: Action, strategy?: MergeStrategy): void;
+  abstract files(): Path[];
+  abstract get(path: Path): FileEntry | null;
 
-
-export class SimpleStagingBase extends SimpleTreeBase implements Staging {
-  protected _actions: ActionList;
-
-  get version() {
-    return this._actions.length
-      ? this._actions.get(this._actions.length - 1).id
-      : super.version;
-  }
-  get staging() { return this; }
-
-  get actions() { return [...this._actions]; }
-  push(action: Action, _strategy?: MergeStrategy) {
-    // TODO: validate the merge strategy.
-    this._actions.push({
-      ...action,
-      path: basename(action.path),
-    });
+  // Readonly.
+  has(path: Path): boolean {
+    return this.get(path) != null;
   }
 
-  overwrite(path: string, content: Buffer | string): void {
-    if (typeof content == 'string') {
-      content = new Buffer(content, 'utf-8');
-    }
+  // Content access.
+  read(path: Path): Buffer | null {
+    const maybe = this.get(path);
 
-    this._actions.overwrite(normalize(path), content);
+    return maybe ? maybe.content : null;
+  }
+
+  protected abstract _overwrite(
+    path: Path,
+    content: Buffer,
+    action?: Action,
+    strategy?: MergeStrategy,
+  ): void;
+  protected abstract _create(
+    path: Path,
+    content: Buffer,
+    action?: Action,
+    strategy?: MergeStrategy,
+  ): void;
+  protected abstract _delete(
+    path: Path,
+    action?: Action,
+    strategy?: MergeStrategy,
+  ): void;
+  protected abstract _rename(
+    path: Path,
+    to: Path,
+    action?: Action,
+    strategy?: MergeStrategy,
+  ): void;
+
+  // Change content of host files.
+  overwrite(path: Path, content: Buffer): void {
+    this._overwrite(path, content);
   }
 
   // Structural methods.
-  create(path: string, content: Buffer | string): void {
-    if (typeof content == 'string') {
-      content = new Buffer(content, 'utf-8');
-    }
+  create(path: Path, content: Buffer): void {
+    this._create(path, content);
+  }
+  delete(path: Path): void {
+    this._delete(path);
+  }
+  rename(from: Path, to: Path): void {
+    this._rename(from, to);
+  }
 
-    this._actions.create(normalize(path), content);
-  }
-  delete(path: string): void {
-    this._actions.delete(normalize(path));
-  }
-  rename(from: string, to: string): void {
-    this._actions.rename(normalize(from), normalize(to));
-  }
+  // Version management.
+  abstract readonly version: number | null;
 }

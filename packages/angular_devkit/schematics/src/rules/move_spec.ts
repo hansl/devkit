@@ -9,7 +9,7 @@
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import { SchematicContext } from '../engine/interface';
-import { VirtualTree } from '../tree/virtual';
+import { InMemorySimpleTree } from '../tree/memory';
 import { callRule } from './call';
 import { move } from './move';
 
@@ -19,7 +19,7 @@ const context: SchematicContext = null !;
 
 describe('move', () => {
   it('works on moving the whole structure', done => {
-    const tree = new VirtualTree();
+    const tree = new InMemorySimpleTree();
     tree.create('a/b/file1', 'hello world');
     tree.create('a/b/file2', 'hello world');
     tree.create('a/c/file3', 'hello world');
@@ -35,7 +35,7 @@ describe('move', () => {
   });
 
   it('works on moving a subdirectory structure', done => {
-    const tree = new VirtualTree();
+    const tree = new InMemorySimpleTree();
     tree.create('a/b/file1', 'hello world');
     tree.create('a/b/file2', 'hello world');
     tree.create('a/c/file3', 'hello world');

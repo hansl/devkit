@@ -13,6 +13,8 @@ import {
   join,
   normalize,
   relative,
+  rest,
+  rootname,
   split,
 } from './path';
 
@@ -142,9 +144,26 @@ describe('path', () => {
 
   it('dirname', () => {
     expect(dirname(normalize('a'))).toBe('');
+    expect(dirname(normalize('/a'))).toBe('/');
+    expect(dirname(normalize('/'))).toBe('/');
     expect(dirname(normalize('/a/b/c'))).toBe('/a/b');
     expect(dirname(normalize('./c'))).toBe('');
     expect(dirname(normalize('./a/b/c'))).toBe('a/b');
+  });
+
+  it('rootname', () => {
+    expect(rootname(normalize('a'))).toBe('');
+    expect(rootname(normalize('./c'))).toBe('');
+    expect(rootname(normalize('/a/b/c'))).toBe('a');
+    expect(rootname(normalize('a/b/c'))).toBe('a');
+  });
+
+  it('rest', () => {
+    expect(rest(normalize('a'))).toBe('');
+    expect(rest(normalize('a/'))).toBe('');
+    expect(rest(normalize('a/b'))).toBe('b');
+    expect(rest(normalize('/a'))).toBe('a');
+    expect(rest(normalize('/a/b'))).toBe('a/b');
   });
 
   it('basename', () => {

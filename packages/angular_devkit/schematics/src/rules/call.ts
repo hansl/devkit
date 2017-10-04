@@ -8,8 +8,7 @@
 import { BaseException } from '@angular-devkit/core';
 import { Observable } from 'rxjs/Observable';
 import { Rule, SchematicContext, Source } from '../engine/interface';
-import { Tree } from '../tree/interface';
-import { VirtualTree } from '../tree/virtual';
+import { Tree, TreeSymbol } from '../tree/interface';
 
 
 /**
@@ -43,7 +42,7 @@ export class InvalidRuleResultException extends BaseException {
 export function callSource(source: Source, context: SchematicContext): Observable<Tree> {
   const result = source(context);
 
-  if (result instanceof VirtualTree) {
+  if (result && TreeSymbol in result) {
     return Observable.of(result);
   } else if (result instanceof Observable) {
     return result;
@@ -59,7 +58,7 @@ export function callRule(rule: Rule,
   return input.mergeMap(inputTree => {
     const result = rule(inputTree, context);
 
-    if (result instanceof VirtualTree) {
+    if (result && TreeSymbol in result) {
       return Observable.of(result as Tree);
     } else if (result instanceof Observable) {
       return result;
