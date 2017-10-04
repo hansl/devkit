@@ -13,7 +13,6 @@ import {
   PathFragment,
   basename,
   dirname,
-  join,
   normalize,
   rest,
   rootname,
@@ -50,12 +49,16 @@ export abstract class SimpleDirEntryBase implements DirEntry {
 export abstract class SimpleTreeBase implements Tree {
   abstract get base(): Tree | null;
   abstract get root(): DirEntry;
-  abstract get staging(): Staging;
+  abstract protected get _staging(): Staging | null;
 
   get [TreeSymbol]() { return true; }
 
   protected _normalize(path: string) {
     return normalize('/' + path);
+  }
+
+  get staging() {
+
   }
 
   getDir(path: Path) {

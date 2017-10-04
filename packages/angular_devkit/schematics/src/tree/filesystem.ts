@@ -43,7 +43,7 @@ export class FileSystemDirEntry extends SimpleDirEntryBase {
 
   subdirs(): PathFragment[] {
     const subdirs = new Set<PathFragment>(this._subdirs.keys());
-    const i = this.path == '/' ? 0 : this.path.length;
+    const i = this.path == '/' ? 1 : this.path.length + 1;
 
     const host = this._tree.host;
     host.listDirectory(this._system).forEach(p => {
