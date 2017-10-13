@@ -5,6 +5,7 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// tslint:disable:non-null-operator
 import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
 import * as path from 'path';
@@ -102,5 +103,20 @@ describe('Application Schematic', () => {
     const tree = schematicRunner.runSchematic('application', options);
     const files = tree.files;
     expect(files.indexOf('/foo/.gitignore')).toEqual(-1);
+  });
+
+  it('should handle the ng-next flag', () => {
+    const tree = schematicRunner.runSchematic('application', { ...defaultOptions, ngNext: true });
+    const packageJson = tree.read('/foo/package.json');
+    expect(packageJson).not.toBeNull();
+
+    const json = JSON.parse(packageJson !.toString());
+    const deps = { ...json.dependencies, ...json.devDependencies };
+    Object.keys(deps)
+      .forEach(name => {
+        if (name.startsWith('@angular/') && name !== '@angular/cli') {
+          expect(deps[name]).toMatch(/\^5.0.0/);
+        }
+      });
   });
 });

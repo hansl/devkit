@@ -79,6 +79,11 @@
       "description": "Should create a minimal app.",
       "type": "boolean",
       "default": false
+    },
+    "ngNext": {
+      "description": "Create an application that uses the @next version of Angular.",
+      "type": "boolean",
+      "default": false
     }
   },
   "required": [

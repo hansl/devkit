@@ -52,4 +52,8 @@ export interface Schema {
      * Should create a minimal app.
      */
     minimal?: boolean;
+    /**
+     * Create an application that uses the @next version of Angular.
+     */
+    ngNext?: boolean;
 }

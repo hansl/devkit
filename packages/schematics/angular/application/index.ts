@@ -98,6 +98,7 @@ export default function (options: ApplicationOptions): Rule {
           template({
             utils: stringUtils,
             'dot': '.',
+            angularVersion: options.ngNext ? '^5.0.0-rc.2' : '^4.2.4',
             ...options as object,
           }),
           move(options.directory),
