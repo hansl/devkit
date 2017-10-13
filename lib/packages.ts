@@ -14,8 +14,9 @@ import * as path from 'path';
 import * as ts from 'typescript';
 
 const glob = require('glob');
-const distRoot = path.join(__dirname, '../dist');
 const { packages: monorepoPackages } = require('../.monorepo.json');
+
+export const distRoot = path.join(__dirname, '../dist');
 
 
 export interface PackageInfo {
@@ -136,7 +137,7 @@ function _findAllPackageJson(dir: string, exclude: RegExp): string[] {
 
 
 const tsConfigPath = path.join(__dirname, '../tsconfig.json');
-const tsConfig = ts.readConfigFile(tsConfigPath, ts.sys.readFile);
+export const tsConfig = ts.readConfigFile(tsConfigPath, ts.sys.readFile);
 const pattern = '^('
   + (tsConfig.config.exclude as string[])
     .map(ex => path.join(path.dirname(tsConfigPath), ex))
