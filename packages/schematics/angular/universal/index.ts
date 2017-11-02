@@ -20,17 +20,17 @@ import {
 import 'rxjs/add/operator/merge';
 import * as ts from 'typescript';
 import * as stringUtils from '../strings';
-import { findNode, getDecoratorMetadata, getSourceNodes } from '../utility/ast-utils';
+import { findNode, getDecoratorMetadata } from '../utility/ast-utils';
 import { InsertChange } from '../utility/change';
 import { AppConfig, getAppFromConfig, getConfig } from '../utility/config';
-import { findBootstrapModuleCall } from '../utility/ng-ast-utils';
+import { findBootstrapModuleCall, findBootstrapModulePath } from '../utility/ng-ast-utils';
 import { Schema as UniversalOptions } from './schema';
 
 
 function updateConfigFile(options: UniversalOptions): Rule {
   return (host: Tree) => {
     const config = getConfig(host);
-    const clientApp = getAppFromConfig(config, options.clientApp);
+    const clientApp = getAppFromConfig(config, options.clientApp || '0');
     if (clientApp === null) {
       throw new SchematicsException('Client app not found.');
     }
@@ -46,6 +46,9 @@ function updateConfigFile(options: UniversalOptions): Rule {
       tsconfig: options.tsconfigFileName,
       testTsconfig: options.testTsconfigFileName,
     };
+    if (options.name) {
+      serverApp.name = options.name;
+    }
     if (!config.apps) {
       config.apps = [];
     }
@@ -55,35 +58,6 @@ function updateConfigFile(options: UniversalOptions): Rule {
 
     return host;
   };
-}
-
-function findBootstrapModulePath(host: Tree, mainPath: string): string {
-  const bootstrapCall = findBootstrapModuleCall(host, mainPath);
-  if (!bootstrapCall) {
-    throw new SchematicsException('Bootstrap call not found');
-  }
-
-  const bootstrapModule = bootstrapCall.arguments[0];
-
-  const mainBuffer = host.read(mainPath);
-  if (!mainBuffer) {
-    throw new SchematicsException(`Client app main file (${mainPath}) not found`);
-  }
-  const mainText = mainBuffer.toString('utf-8');
-  const source = ts.createSourceFile(mainPath, mainText, ts.ScriptTarget.Latest, true);
-  const allNodes = getSourceNodes(source);
-  const bootstrapModuleRelativePath = allNodes
-    .filter(node => node.kind === ts.SyntaxKind.ImportDeclaration)
-    .filter(imp => {
-      return findNode(imp, ts.SyntaxKind.Identifier, bootstrapModule.getText());
-    })
-    .map((imp: ts.ImportDeclaration) => {
-      const modulePathStringLiteral = <ts.StringLiteral> imp.moduleSpecifier;
-
-      return modulePathStringLiteral.text;
-    })[0];
-
-  return bootstrapModuleRelativePath;
 }
 
 function findBrowserModuleImport(host: Tree, modulePath: string): ts.Node {
@@ -108,7 +82,7 @@ function findBrowserModuleImport(host: Tree, modulePath: string): ts.Node {
 function wrapBootstrapCall(options: UniversalOptions): Rule {
   return (host: Tree) => {
     const config = getConfig(host);
-    const clientApp = getAppFromConfig(config, options.clientApp);
+    const clientApp = getAppFromConfig(config, options.clientApp || '0');
     if (clientApp === null) {
       throw new SchematicsException('Client app not found.');
     }
@@ -140,7 +114,7 @@ function wrapBootstrapCall(options: UniversalOptions): Rule {
 function addServerTransition(options: UniversalOptions): Rule {
   return (host: Tree) => {
     const config = getConfig(host);
-    const clientApp = getAppFromConfig(config, options.clientApp);
+    const clientApp = getAppFromConfig(config, options.clientApp || '0');
     if (clientApp === null) {
       throw new SchematicsException('Client app not found.');
     }
