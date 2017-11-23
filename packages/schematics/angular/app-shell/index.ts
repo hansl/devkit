@@ -18,7 +18,7 @@ import 'rxjs/add/operator/merge';
 import * as ts from 'typescript';
 import {
   addImportToModule,
-  addToNgModuleMetadata,
+  addSymbolToNgModuleMetadata,
   findNode,
   getDecoratorMetadata,
   getSourceNodes,
@@ -250,14 +250,14 @@ function addServerRoutes(options: AppShellOptions): Rule {
         recorder.insertLeft(routerModuleChange.pos, routerModuleChange.toAdd);
         host.commitUpdate(recorder);
       }
-      const metadataChange = addToNgModuleMetadata(moduleSource,
-                                                   modulePath,
-                                                   'imports',
-                                                   'RouterModule.forRoot(routes)');
+      const metadataChange = addSymbolToNgModuleMetadata(
+        moduleSource, modulePath, 'imports', 'RouterModule.forRoot(routes)');
 
       if (metadataChange) {
         const recorder = host.beginUpdate(modulePath);
-        recorder.insertRight(metadataChange.pos, metadataChange.toAdd);
+        metadataChange.forEach((change: InsertChange) => {
+          recorder.insertRight(change.pos, change.toAdd);
+        });
         host.commitUpdate(recorder);
       }
     }

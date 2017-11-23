@@ -233,138 +233,13 @@ export function getDecoratorMetadata(source: ts.SourceFile, identifier: string,
     .map(expr => expr.arguments[0] as ts.ObjectLiteralExpression);
 }
 
-export function addToNgModuleMetadata(source: ts.SourceFile,
-                                      ngModulePath: string,
-                                      metadataField: string,
-                                      insertText: string): InsertChange | null {
-  const nodes = getDecoratorMetadata(source, 'NgModule', '@angular/core');
-  let node: any = nodes[0];  // tslint:disable-line:no-any
-
-  // Find the decorator declaration.
-  if (!node) {
-    return null;
-  }
-
-  // Get all the children property assignment of object literals.
-  const matchingProperties: ts.ObjectLiteralElement[] =
-    (node as ts.ObjectLiteralExpression).properties
-    .filter(prop => prop.kind == ts.SyntaxKind.PropertyAssignment)
-    // Filter out every fields that's not "metadataField". Also handles string literals
-    // (but not expressions).
-    .filter((prop: ts.PropertyAssignment) => {
-      const name = prop.name;
-      switch (name.kind) {
-        case ts.SyntaxKind.Identifier:
-          return (name as ts.Identifier).getText(source) == metadataField;
-        case ts.SyntaxKind.StringLiteral:
-          return (name as ts.StringLiteral).text == metadataField;
-      }
-
-      return false;
-    });
-
-  // Get the last node of the array literal.
-  if (!matchingProperties) {
-    return null;
-  }
-  if (matchingProperties.length == 0) {
-    // We haven't found the field in the metadata declaration. Insert a new field.
-    const expr = node as ts.ObjectLiteralExpression;
-    let position: number;
-    let toInsert: string;
-    if (expr.properties.length == 0) {
-      position = expr.getEnd() - 1;
-      toInsert = `  ${metadataField}: [${insertText}]\n`;
-    } else {
-      node = expr.properties[expr.properties.length - 1];
-      position = node.getEnd();
-      // Get the indentation of the last element, if any.
-      const text = node.getFullText(source);
-      const matches = text.match(/^\r?\n\s*/);
-      if (matches.length > 0) {
-        toInsert = `,${matches[0]}${metadataField}: [${insertText}]`;
-      } else {
-        toInsert = `, ${metadataField}: [${insertText}]`;
-      }
-    }
-    const newMetadataProperty = new InsertChange(ngModulePath, position, toInsert);
-
-    return newMetadataProperty;
-  }
-
-  const assignment = matchingProperties[0] as ts.PropertyAssignment;
-
-  // If it's not an array, nothing we can do really.
-  if (assignment.initializer.kind !== ts.SyntaxKind.ArrayLiteralExpression) {
-    return null;
-  }
-
-  const arrLiteral = assignment.initializer as ts.ArrayLiteralExpression;
-  if (arrLiteral.elements.length == 0) {
-    // Forward the property.
-    node = arrLiteral;
-  } else {
-    node = arrLiteral.elements;
-  }
-
-  if (!node) {
-    console.log('No app module found. Please add your new class to your component.');
-
-    return null;
-  }
-
-  if (Array.isArray(node)) {
-    const nodeArray = node as {} as Array<ts.Node>;
-    const symbolsArray = nodeArray.map(node => node.getText());
-    if (symbolsArray.includes(insertText)) {
-      return null;
-    }
-
-    node = node[node.length - 1];
-  }
-
-  let toInsert: string;
-  let position = node.getEnd();
-  if (node.kind == ts.SyntaxKind.ObjectLiteralExpression) {
-    // We haven't found the field in the metadata declaration. Insert a new
-    // field.
-    const expr = node as ts.ObjectLiteralExpression;
-    if (expr.properties.length == 0) {
-      position = expr.getEnd() - 1;
-      toInsert = `  ${metadataField}: [${insertText}]\n`;
-    } else {
-      node = expr.properties[expr.properties.length - 1];
-      position = node.getEnd();
-      // Get the indentation of the last element, if any.
-      const text = node.getFullText(source);
-      if (text.match('^\r?\r?\n')) {
-        toInsert = `,${text.match(/^\r?\n\s+/)[0]}${metadataField}: [${insertText}]`;
-      } else {
-        toInsert = `, ${metadataField}: [${insertText}]`;
-      }
-    }
-  } else if (node.kind == ts.SyntaxKind.ArrayLiteralExpression) {
-    // We found the field but it's empty. Insert it just before the `]`.
-    position--;
-    toInsert = `${insertText}`;
-  } else {
-    // Get the indentation of the last element, if any.
-    const text = node.getFullText(source);
-    if (text.match(/^\r?\n/)) {
-      position = node.getEnd() + text.length - 3;
-      toInsert = `,${text.match(/^\r?\n(\r?)\s+/)[0]}${insertText}`;
-    } else {
-      toInsert = `, ${insertText}`;
-    }
-  }
-  const insert = new InsertChange(ngModulePath, position, toInsert);
-
-  return insert;
-}
-
-function _addSymbolToNgModuleMetadata(source: ts.SourceFile,
-                                      ngModulePath: string, metadataField: string,
-                                      symbolName: string, importPath: string): Change[] {
+export function addSymbolToNgModuleMetadata(
+  source: ts.SourceFile,
+  ngModulePath: string,
+  metadataField: string,
+  symbolName: string,
+  importPath: string | null = null,
+): Change[] {
   const nodes = getDecoratorMetadata(source, 'NgModule', '@angular/core');
   let node: any = nodes[0];  // tslint:disable-line:no-any
 
@@ -415,13 +290,16 @@ function _addSymbolToNgModuleMetadata(source: ts.SourceFile,
         toInsert = `, ${metadataField}: [${symbolName}]`;
       }
     }
-    const newMetadataProperty = new InsertChange(ngModulePath, position, toInsert);
-    const newMetadataImport = insertImport(source,
-      ngModulePath, symbolName.replace(/\..*$/, ''), importPath);
 
-    return [newMetadataProperty, newMetadataImport];
+    if (importPath !== null) {
+      return [
+        new InsertChange(ngModulePath, position, toInsert),
+        insertImport(source, ngModulePath, symbolName.replace(/\..*$/, ''), importPath),
+      ];
+    } else {
+      return [new InsertChange(ngModulePath, position, toInsert)];
+    }
   }
-
   const assignment = matchingProperties[0] as ts.PropertyAssignment;
 
   // If it's not an array, nothing we can do really.
@@ -486,11 +364,15 @@ function _addSymbolToNgModuleMetadata(source: ts.SourceFile,
       toInsert = `, ${symbolName}`;
     }
   }
-  const insert = new InsertChange(ngModulePath, position, toInsert);
-  const importInsert: Change = insertImport(source,
-    ngModulePath, symbolName.replace(/\..*$/, ''), importPath);
 
-  return [insert, importInsert];
+  if (importPath !== null) {
+    return [
+      new InsertChange(ngModulePath, position, toInsert),
+      insertImport(source, ngModulePath, symbolName.replace(/\..*$/, ''), importPath),
+    ];
+  }
+
+  return [new InsertChange(ngModulePath, position, toInsert)];
 }
 
 /**
@@ -500,8 +382,8 @@ function _addSymbolToNgModuleMetadata(source: ts.SourceFile,
 export function addDeclarationToModule(source: ts.SourceFile,
                                        modulePath: string, classifiedName: string,
                                        importPath: string): Change[] {
-  return _addSymbolToNgModuleMetadata(source, modulePath, 'declarations', classifiedName,
-    importPath);
+  return addSymbolToNgModuleMetadata(
+    source, modulePath, 'declarations', classifiedName, importPath);
 }
 
 /**
@@ -511,7 +393,7 @@ export function addImportToModule(source: ts.SourceFile,
                                   modulePath: string, classifiedName: string,
                                   importPath: string): Change[] {
 
-  return _addSymbolToNgModuleMetadata(source, modulePath, 'imports', classifiedName, importPath);
+  return addSymbolToNgModuleMetadata(source, modulePath, 'imports', classifiedName, importPath);
 }
 
 /**
@@ -520,7 +402,7 @@ export function addImportToModule(source: ts.SourceFile,
 export function addProviderToModule(source: ts.SourceFile,
                                     modulePath: string, classifiedName: string,
                                     importPath: string): Change[] {
-  return _addSymbolToNgModuleMetadata(source, modulePath, 'providers', classifiedName, importPath);
+  return addSymbolToNgModuleMetadata(source, modulePath, 'providers', classifiedName, importPath);
 }
 
 /**
@@ -529,7 +411,7 @@ export function addProviderToModule(source: ts.SourceFile,
 export function addExportToModule(source: ts.SourceFile,
                                   modulePath: string, classifiedName: string,
                                   importPath: string): Change[] {
-  return _addSymbolToNgModuleMetadata(source, modulePath, 'exports', classifiedName, importPath);
+  return addSymbolToNgModuleMetadata(source, modulePath, 'exports', classifiedName, importPath);
 }
 
 /**
@@ -538,7 +420,7 @@ export function addExportToModule(source: ts.SourceFile,
 export function addBootstrapToModule(source: ts.SourceFile,
                                      modulePath: string, classifiedName: string,
                                      importPath: string): Change[] {
-  return _addSymbolToNgModuleMetadata(source, modulePath, 'bootstrap', classifiedName, importPath);
+  return addSymbolToNgModuleMetadata(source, modulePath, 'bootstrap', classifiedName, importPath);
 }
 
 /**

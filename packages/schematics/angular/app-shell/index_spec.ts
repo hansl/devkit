@@ -65,7 +65,7 @@ describe('App Shell Schematic', () => {
     const tree = schematicRunner.runSchematic('appShell', defaultOptions, appTree);
     const filePath = '/src/app/app.module.ts';
     const content = tree.read(filePath) || new Buffer('');
-    expect(content).toMatch(/import { RouterModule } from \'@angular\/router\';/);
+    expect(content.toString()).toMatch(/import { RouterModule } from \'@angular\/router\';/);
   });
 
   describe('Add routerOutlet', () => {
