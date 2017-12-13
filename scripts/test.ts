@@ -12,7 +12,7 @@ import 'jasmine';
 import { SpecReporter as JasmineSpecReporter } from 'jasmine-spec-reporter';
 import { ParsedArgs } from 'minimist';
 import { join, relative } from 'path';
-import { SourceMapConsumer } from 'source-map';
+import { Position, SourceMapConsumer } from 'source-map';
 import * as ts from 'typescript';
 import { packages } from '../lib/packages';
 
@@ -24,6 +24,11 @@ require('source-map-support').install({
   hookRequire: true,
 });
 
+
+interface CoverageLocation {
+  start: Position;
+  end: Position;
+}
 
 type CoverageType = any;  // tslint:disable-line:no-any
 declare const global: {

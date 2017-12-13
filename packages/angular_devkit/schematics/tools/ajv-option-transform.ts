@@ -102,7 +102,7 @@ function _visitJsonSchema(schema: JsonObject, visitor: JsonVisitor) {
 
 export class AjvSchemaRegistry implements OptionsSchemaRegistry {
   private _ajv: ajv.Ajv;
-  private _uriCache = new Map<string, string>();
+  private _uriCache = new Map<string, JsonObject>();
 
   constructor() {
     /**
@@ -185,14 +185,14 @@ export class AjvSchemaRegistry implements OptionsSchemaRegistry {
     });
   }
 
-  private _fetch(uri: string) {
+  private _fetch(uri: string): Promise<JsonObject> {
     const maybeSchema = this._uriCache.get(uri);
 
     if (maybeSchema) {
-      return Promise.resolve(JSON.parse(maybeSchema));
+      return Promise.resolve(maybeSchema);
     }
 
-    return new Promise<object>((resolve, reject) => {
+    return new Promise<JsonObject>((resolve, reject) => {
       http.get(uri, res => {
         if (!res.statusCode || res.statusCode >= 300) {
           // Consume the rest of the data to free memory.
@@ -206,15 +206,16 @@ export class AjvSchemaRegistry implements OptionsSchemaRegistry {
           });
           res.on('end', () => {
             try {
-              this._uriCache.set(uri, data);
-              resolve(JSON.parse(data));
+              const json = JSON.parse(data);
+              this._uriCache.set(uri, json);
+              resolve(json);
             } catch (err) {
               reject(err);
             }
           });
         }
       });
-    }) as ajv.Thenable<Object>;
+    });
   }
 
   compile(schema: Object): Observable<OptionsSchemaValidator> {
