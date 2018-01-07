@@ -40,7 +40,7 @@ interface ChokidarWatcher {
   close(): void;
 }
 
-const { FSWatcher }: { FSWatcher: ChokidarWatcher } = require('chokidar');
+let FSWatcher: ChokidarWatcher | null = null;
 
 
 type FsFunction0<R> = (cb: (err?: Error, result?: R) => void) => void;
@@ -189,6 +189,9 @@ export class NodeJsAsyncHost implements virtualFs.Host<fs.Stats> {
     _options?: virtualFs.HostWatchOptions,
   ): Observable<virtualFs.HostWatchEvent> | null {
     return new Observable<virtualFs.HostWatchEvent>(obs => {
+      if (!FSWatcher) {
+        FSWatcher = require('chokidar').FSWatcher;
+      }
       const watcher = new FSWatcher({ persistent: true }).add(this._getSystemPath(path));
 
       watcher
@@ -311,6 +314,9 @@ export class NodeJsSyncHost implements virtualFs.Host<fs.Stats> {
   ): Observable<virtualFs.HostWatchEvent> | null {
     return new Observable<virtualFs.HostWatchEvent>(obs => {
       const opts = { persistent: false };
+      if (!FSWatcher) {
+        FSWatcher = require('chokidar').FSWatcher;
+      }
       const watcher = new FSWatcher(opts).add(this._getSystemPath(path));
 
       watcher
