@@ -22,6 +22,11 @@ export function externalSchematic<OptionT extends object>(collectionName: string
                                                           schematicName: string,
                                                           options: OptionT): Rule {
   return (input: Tree, context: SchematicContext) => {
+    if (context.debug) {
+      context.logger.debug(`externalSchematic(${JSON.stringify(collectionName)}, ${JSON.stringify(schematicName)}, ...)`);
+      context = { ...context, logger: context.logger.createChild('chain') };
+    }
+
     const collection = context.engine.createCollection(collectionName);
     const schematic = collection.createSchematic(schematicName);
 
@@ -38,6 +43,11 @@ export function externalSchematic<OptionT extends object>(collectionName: string
  */
 export function schematic<OptionT extends object>(schematicName: string, options: OptionT): Rule {
   return (input: Tree, context: SchematicContext) => {
+    if (context.debug) {
+      context.logger.debug(`schematic(${JSON.stringify(schematicName)}, ...)`);
+      context = { ...context, logger: context.logger.createChild('chain') };
+    }
+
     const collection = context.schematic.collection;
     const schematic = collection.createSchematic(schematicName);
 

@@ -43,6 +43,10 @@ export function empty(): Source {
  */
 export function chain(rules: Rule[]): Rule {
   return (tree: Tree, context: SchematicContext) => {
+    if (context.debug) {
+      context.logger.debug('chain([...])');
+      context = { ...context, logger: context.logger.createChild('chain') };
+    }
     return rules.reduce((acc: Observable<Tree>, curr: Rule) => {
       return callRule(curr, acc, context);
     }, Observable.of(tree));
@@ -55,6 +59,10 @@ export function chain(rules: Rule[]): Rule {
  */
 export function apply(source: Source, rules: Rule[]): Source {
   return (context: SchematicContext) => {
+    if (context.debug) {
+      context.logger.debug('apply([...])');
+      context = { ...context, logger: context.logger.createChild('chain') };
+    }
     return callRule(chain(rules), callSource(source, context), context);
   };
 }
