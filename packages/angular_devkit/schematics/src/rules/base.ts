@@ -20,6 +20,7 @@ import {
 } from '../tree/static';
 import { VirtualTree } from '../tree/virtual';
 import { callRule, callSource } from './call';
+import { printRuleDebugInfo } from './utils/debug';
 
 
 /**
@@ -42,9 +43,22 @@ export function empty(): Source {
  * Chain multiple rules into a single rule.
  */
 export function chain(rules: Rule[]): Rule {
+  if (rules.length == 0) {
+    return (tree: Tree, context: SchematicContext) => {
+      if (context.debug) {
+        context.logger.warn('@schematics: chain() without any rules is unnecessary.');
+      }
+
+      return tree;
+    };
+  }
+
   return (tree: Tree, context: SchematicContext) => {
     if (context.debug) {
-      context.logger.debug('chain([...])');
+      if (rules.length == 1) {
+        context.logger.warn('@schematics: chain() with a single rule is redundant.');
+      }
+      printRuleDebugInfo(context, 'chain', rules);
       context = { ...context, logger: context.logger.createChild('chain') };
     }
     return rules.reduce((acc: Observable<Tree>, curr: Rule) => {
@@ -60,7 +74,7 @@ export function chain(rules: Rule[]): Rule {
 export function apply(source: Source, rules: Rule[]): Source {
   return (context: SchematicContext) => {
     if (context.debug) {
-      context.logger.debug('apply([...])');
+      printRuleDebugInfo(context, 'apply', source, rules);
       context = { ...context, logger: context.logger.createChild('chain') };
     }
     return callRule(chain(rules), callSource(source, context), context);
@@ -73,6 +87,11 @@ export function apply(source: Source, rules: Rule[]): Source {
  */
 export function mergeWith(source: Source, strategy: MergeStrategy = MergeStrategy.Default): Rule {
   return (tree: Tree, context: SchematicContext) => {
+    if (context.debug) {
+      printRuleDebugInfo(context, 'mergeWith', source, MergeStrategy[strategy]);
+      context = { ...context, logger: context.logger.createChild('chain') };
+    }
+
     const result = callSource(source, context);
 
     return result.map(other => VirtualTree.merge(tree, other, strategy || context.strategy));
@@ -86,7 +105,13 @@ export function noop(): Rule {
 
 
 export function filter(predicate: FilePredicate<boolean>): Rule {
-  return (tree: Tree) => new FilteredTree(tree, predicate);
+  return (tree: Tree) => {
+    if (context.debug) {
+      context.logger.debug('filter([...])');
+    }
+
+    return new FilteredTree(tree, predicate);
+  }
 }
 
 
@@ -97,6 +122,11 @@ export function asSource(rule: Rule): Source {
 
 export function branchAndMerge(rule: Rule, strategy = MergeStrategy.Default): Rule {
   return (tree: Tree, context: SchematicContext) => {
+    if (context.debug) {
+      printRuleDebugInfo(context, 'branchAndMerge', rule, MergeStrategy[strategy]);
+      context = { ...context, logger: context.logger.createChild('branchAndMerge') };
+    }
+
     const branchedTree = branch(tree);
 
     return callRule(rule, Observable.of(branchedTree), context)

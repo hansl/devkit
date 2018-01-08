@@ -6,17 +6,13 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { normalize } from '@angular-devkit/core';
-import { FileOperator, Rule } from '../engine/interface';
+import { FileOperator, Rule, SchematicContext, Tree } from '../engine/interface';
 import { FileEntry } from '../tree/interface';
 import { forEach } from './base';
+import { printRuleDebugInfo } from './utils/debug';
 
 
-export function moveOp(from: string, to?: string): FileOperator {
-  if (to === undefined) {
-    to = from;
-    from = '/';
-  }
-
+export function moveOp(from: string, to: string): FileOperator {
   const fromPath = normalize('/' + from);
   const toPath = normalize('/' + to);
 
@@ -34,5 +30,15 @@ export function moveOp(from: string, to?: string): FileOperator {
 
 
 export function move(from: string, to?: string): Rule {
-  return forEach(moveOp(from, to));
+  if (to === undefined) {
+    to = from;
+    from = '/';
+  }
+
+  return (tree: Tree, context: SchematicContext) => {
+    if (context.debug) {
+      printRuleDebugInfo(context, 'move', from, to);
+    }
+    return forEach(moveOp(from, to))(tree, context);
+  };
 }
