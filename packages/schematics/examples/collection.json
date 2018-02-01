@@ -1,0 +1,9 @@
+{
+  "schematics": {
+    "lint": {
+      "factory": "./lint/factory",
+      "schema": "./lint/schema.json",
+      "description": "Run lint on your project."
+    }
+  }
+}
