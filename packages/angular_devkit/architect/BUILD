@@ -10,17 +10,18 @@ load("//tools:defaults.bzl", "ts_library", "jasmine_node_test")
 package(default_visibility = ["//visibility:public"])
 
 ts_library(
-    name = "build_optimizer",
+    name = "architect",
     srcs = glob(
-        include = ["**/*.ts"],
+        ["**/*.ts"],
         exclude = [
             "**/*_spec.ts",
         ],
     ),
-    tsconfig = "//:tsconfig.json",
     deps = [
         "//packages/angular_devkit/core",
+        "//packages/angular_devkit/core:node",
     ],
+    data = glob(["src/**/*.json"])
 )
 
 ts_library(
@@ -29,8 +30,9 @@ ts_library(
         include = ["**/*_spec.ts"],
     ),
     deps = [
-        ":build_optimizer",
+        ":architect",
         "//packages/angular_devkit/core",
+        "//packages/angular_devkit/core:node",
     ],
 )
 

@@ -120,13 +120,29 @@ export function setResolveHook(
 
 /**
  * Resolve a package using a logic similar to npm require.resolve, but with more options.
- * @param x The package name to resolve.
+ * @param what The package name to resolve.
  * @param options A list of options. See documentation of those options.
  * @returns {string} Path to the index to include, or if `resolvePackageJson` option was
  *                   passed, a path to that file.
  * @throws {ModuleNotFoundException} If no module with that name was found anywhere.
  */
-export function resolve(x: string, options: ResolveOptions): string {
+export function resolve(what: string, options?: ResolveOptions): string {
+  let result = _resolve(what, options || { basedir: process.cwd() });
+
+  if (options && options.preserveSymlinks === false) {
+    try {
+      result = fs.realpathSync(result);
+    } catch (err) {
+      if (err.code !== 'ENOENT') {
+        throw err;
+      }
+    }
+  }
+
+  return result;
+}
+
+export function _resolve(x: string, options: ResolveOptions): string {
   if (_resolveHook) {
     const maybe = _resolveHook(x, options);
     if (maybe) {
@@ -263,17 +279,7 @@ export function resolve(x: string, options: ResolveOptions): string {
 
     // ensure that `start` is an absolute path at this point,
     // resolving against the process' current working directory
-    let absoluteStart = path.resolve(start);
-
-    if (opts && opts.preserveSymlinks === false) {
-      try {
-        absoluteStart = fs.realpathSync(absoluteStart);
-      } catch (err) {
-        if (err.code !== 'ENOENT') {
-          throw err;
-        }
-      }
-    }
+    const absoluteStart = path.resolve(start);
 
     let prefix = '/';
     if (/^([A-Za-z]:)/.test(absoluteStart)) {

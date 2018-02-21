@@ -9,6 +9,7 @@
 export class BaseException extends Error {
   constructor(message = '') {
     super(message);
+    Object.setPrototypeOf(this, new.target.prototype);
   }
 }
 

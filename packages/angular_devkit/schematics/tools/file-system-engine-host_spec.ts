@@ -12,13 +12,14 @@ import { FileSystemEngineHost } from '@angular-devkit/schematics/tools';
 import * as path from 'path';
 
 describe('FileSystemEngineHost', () => {
-  const devkitRoot = (global as any)._DevKitRoot;
-  const root = path.join(
-    devkitRoot,
-    'tests/@angular_devkit/schematics/tools/file-system-engine-host',
+  const root = path.dirname(
+    require.resolve(
+      'angular_devkit/tests/angular_devkit/schematics/tools/file-system-engine-host/index.js',
+    ),
   );
 
   it('works', () => {
+    debugger;
     const engineHost = new FileSystemEngineHost(root);
     const engine = new SchematicEngine(engineHost);
 

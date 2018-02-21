@@ -8,14 +8,14 @@
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { RuleFactory } from '../src';
+import { FileSystemCollectionDesc, FileSystemSchematicDesc } from './description';
+import { ExportStringRef } from './export-ref';
 import {
   CollectionCannotBeResolvedException,
   CollectionMissingSchematicsMapException,
+  FileSystemEngineHostBase,
   SchematicMissingFieldsException,
-} from '../tools';
-import { FileSystemCollectionDesc, FileSystemSchematicDesc } from './description';
-import { ExportStringRef } from './export-ref';
-import { FileSystemEngineHostBase } from './file-system-engine-host-base';
+} from './file-system-engine-host-base';
 
 
 /**
@@ -42,6 +42,8 @@ export class FileSystemEngineHost extends FileSystemEngineHostBase {
   protected _resolveReferenceString(refString: string, parentPath: string) {
     // Use the same kind of export strings as NodeModule.
     const ref = new ExportStringRef<RuleFactory<{}>>(refString, parentPath);
+    console.log(0, refString, parentPath);
+    console.log(1, !!ref.ref, ref.module);
     if (!ref.ref) {
       return null;
     }

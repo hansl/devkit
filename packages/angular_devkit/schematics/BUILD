@@ -4,7 +4,7 @@
 # found in the LICENSE file at https://angular.io/license
 package(default_visibility = ["//visibility:public"])
 
-load("//tools:defaults.bzl", "ts_library")
+load("//tools:defaults.bzl", "ts_library", "jasmine_node_test")
 
 licenses(["notice"])  # MIT License
 
@@ -83,27 +83,26 @@ ts_library(
 )
 
 ts_library(
-    name = "spec",
+    name = "spec-lib",
     srcs = glob(
-        include = ["src/**/*_spec.ts"],
+        include = ["**/*_spec.ts"],
     ),
     deps = [
-        ":schematics",
-        "//packages/angular_devkit/core",
-        # @deps: rxjs
-        # @typings: jasmine
-    ],
+         ":schematics",
+         ":tasks",
+         ":testing",
+         ":tools",
+         "//packages/angular_devkit/core",
+         "//packages/angular_devkit/core:node",
+     ],
 )
 
-ts_library(
-    name = "tools_spec",
-    srcs = glob(
-        include = ["tools/**/*_spec.ts"],
-    ),
+jasmine_node_test(
+    name = "spec",
     deps = [
-        ":schematics",
-        ":tools",
-        # @deps: rxjs
-        # @typings: jasmine
+        ":spec-lib",
+    ],
+    data = [
+        "//tests"
     ],
 )

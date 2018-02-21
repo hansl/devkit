@@ -298,7 +298,11 @@ export class NodeJsSyncHost implements virtualFs.Host<fs.Stats> {
     _options?: virtualFs.HostWatchOptions,
   ): Observable<virtualFs.HostWatchEvent> | null {
     return new Observable<virtualFs.HostWatchEvent>(obs => {
-      const opts = { persistent: false };
+      const opts = {
+        persistent: false,
+        usePolling: true,
+        interval: 100,
+      };
       const watcher = new FSWatcher(opts).add(getSystemPath(path));
 
       watcher

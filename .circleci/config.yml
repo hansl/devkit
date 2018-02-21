@@ -38,8 +38,8 @@ jobs:
       - restore_cache:
           key: angular_devkit-{{ checksum "package-lock.json" }}
 
-      - run: npm install --no-save
-      - run: npm run test -- --code-coverage --full
+      - run: bazel run @nodejs//:npm install
+      - run: bazel test //packages/...
 
   integration:
     <<: *defaults

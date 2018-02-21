@@ -6,4 +6,11 @@ build --strategy=TypeScriptCompile=worker
 build --watchfs
 
 # Do not generate the symbolic links bazel-*.
-build --symlink_prefix=/
+build --symlink_prefix=dist/
+
+
+# Enable debugging tests with --config=debug
+test:debug --test_arg=--node_options=--inspect-brk --test_output=streamed --test_strategy=exclusive --test_timeout=9999 --nocache_test_results
+
+
+test --test_output=errors

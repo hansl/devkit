@@ -15,6 +15,12 @@ exports_files([
 # @external_begin
 filegroup(
     name = "node_modules",
-    srcs = glob(["node_modules/**/*"]),
+    srcs = glob(
+        include = ["node_modules/**/*"],
+        exclude = [
+            "node_modules/fileset/test/**/*",  # Contains a test file with a space in the name.
+            "node_modules/adm-zip/test/**/*",  # Ditto.
+        ]
+    ),
 )
 # @external_end
