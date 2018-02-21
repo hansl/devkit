@@ -11,29 +11,37 @@ import { join } from 'path';
 import { purify } from './purify';
 
 
-if (process.argv.length < 3 || process.argv.length > 4) {
-  throw new Error(`
-    purify should be called with either one or two arguments:
+function main(argv: string[]) {
+  if (argv.length < 1 || argv.length > 2) {
+    throw new Error(`
+      purify should be called with either one or two arguments:
+  
+        purify input.js
+        purify input.js output.js
+    `);
+  }
 
-      purify input.js
-      purify input.js output.js
-  `);
+  const currentDir = process.cwd();
+
+  const inputFile = argv[0];
+  const tsOrJsRegExp = /\.(j|t)s$/;
+
+  if (!inputFile.match(tsOrJsRegExp)) {
+    throw new Error(`Input file must be .js or .ts.`);
+  }
+
+  // Use provided output file, or add the .purify suffix before the extension.
+  const outputFile = argv[1]
+                     || inputFile.replace(tsOrJsRegExp, (subStr) => `.purify${subStr}`);
+
+  const purifyOutput = purify(readFileSync(join(currentDir, inputFile), 'UTF-8'));
+
+  writeFileSync(join(currentDir, outputFile), purifyOutput);
+  console.log(`Emitted: ${outputFile}`);
+
+  return 0;
 }
 
-const currentDir = process.cwd();
-
-const inputFile = process.argv[2];
-const tsOrJsRegExp = /\.(j|t)s$/;
-
-if (!inputFile.match(tsOrJsRegExp)) {
-  throw new Error(`Input file must be .js or .ts.`);
+if (require.main === module) {
+  process.exit(main(process.argv.slice(2)));
 }
-
-// Use provided output file, or add the .purify suffix before the extension.
-const outputFile = process.argv[3]
-  || inputFile.replace(tsOrJsRegExp, (subStr) => `.purify${subStr}`);
-
-const purifyOutput = purify(readFileSync(join(currentDir, inputFile), 'UTF-8'));
-
-writeFileSync(join(currentDir, outputFile), purifyOutput);
-console.log(`Emitted: ${outputFile}`);
