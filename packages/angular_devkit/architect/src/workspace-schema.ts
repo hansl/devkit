@@ -1,4 +1,4 @@
-{
+export default {
   "$schema": "http://json-schema.org/schema",
   "id": "BuildFacaceWorkspaceSchema",
   "title": "Workspace schema for validating a Architect workspace configuration file.",
@@ -103,4 +103,4 @@
       "description": "Target options."
     }
   }
-}
+};

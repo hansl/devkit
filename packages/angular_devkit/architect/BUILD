@@ -41,4 +41,7 @@ jasmine_node_test(
     deps = [
         ":spec-lib",
     ],
+    data = [
+        "//tests",
+    ],
 )

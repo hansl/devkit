@@ -9,7 +9,6 @@
 import { join, normalize } from '@angular-devkit/core';
 import { NodeJsSyncHost } from '@angular-devkit/core/node';
 import { concatMap, tap, toArray } from 'rxjs/operators';
-import { BrowserTargetOptions } from '../test/browser';
 import {
   Architect,
   BuilderCannotBeResolvedException,
@@ -19,6 +18,12 @@ import {
   TargetNotFoundException,
 } from './architect';
 import { Workspace } from './workspace';
+
+
+interface BrowserTargetOptions {
+  browserOption: number;
+  optimizationLevel: number;
+}
 
 
 describe('Architect', () => {
@@ -36,7 +41,7 @@ describe('Architect', () => {
         defaultTarget: 'browser',
         targets: {
           browser: {
-            builder: '../test:browser',
+            builder: ('angular_devkit/tests/angular_devkit/architect/test') + ':browser',
             options: {
               browserOption: 1,
             },
@@ -47,7 +52,7 @@ describe('Architect', () => {
             },
           },
           karma: {
-            builder: '../test:karma',
+            builder: ('angular_devkit/tests/angular_devkit/architect/test') + ':karma',
             options: {},
           },
         },
@@ -65,7 +70,6 @@ describe('Architect', () => {
         // Check options were composed properly.
         expect(target.root).toBe(join(root, 'app'));
         expect(target.projectType).toBe('application');
-        expect(target.builder).toBe('../test:browser');
         expect(options.browserOption).toBe(1);
 
         done();
@@ -89,7 +93,6 @@ describe('Architect', () => {
         // Check options were composed properly.
         expect(target.root).toBe(join(root, 'app'));
         expect(target.projectType).toBe('application');
-        expect(target.builder).toBe('../test:browser');
         expect(options.browserOption).toBe(1);
         expect(options.optimizationLevel).toBe(1);
 

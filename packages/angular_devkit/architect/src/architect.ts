@@ -26,6 +26,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { _throw } from 'rxjs/observable/throw';
 import { concatMap } from 'rxjs/operators';
+import buildersSchema from './builders-schema';
 import {
   BuildEvent,
   Builder,
@@ -35,7 +36,7 @@ import {
   BuilderMap,
 } from './builder';
 import { Workspace } from './workspace';
-
+import workspaceSchema from './workspace-schema';
 
 export class ProjectNotFoundException extends BaseException {
   constructor(name?: string) {
@@ -89,11 +90,9 @@ export interface TargetOptions<OptionsT = {}> {
 }
 
 export class Architect {
-  private readonly _workspaceSchema = join(normalize(__dirname), 'workspace-schema.json');
-  private readonly _buildersSchema = join(normalize(__dirname), 'builders-schema.json');
   private _workspace: Workspace;
 
-  constructor(private _root: Path, private _host: virtualFs.Host<{}>) { }
+  constructor(private _root: Path, private _host: virtualFs.Host<{}>) { debugger; }
 
   loadWorkspaceFromHost(workspacePath: Path) {
     return this._host.read(join(this._root, workspacePath)).pipe(
@@ -106,7 +105,7 @@ export class Architect {
   }
 
   loadWorkspaceFromJson(json: Workspace) {
-    return this._validateAgainstSchema(json, this._workspaceSchema).pipe(
+    return this._validateAgainstSchema(json, workspaceSchema).pipe(
       concatMap((validatedWorkspace: Workspace) => {
         this._workspace = validatedWorkspace;
 
@@ -196,6 +195,7 @@ export class Architect {
       const basedir = getSystemPath(this._root);
       const [pkg, builderName] = target.builder.split(':');
       const pkgJsonPath = nodeResolve(pkg, { basedir, resolvePackageJson: true });
+      console.log(pkgJsonPath);
       let buildersJsonPath: Path;
 
       // Read the `builders` entry of package.json.
@@ -213,10 +213,9 @@ export class Architect {
           return this._host.read(buildersJsonPath);
         }),
         concatMap((buffer) => of(JSON.parse(virtualFs.fileBufferToString(buffer)))),
-        // Validate builders json.
-        concatMap((builderMap) =>
-          this._validateAgainstSchema<BuilderMap>(builderMap, this._buildersSchema)),
 
+        // Validate builders json.
+        concatMap((builderMap) => this._validateAgainstSchema<BuilderMap>(builderMap, buildersSchema)),
 
         concatMap((builderMap) => {
           const builderDescription = builderMap.builders[builderName];
@@ -238,17 +237,23 @@ export class Architect {
   }
 
   validateBuilderOptions<OptionsT>(
-    target: Target<OptionsT>, builderDescription: BuilderDescription,
+    target: Target<OptionsT>,
+    builderDescription: BuilderDescription,
   ): Observable<OptionsT> {
-    return this._validateAgainstSchema<OptionsT>(target.options,
-      normalize(builderDescription.schema));
+    const schemaPath = normalize(builderDescription.schema);
+
+    return this._host.read(schemaPath).pipe(
+      concatMap((buffer) => of(JSON.parse(virtualFs.fileBufferToString(buffer)))),
+      concatMap(schemaJson => this._validateAgainstSchema<OptionsT>(target.options, schemaJson)),
+    );
   }
 
   getBuilder<OptionsT>(
     builderDescription: BuilderDescription, context: BuilderContext,
   ): Builder<OptionsT> {
     // TODO: support more than the default export, maybe via builder#import-name.
-    const builderModule = require(getSystemPath(builderDescription.class));
+    const builderPath = require.resolve(builderDescription.class);
+    const builderModule = require(builderPath);
     const builderClass = builderModule['default'] as BuilderConstructor<OptionsT>;
 
     return new builderClass(context);
@@ -256,12 +261,10 @@ export class Architect {
 
   // Warning: this method changes contentJson in place.
   // TODO: add transforms to resolve paths.
-  private _validateAgainstSchema<T = {}>(contentJson: {}, schemaPath: Path): Observable<T> {
+  private _validateAgainstSchema<T = {}>(contentJson: {}, schemaJson: JsonObject): Observable<T> {
     const registry = new schema.CoreSchemaRegistry();
 
-    return this._host.read(schemaPath).pipe(
-      concatMap((buffer) => of(JSON.parse(virtualFs.fileBufferToString(buffer)))),
-      concatMap((schemaContent) => registry.compile(schemaContent)),
+    return registry.compile(schemaJson).pipe(
       concatMap(validator => validator(contentJson)),
       concatMap(validatorResult => {
         if (validatorResult.success) {

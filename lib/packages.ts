@@ -199,7 +199,7 @@ export const packages: PackageMap =
         dist: path.join(distRoot, name),
         root: pkgRoot,
         relative: path.relative(path.dirname(__dirname), pkgRoot),
-        main: path.resolve(pkgRoot, 'src/index.ts'),
+        main: path.resolve(pkgRoot, 'src/index.js'),
         private: packageJson.private,
         tar: path.join(distRoot, name.replace('/', '_') + '.tgz'),
         bin,

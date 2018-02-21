@@ -1,4 +1,4 @@
-{
+export default {
   "$schema": "http://json-schema.org/schema",
   "id": "BuildersSchema",
   "title": "Builders schema for validating a list of builders.",
@@ -39,4 +39,4 @@
       ]
     }
   }
-}
+};
