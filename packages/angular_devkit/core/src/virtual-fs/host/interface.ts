@@ -9,7 +9,9 @@ import { Observable } from 'rxjs/Observable';
 import { Path, PathFragment } from '../path';
 
 
-export declare type FileBuffer = ArrayBuffer;
+export declare type FileBuffer = ArrayBuffer & {
+  __PRIVATE_DEVKIT_FILE_BUFFER: void;
+};
 
 export interface HostWatchOptions {
   readonly persistent?: boolean;

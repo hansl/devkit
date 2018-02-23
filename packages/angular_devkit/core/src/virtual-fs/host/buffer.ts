@@ -29,10 +29,10 @@ export function stringToFileBuffer(str: string): FileBuffer {
       view[i] = buf[i];
     }
 
-    return ab;
+    return ab as FileBuffer;
   } else if (typeof TextEncoder !== 'undefined') {
     // Modern browsers implement TextEncode.
-    return new TextEncoder('utf-8').encode(str).buffer as ArrayBuffer;
+    return new TextEncoder('utf-8').encode(str).buffer as FileBuffer;
   } else {
     // Slowest method but sure to be compatible with every platform.
     const buf = new ArrayBuffer(str.length * 2); // 2 bytes for each char
@@ -41,7 +41,7 @@ export function stringToFileBuffer(str: string): FileBuffer {
       bufView[i] = str.charCodeAt(i);
     }
 
-    return buf;
+    return buf as FileBuffer;
   }
 }
 
