@@ -14,6 +14,8 @@ export class BaseException extends Error {
 
 
 // Exceptions
+export class InvalidStateException extends BaseException {}
+
 export class FileDoesNotExistException extends BaseException {
   constructor(path: string) { super(`Path "${path}" does not exist.`); }
 }

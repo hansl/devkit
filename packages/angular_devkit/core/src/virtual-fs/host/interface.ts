@@ -48,14 +48,14 @@ export interface HostCapabilities {
   synchronous: boolean;
 }
 
-export interface Host<StatsT extends object = {}> {
+export interface Visitor {
+  (path: Path, )
+}
+
+export interface ReadonlyHost<StatsT extends object = {}> {
   readonly capabilities: HostCapabilities;
 
-  write(path: Path, content: FileBuffer): Observable<void>;
   read(path: Path): Observable<FileBuffer>;
-  delete(path: Path): Observable<void>;
-  rename(from: Path, to: Path): Observable<void>;
-
   list(path: Path): Observable<PathFragment[]>;
 
   exists(path: Path): Observable<boolean>;
@@ -67,4 +67,10 @@ export interface Host<StatsT extends object = {}> {
 
   // Some hosts may not support watching.
   watch(path: Path, options?: HostWatchOptions): Observable<HostWatchEvent> | null;
+}
+
+export interface Host<StatsT extends object = {}> extends ReadonlyHost<StatsT> {
+  write(path: Path, content: FileBuffer): Observable<void>;
+  delete(path: Path): Observable<void>;
+  rename(from: Path, to: Path): Observable<void>;
 }

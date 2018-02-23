@@ -37,8 +37,12 @@ import {
 
 
 export class SimpleMemoryHost implements Host<{}> {
-  private _cache = new Map<Path, FileBuffer>();
+  protected _cache = new Map<Path, FileBuffer>();
   private _watchers = new Map<Path, [HostWatchOptions, Subject<HostWatchEvent>][]>();
+
+  protected _exists(path: Path) {
+    return this._cache.has(path) || this._isDir(path);
+  }
 
   protected _isDir(path: Path) {
     if (path === '/') {
@@ -191,7 +195,7 @@ export class SimpleMemoryHost implements Host<{}> {
   }
 
   exists(path: Path): Observable<boolean> {
-    return observableOf(this._cache.has(path) || this._isDir(path));
+    return observableOf(this._exists(path));
   }
   isDirectory(path: Path): Observable<boolean> {
     return observableOf(this._isDir(path));
