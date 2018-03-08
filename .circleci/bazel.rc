@@ -1,0 +1,4 @@
+# Save downloaded repositories such as the go toolchain
+# This directory can then be included in the CircleCI cache
+# It should save time running the first build
+build --experimental_repository_cache=/home/circleci/bazel_repository_cache
