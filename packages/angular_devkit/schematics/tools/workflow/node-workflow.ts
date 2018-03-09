@@ -29,6 +29,7 @@ import { BuiltinTaskExecutor } from '../../tasks/node';
 export class NodeWorkflow implements workflow.Workflow {
   protected _engine: SchematicEngine<{}, {}>;
   protected _engineHost: NodeModulesEngineHost;
+  protected _registry: schema.CoreSchemaRegistry;
 
   protected _dryRunSink: DryRunSink;
   protected _fsSink: Sink;
@@ -50,8 +51,8 @@ export class NodeWorkflow implements workflow.Workflow {
     this._engine = new SchematicEngine(this._engineHost);
 
     // Add support for schemaJson.
-    const registry = new schema.CoreSchemaRegistry(formats.standardFormats);
-    this._engineHost.registerOptionsTransform(validateOptionsWithSchema(registry));
+    this._registry = new schema.CoreSchemaRegistry(formats.standardFormats);
+    this._engineHost.registerOptionsTransform(validateOptionsWithSchema(this._registry));
 
     this._engineHost.registerTaskExecutor(BuiltinTaskExecutor.NodePackage);
     this._engineHost.registerTaskExecutor(BuiltinTaskExecutor.RepositoryInitializer);
@@ -72,6 +73,9 @@ export class NodeWorkflow implements workflow.Workflow {
     }
 
     return maybeContext;
+  }
+  get registry(): schema.SchemaRegistry {
+    return this._registry;
   }
   get reporter(): Observable<DryRunEvent> {
     return this._dryRunSink.reporter;
