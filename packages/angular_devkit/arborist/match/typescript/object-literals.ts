@@ -7,6 +7,10 @@
  */
 import { Matcher } from '@angular-devkit/arborist';
 import * as ts from 'typescript';
+import {
+  TypeScriptLanguageMatcher,
+  TypeScriptLanguageMatcherContext,
+} from '../../src/language/typescript';
 import { allOf } from '../boolean';
 import { StringMatcherOptions, stringMatches } from '../strings';
 import { isTypeScript } from './kind';
@@ -22,10 +26,13 @@ export function objectLiteral() {
 }
 
 
-export function objectProperty(keyMatches: StringMatcherOptions): Matcher<ts.SourceFile, ts.Node> {
+export function objectProperty(
+  keyMatches: StringMatcherOptions,
+  propertyMatcher?: TypeScriptLanguageMatcher,
+): Matcher<ts.SourceFile, ts.Node> {
   return allOf(
     isTypeScript(),
-    (node: ts.Node) => {
+    (node: ts.Node, context: TypeScriptLanguageMatcherContext) => {
       if (node.kind === ts.SyntaxKind.PropertyAssignment) {
         let key = '';
         const property = node as ts.PropertyAssignment;
@@ -42,7 +49,15 @@ export function objectProperty(keyMatches: StringMatcherOptions): Matcher<ts.Sou
             return false;
         }
 
-        return stringMatches(key, keyMatches);
+        if (!stringMatches(key, keyMatches)) {
+          return false;
+        }
+
+        if (propertyMatcher) {
+          return propertyMatcher((node as ts.PropertyAssignment).initializer, context);
+        } else {
+          return true;
+        }
       }
 
       return false;

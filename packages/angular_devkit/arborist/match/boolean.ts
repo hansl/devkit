@@ -8,6 +8,14 @@
 import { Matcher, MatcherContext } from '@angular-devkit/arborist';
 
 
+export function any(): Matcher<{}, {}> {
+  return () => true;
+}
+export function none(): Matcher<{}, {}> {
+  return () => false;
+}
+
+
 export function allOf<ST, NT>(...matchers: Matcher<ST, NT>[]): Matcher<ST, NT> {
   return (node: NT, context: MatcherContext<ST, NT>) => {
     return matchers.every(matcher => matcher(node, context));

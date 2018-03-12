@@ -89,6 +89,15 @@ export class TypeScriptLanguage implements Language<TypeScriptLanguageSource,
     return TypeScriptLanguageToken;
   }
 
+  resolveModuleName(moduleName: string, source: TypeScriptLanguageSource) {
+    return ts.resolveModuleName(
+      moduleName,
+      source.fileName,
+      this._program.getCompilerOptions(),
+      this._compilerHost,
+    );
+  }
+
   private _positionOf(offset: number, sourceFile: TypeScriptLanguageSource | null): Position {
     if (!sourceFile) {
       return {

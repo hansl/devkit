@@ -9,5 +9,6 @@
 export * from './class';
 export * from './function';
 export * from './kind';
+export * from './array-literals';
 export * from './object-literals';
 export * from './symbol';

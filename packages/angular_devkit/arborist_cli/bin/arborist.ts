@@ -6,6 +6,8 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+import { Arborist, languages } from '@angular-devkit/arborist';
+import { angular, first, html } from '@angular-devkit/arborist/match';
 import {
   logging,
   normalize,
@@ -14,20 +16,6 @@ import {
 } from '@angular-devkit/core';
 import { NodeJsSyncHost, createConsoleLogger } from '@angular-devkit/core/node';
 import * as minimist from 'minimist';
-import * as ts from 'typescript';
-import { Arborist } from '@angular-devkit/arborist';
-import { HtmlLanguage } from '../../arborist/src/language/html/language';
-import { TypeScriptLanguage } from '../../arborist/src/language/typescript/language';
-import {
-  allOf,
-  angular,
-  anyOf,
-  descendants,
-  first,
-  firstOfFile,
-  html,
-  typescript,
-} from '@angular-devkit/arborist/match';
 
 
 const {
@@ -77,27 +65,18 @@ const host = new NodeJsSyncHost();
 
 if (argv['tsconfig']) {
   const tsConfigPath = resolve(normalize(process.cwd()), normalize(argv['tsconfig']));
-  arborist.registerLanguage(new TypeScriptLanguage(host, tsConfigPath));
+  arborist.registerLanguage(new languages.typescript.TypeScriptLanguage(host, tsConfigPath));
 }
 if (argv['html']) {
   const htmlPath = resolve(normalize(process.cwd()), normalize(argv['html']));
-  arborist.registerLanguage(new HtmlLanguage(host, htmlPath));
+  arborist.registerLanguage(new languages.html.HtmlLanguage(host, htmlPath));
 }
 debugger;
 
 arborist.match(
-  anyOf(
-    descendants(
-      allOf(
-        typescript.isKind(ts.SyntaxKind.ClassDeclaration),
-        typescript.symbolName({ not: { matches: /compon/i } }),
-      ),
-      firstOfFile(typescript.isKind(ts.SyntaxKind.MethodDeclaration)),
-    ),
-    first(
-      angular.inTemplate(
-        html.tagName({ startsWith: 'mat-' }),
-      ),
+  first(
+    angular.inTemplate(
+      html.tagName({ startsWith: 'mat-' }),
     ),
   ),
 )

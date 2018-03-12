@@ -13,6 +13,7 @@ import { Match, Matcher, MatcherContext } from './interface';
 
 
 export interface MatchOptions<SourceT, NodeT> {
+  language?: Language<SourceT, NodeT>;
   parentContext?: MatcherContext<SourceT, NodeT> | null;
   positionMap?: (position: Position) => Position;
 }
@@ -212,6 +213,74 @@ export class Arborist {
     });
   }
 
+  matchNode<SourceT, NodeT>(
+    node: NodeT,
+    path: Path | null,
+    language: Language<SourceT, NodeT>,
+    matcher: Matcher<SourceT, NodeT>,
+  ): Observable<Match<NodeT>> {
+    return new Observable<Match<NodeT>>(obs => {
+      let done = false;
+      const context: MatcherContext<{}, {}> = {
+        arborist: this,
+
+        path: path,
+        language: language,
+        source: path && language.getSourceForPath(path),
+
+        parentContext: null,
+
+        next(match: Match<NodeT>) { obs.next(match); },
+        complete() { obs.complete(); done = true; },
+        error(err: Error) { obs.error(err); done = true; },
+        stop() { obs.complete(); done = true; },
+        skipFile() { done = true; },
+
+        get doneFile() { return done; },
+        get done() { return done; },
+      };
+
+      language.visitNode(
+        node,
+        path && language.getSourceForPath(path),
+        this.createVisitorFromMatcher(matcher, context),
+      );
+    });
+  }
+
+  submatch<SourceT, NodeT>(
+    match: Match<NodeT>,
+    matcher: Matcher<SourceT, NodeT>,
+  ): Observable<Match<NodeT>> {
+    return new Observable<Match<NodeT>>(obs => {
+      let done = false;
+      const context: MatcherContext<{}, {}> = {
+        arborist: this,
+
+        path: match.path,
+        language: match.language,
+        source: match.path && match.language.getSourceForPath(match.path),
+
+        parentContext: null,
+
+        next(match: Match<NodeT>) { obs.next(match); },
+        complete() { obs.complete(); done = true; },
+        error(err: Error) { obs.error(err); done = true; },
+        stop() { obs.complete(); done = true; },
+        skipFile() { done = true; },
+
+        get doneFile() { return done; },
+        get done() { return done; },
+      };
+
+      match.language.visitNode(
+        match.node,
+        match.path && match.language.getSourceForPath(match.path),
+        this.createVisitorFromMatcher(matcher, context),
+      );
+    });
+  }
+
   match<SourceT, NodeT>(
     matcher: Matcher<SourceT, NodeT>,
     options?: MatchOptions<SourceT, NodeT>,
@@ -219,7 +288,7 @@ export class Arborist {
     return new Observable<Match<NodeT>>(obs => {
       let done = false;
       this._languages.forEach(language => {
-        if (done) {
+        if (done || (options && options.language && language !== options.language)) {
           return;
         }
 

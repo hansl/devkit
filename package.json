@@ -10,6 +10,7 @@
     "purify": "./bin/purify",
     "schematics": "./bin/schematics"
   },
+  "main": "./lib/index.js",
   "keywords": [
     "angular",
     "devkit",

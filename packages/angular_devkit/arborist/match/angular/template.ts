@@ -13,6 +13,7 @@ import * as ts from 'typescript';
 import { allOf, anyOf } from '../boolean';
 import { descendants } from '../descendants';
 import { typescript } from '../index';
+import { component } from './component';
 
 
 export function inTemplate(
@@ -24,7 +25,9 @@ export function inTemplate(
     typescript.decorator(),
     typescript.functionCall({ equals: 'Component' }),
     allOf(
-      (_node: {}, context: MatcherContext<{}, {}>) => !!context.path,
+      (_node: {}, context: MatcherContext<{}, {}>) => {
+        return !!context.path;
+      },
       anyOf(
         // Find the templateUrl property on any objects.
         allOf(

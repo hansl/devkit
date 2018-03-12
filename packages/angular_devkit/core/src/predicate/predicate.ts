@@ -14,7 +14,11 @@ export type PredicateOption<T> = T & {
 };
 
 
-export function runPredicate<T>(fn: (t: T) => boolean, option: PredicateOption<T>): boolean {
+export function runPredicate<T>(fn: (t: T) => boolean, option?: PredicateOption<T>): boolean {
+  if (!option) {
+    return true;
+  }
+
   if (option.and) {
     if (!runPredicate(fn, option.and)) {
       return false;
