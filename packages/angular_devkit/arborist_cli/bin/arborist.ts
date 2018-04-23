@@ -73,13 +73,13 @@ if (argv['html']) {
 }
 debugger;
 
-arborist.match(
-  first(
-    angular.inTemplate(
-      html.tagName({ startsWith: 'mat-' }),
-    ),
-  ),
-)
+arborist.match(angular.component())
+//   first(
+//     angular.inTemplate(
+//       html.tagName({ startsWith: 'mat-' }),
+//     ),
+//   ),
+// )
 .subscribe(match => {
   const start = match.start;
   const end = match.end;

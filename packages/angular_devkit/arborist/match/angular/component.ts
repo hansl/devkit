@@ -25,6 +25,9 @@ function _isNgComponentSymbol(
   const tc = language.program.getTypeChecker();
 
   const angularCoreModuleName = language.resolveModuleName('@angular/core', context.source);
+  if (!angularCoreModuleName.resolvedModule) {
+    return false;
+  }
   const angularCoreRoot = dirname(normalize(angularCoreModuleName.resolvedModule.resolvedFileName));
 
   if (!angularCoreModuleName.resolvedModule) {

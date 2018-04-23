@@ -6,8 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { Path } from '@angular-devkit/core';
-import { Observable } from 'rxjs/Observable';
-import { Subscriber } from 'rxjs/Subscriber';
+import { Observable, Subscriber } from 'rxjs';
 import { Language, LanguageVisitor, Position, VisitorResult } from '../language/interface';
 import { Match, Matcher, MatcherContext } from './interface';
 
