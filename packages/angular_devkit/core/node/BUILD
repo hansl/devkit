@@ -9,24 +9,19 @@ load("//tools:defaults.bzl", "ts_library")
 licenses(["notice"])  # MIT License
 
 ts_library(
-    name = "core",
+    name = "node",
     srcs = glob(
-        include = ["src/**/*.ts", "index.ts"],
+        include = ["**/*.ts"],
         exclude = [
-            "src/**/*_spec.ts",
-            "src/**/*_spec_large.ts",
-            "src/**/*_benchmark.ts",
+            "**/*_spec.ts",
+            "**/*_spec_large.ts",
         ],
     ),
-    module_name = "@angular-devkit/core",
+    module_name = "@angular-devkit/core/node",
     deps = [
+        "//packages/angular_devkit/core",
         "@rxjs",
         "@rxjs//operators",
-        # @typings: es2015.core
-        # @typings: es2015.symbol.wellknown
-        # @typings: ajv
-        # @typings: node
-        # @typings: source-map
     ],
 )
 
@@ -37,12 +32,10 @@ ts_library(
             "**/*_spec.ts",
             "**/*_spec_large.ts",
         ],
-        exclude = [
-            "node/**/*.ts",
-        ]
     ),
     deps = [
-        ":core",
+        "//packages/angular_devkit/core",
+        ":node",
         "@rxjs",
         "@rxjs//operators",
         # @typings: jasmine

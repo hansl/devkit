@@ -2,6 +2,8 @@
 # running as daemons, and cache SourceFile AST's to reduce parse time.
 build --strategy=TypeScriptCompile=worker
 
+test:debug --test_arg=--node_options=--inspect-brk --test_output=streamed --test_strategy=exclusive --test_timeout=9999 --nocache_test_results
+
 # Performance: avoid stat'ing input files
 build --watchfs
 

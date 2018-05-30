@@ -4,7 +4,7 @@
 # found in the LICENSE file at https://angular.io/license
 package(default_visibility = ["//visibility:public"])
 
-load("//tools:defaults.bzl", "ts_library")
+load("//tools:defaults.bzl", "ts_library", "jasmine_node_test")
 
 licenses(["notice"])  # MIT License
 
@@ -21,9 +21,30 @@ ts_library(
     module_root = "src",
     deps = [
         "//packages/angular_devkit/core",
-        "//packages/angular_devkit/core:node",  # TODO: get rid of this for 6.0
+        "//packages/angular_devkit/core/node",  # TODO: get rid of this for 6.0
         "@rxjs",
         "@rxjs//operators",
+    ],
+)
+
+ts_library(
+    name = "spec",
+    srcs = glob(
+        include = ["src/**/*_spec.ts"],
+    ),
+    deps = [
+        ":schematics",
+        "//packages/angular_devkit/core",
+        "@rxjs",
+        "@rxjs//operators",
+        # @typings: jasmine
+    ],
+)
+
+jasmine_node_test(
+    name = "schematics_spec",
+    deps = [
+        ":spec",
     ],
 )
 
@@ -42,7 +63,7 @@ ts_library(
     deps = [
         ":schematics",
         "//packages/angular_devkit/core",
-        "//packages/angular_devkit/core:node",
+        "//packages/angular_devkit/core/node",
         "@rxjs",
         "@rxjs//operators",
     ],
@@ -63,7 +84,7 @@ ts_library(
         ":schematics",
         ":tasks",
         "//packages/angular_devkit/core",
-        "//packages/angular_devkit/core:node",
+        "//packages/angular_devkit/core/node",
         "@rxjs",
         "@rxjs//operators",
     ],
@@ -88,20 +109,6 @@ ts_library(
 )
 
 ts_library(
-    name = "spec",
-    srcs = glob(
-        include = ["src/**/*_spec.ts"],
-    ),
-    deps = [
-        ":schematics",
-        "//packages/angular_devkit/core",
-        "@rxjs",
-        "@rxjs//operators",
-        # @typings: jasmine
-    ],
-)
-
-ts_library(
     name = "tools_spec",
     srcs = glob(
         include = ["tools/**/*_spec.ts"],
@@ -110,7 +117,7 @@ ts_library(
         ":schematics",
         ":tools",
         "//packages/angular_devkit/core",
-        "//packages/angular_devkit/core:node",
+        "//packages/angular_devkit/core/node",
         "@rxjs",
         "@rxjs//operators",
         # @typings: jasmine

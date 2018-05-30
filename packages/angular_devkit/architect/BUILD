@@ -25,7 +25,7 @@ ts_library(
     ),
     deps = [
         "//packages/angular_devkit/core",
-        "//packages/angular_devkit/core:node",
+        "//packages/angular_devkit/core/node",
         "@rxjs",
         "@rxjs//operators",
     ],

@@ -23,7 +23,7 @@ ts_library(
     tsconfig = "//:tsconfig.json",
     deps = [
         "//packages/angular_devkit/core",
-        "//packages/angular_devkit/core:node",
+        "//packages/angular_devkit/core/node",
         "//packages/angular_devkit/schematics",
         "//packages/angular_devkit/schematics:tasks",
         "//packages/angular_devkit/schematics:tools",
